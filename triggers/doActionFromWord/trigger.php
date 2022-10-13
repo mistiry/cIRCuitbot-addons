@@ -5,7 +5,7 @@ function doActionFromWord($data) {
     global $socket;
     global $ircdata;
 
-    $options = parse_ini_file("./trigger.conf");
+    $options = parse_ini_file("./triggers/doActionFromWord/trigger.conf");
     if($options['action'] != "") {
         fputs($socket, "PRIVMSG ".$ircdata['location']." \001ACTION ".$options['action']."\001\n");
     }

@@ -2,7 +2,7 @@
 function parseURLfromMessage($ircdata){
     global $config;
 
-    if(stristr($data, "https://")) {
+    if(stristr($ircdata['fullmessage'], "https://")) {
         preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $data, $urlmatch);
         foreach($urlmatch[0] as $url) {
             $urltitle = trim(getTitle($url));
@@ -14,7 +14,7 @@ function parseURLfromMessage($ircdata){
             }
         }
     }
-    if(stristr($data, "http://")) {
+    if(stristr($ircdata['fullmessage'], "http://")) {
         preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $data, $urlmatch);
         foreach($urlmatch[0] as $url) {
             $urltitle = trim(getTitle($url));

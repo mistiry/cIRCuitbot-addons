@@ -5,6 +5,9 @@ function getSeenInfo($ircdata) {
     $who = trim($ircdata['commandargs']);
     $who = mysqli_real_escape_string($dbconnection, $who);
     $query = "SELECT hostname,last_datatype,last_message,last_location,timestamp FROM known_users WHERE nick_aliases LIKE '%$who%' ORDER BY timestamp DESC LIMIT 1";
+
+    echo "running query ".$query."\n";
+
     $result = mysqli_query($dbconnection,$query);
                 
     if(mysqli_num_rows($result) > 0) {
@@ -18,6 +21,8 @@ function getSeenInfo($ircdata) {
                 $lastmessage = $row['last_message'];
                 $last_location = $row['last_location'];
                 $timelastseen = $row['timestamp'];
+
+                print_r($row);
 
                 switch($lastdatatype) {
                     case "PRIVMSG":

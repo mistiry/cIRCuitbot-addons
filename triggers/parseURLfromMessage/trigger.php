@@ -1,5 +1,5 @@
 <?php
-function getURLTitle($data){
+function parseURLfromMessage($data){
     global $ircdata;
     global $config;
 

@@ -2,6 +2,8 @@
 function getSeenInfo($ircdata) {
     global $dbconnection;
 
+    print_r($ircdata);
+
     $who = $ircdata['commandargs'];
     $who = mysqli_real_escape_string($dbconnection, $who);
     $query = "SELECT hostname,last_datatype,last_message,last_location,timestamp FROM known_users WHERE nick_aliases LIKE '%,$who,%' ORDER BY timestamp DESC LIMIT 1";

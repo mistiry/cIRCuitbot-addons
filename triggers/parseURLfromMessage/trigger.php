@@ -1,6 +1,5 @@
 <?php
-function parseURLfromMessage($data){
-    global $ircdata;
+function parseURLfromMessage($ircdata){
     global $config;
 
     if(stristr($data, "https://")) {

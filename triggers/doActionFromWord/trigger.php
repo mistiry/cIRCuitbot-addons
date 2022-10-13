@@ -1,5 +1,5 @@
 <?php
-function doActionFromWord($data) {
+function doActionFromWord($ircdata) {
     //We need to pull in the socket object so we can directly send an ACTION
     //with the proper control characters.
     global $socket;

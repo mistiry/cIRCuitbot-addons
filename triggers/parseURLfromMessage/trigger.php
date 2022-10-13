@@ -2,8 +2,6 @@
 function parseURLfromMessage($ircdata) {
     global $config;
 
-    echo "got fullmessage ".$ircdata['fullmessage']."\n";
-
     if(stristr($ircdata['fullmessage'], "https://")) {
         preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
         foreach($urlmatch[0] as $url) {

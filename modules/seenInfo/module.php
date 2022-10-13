@@ -1,7 +1,6 @@
 <?php
 function getSeenInfo($ircdata) {
     global $dbconnection;
-    global $timestamp;
 
     $who = $ircdata['commandargs'];
     $who = mysqli_real_escape_string($dbconnection, $who);

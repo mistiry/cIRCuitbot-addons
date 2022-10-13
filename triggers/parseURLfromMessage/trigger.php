@@ -5,7 +5,7 @@ function parseURLfromMessage($ircdata) {
     echo "got fullmessage ".$ircdata['fullmessage']."\n";
 
     if(stristr($ircdata['fullmessage'], "https://")) {
-        preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $data, $urlmatch);
+        preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
         foreach($urlmatch[0] as $url) {
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
@@ -17,7 +17,7 @@ function parseURLfromMessage($ircdata) {
         }
     }
     if(stristr($ircdata['fullmessage'], "http://")) {
-        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $data, $urlmatch);
+        preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
         foreach($urlmatch[0] as $url) {
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);

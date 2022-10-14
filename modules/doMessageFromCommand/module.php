@@ -9,7 +9,7 @@ function replyNoTag($ircdata) {
 function replyWithTag($ircdata) {
     $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
     $reply = $options['reply'];
-    $reply = "".$ircdata['nickname'].": ".$reply."";
+    $reply = "".$ircdata['usernickname'].": ".$reply."";
     sendPRIVMSG($ircdata['location'], $reply);
     return true;
 }

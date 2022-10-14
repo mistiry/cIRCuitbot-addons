@@ -1,5 +1,8 @@
 <?php
 function opCommandUserMode($data) {
+    echo "got data:\n";
+    print_r($data);
+
     $botflags = getBotFlags($data['usernickname']);
     if($botflags == "A" || $botflags == "O") {
         $messagearray = $data['messagearray'];

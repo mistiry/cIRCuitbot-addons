@@ -88,7 +88,7 @@ function isKnownUser($user) {
     if(mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             if(is_numeric($row['id'])) {
-                $return "true";
+                $return = "true";
             }
         }
     } else {

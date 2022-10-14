@@ -1,11 +1,6 @@
 <?php
 function opCommandUserMode($data) {
-    echo "got data:\n";
-    print_r($data);
-
     $botflags = getBotFlags($data['userhostname']);
-    echo "got botflags:\n";
-    print_r($data);
     if($botflags == "A" || $botflags == "O") {
         $messagearray = $data['messagearray'];
         $firstword = trim($messagearray[1]);
@@ -40,9 +35,9 @@ function opCommandUserMode($data) {
                 setMode("-","q",$user);
                 break;
         }
-        logEntry("Admin user '".$data['usernickname']."@".$data['userhostname']."' requested '".$firstword." ".$user."'");
+        logEntry("opCommands: Admin user '".$data['usernickname']."@".$data['userhostname']."' requested '".$firstword." ".$user."'");
     } else {
-        logEntry("Denied non-admin user '".$data['usernickname']."@".$data['userhostname']."' requesting '".$firstword." ".$user."'");
+        logEntry("opCommands: denied non-admin user '".$data['usernickname']."@".$data['userhostname']." from running command '".$data['fullmessage']."");
     }
     return true;
 }

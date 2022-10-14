@@ -1,5 +1,7 @@
 <?php
-function opCommandUserMode($ircdata) {
+function opCommandUserMode($data) {
+    global $ircdata;
+
     $botflags = getBotFlags($ircdata['user_nickname']);
     if($botflags == "A" || $botflags == "O") {
         $messagearray = $ircdata['messagearray'];

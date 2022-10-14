@@ -42,7 +42,8 @@ function replyRandomWithTag($ircdata) {
 }
 
 function replyTagOtherUser($ircdata) {
-    $userToTag = trim($ircdata['fullmessage'][0]);
+    $argpieces = explode(" ",$ircdata['commandargs']);
+    $userToTag = $argpieces[0];
     echo "userToTag $userToTag\n";
     $userKnown = isKnownUser($userToTag);
 
@@ -58,7 +59,8 @@ function replyTagOtherUser($ircdata) {
 }
 
 function replyRandomTagOtherUser($ircdata) {
-    $userToTag = trim($ircdata['fullmessage'][0]);
+    $argpieces = explode(" ",$ircdata['commandargs']);
+    $userToTag = $argpieces[0];
     echo "userToTag $userToTag\n";
     $userKnown = isKnownUser($userToTag);
 

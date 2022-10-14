@@ -40,9 +40,9 @@ function opCommandUserMode($data) {
                 setMode("-","q",$user);
                 break;
         }
-        logEntry("Admin user '".$data['usernickname']."@".$data['userhostname']."' requested '".$firstword."".$user."'");
+        logEntry("Admin user '".$data['usernickname']."@".$data['userhostname']."' requested '".$firstword." ".$user."'");
     } else {
-        logEntry("Denied non-admin user '".$data['usernickname']."@".$data['userhostname']."' requesting '".$firstword."".$user."'");
+        logEntry("Denied non-admin user '".$data['usernickname']."@".$data['userhostname']."' requesting '".$firstword." ".$user."'");
     }
     return true;
 }

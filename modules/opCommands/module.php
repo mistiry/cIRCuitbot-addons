@@ -1,8 +1,5 @@
 <?php
-
-function opCommandUserMode($data) {.
-    global $socket;
-
+function opCommandUserMode($data) {
     $botflags = getBotFlags($data['user_nickname']);
     if($botflags == "A" || $botflags == "O") {
         $messagearray = $data['messagearray'];

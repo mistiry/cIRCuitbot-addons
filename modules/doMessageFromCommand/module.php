@@ -50,7 +50,7 @@ function replyTagOtherUser($ircdata) {
     if($userKnown == "true") {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $reply = $options['reply'];
-        $reply = "".$ircdata['nickname'].": ".$reply."";
+        $reply = "".$userToTag.": ".$reply."";
         sendPRIVMSG($ircdata['location'], $reply);
         return true;
     } else {
@@ -86,7 +86,11 @@ function isKnownUser($user) {
     $query = "SELECT id FROM known_users WHERE nick_aliases LIKE '%".$user."%' LIMIT 1";
     $result = mysqli_query($dbconnection, $query);
     if(mysqli_num_rows($result) > 0) {
-        $return = "true";
+        while($row = mysqli_fetch_assoc($result)) {
+            if(is_numeric($row['id'])) {
+                $return "true";
+            }
+        }
     } else {
         $return = "false";
     }

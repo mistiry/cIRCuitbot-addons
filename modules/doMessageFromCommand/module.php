@@ -44,10 +44,9 @@ function replyRandomWithTag($ircdata) {
 function replyTagOtherUser($ircdata) {
     $argpieces = explode(" ",$ircdata['commandargs']);
     $userToTag = $argpieces[0];
-    echo "userToTag $userToTag\n";
     $userKnown = isKnownUser($userToTag);
 
-    if($userKnown == "true") {
+    if($userKnown == "true" && strlen($userToTag)>1) {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $reply = $options['reply'];
         $reply = "".$userToTag.": ".$reply."";
@@ -61,10 +60,9 @@ function replyTagOtherUser($ircdata) {
 function replyRandomTagOtherUser($ircdata) {
     $argpieces = explode(" ",$ircdata['commandargs']);
     $userToTag = $argpieces[0];
-    echo "userToTag $userToTag\n";
     $userKnown = isKnownUser($userToTag);
 
-    if($userKnown == "true") {
+    if($userKnown == "true" && strlen($userToTag)>1) {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $replies = $options['replies'];
         $replyArray = array();

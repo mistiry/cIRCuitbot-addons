@@ -3,7 +3,9 @@ function opCommandUserMode($data) {
     echo "got data:\n";
     print_r($data);
 
-    $botflags = getBotFlags($data['usernickname']);
+    $botflags = getBotFlags($data['userhostname']);
+    echo "got botflags:\n";
+    print_r($data);
     if($botflags == "A" || $botflags == "O") {
         $messagearray = $data['messagearray'];
         $firstword = trim($messagearray[1]);

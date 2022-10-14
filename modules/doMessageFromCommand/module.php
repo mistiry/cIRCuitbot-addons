@@ -17,7 +17,7 @@ function replyWithTag($ircdata) {
 function replyRandomNoTag($ircdata) {
     $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
     $replies = $options['replies'];
-    $replyArray = arary();
+    $replyArray = array();
     foreach($replies as $reply) {
         array_push($replyArray,$reply);
     }
@@ -30,7 +30,7 @@ function replyRandomNoTag($ircdata) {
 function replyRandomWithTag($ircdata) {
     $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
     $replies = $options['replies'];
-    $replyArray = arary();
+    $replyArray = array();
     foreach($replies as $reply) {
         array_push($replyArray,$reply);
     }
@@ -63,7 +63,7 @@ function replyRandomTagOtherUser($ircdata) {
     if($userKnown == true) {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $replies = $options['replies'];
-        $replyArray = arary();
+        $replyArray = array();
         foreach($replies as $reply) {
             array_push($replyArray,$reply);
         }

@@ -43,9 +43,10 @@ function replyRandomWithTag($ircdata) {
 
 function replyTagOtherUser($ircdata) {
     $userToTag = trim($ircdata['messagearray'][1]);
+    echo "userToTag $userToTag\n";
     $userKnown = isKnownUser($userToTag);
 
-    if($userKnown == true) {
+    if($userKnown == "true") {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $reply = $options['reply'];
         $reply = "".$ircdata['nickname'].": ".$reply."";
@@ -58,9 +59,10 @@ function replyTagOtherUser($ircdata) {
 
 function replyRandomTagOtherUser($ircdata) {
     $userToTag = trim($ircdata['messagearray'][1]);
+    echo "userToTag $userToTag\n";
     $userKnown = isKnownUser($userToTag);
 
-    if($userKnown == true) {
+    if($userKnown == "true") {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $replies = $options['replies'];
         $replyArray = array();
@@ -82,8 +84,9 @@ function isKnownUser($user) {
     $query = "SELECT id FROM known_users WHERE nick_aliases LIKE '%".$user."%' LIMIT 1";
     $result = mysqli_query($dbconnection, $query);
     if(mysqli_num_rows($result) > 0) {
-        return true;
+        $return = "true";
     } else {
-        return false;
+        $return = "false";
     }
+    return $return;
 }

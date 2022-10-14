@@ -1,9 +1,6 @@
 <?php
 function opCommandUserMode($data) {
-    echo "got data:\n";
-    print_r($data);
-    
-    $botflags = getBotFlags($ircdata['user_nickname']);
+    $botflags = getBotFlags($ircdata['usernickname']);
     if($botflags == "A" || $botflags == "O") {
         $messagearray = $ircdata['messagearray'];
         $firstword = trim($messagearray[1]);
@@ -11,7 +8,7 @@ function opCommandUserMode($data) {
     
         //If they didnt give a user, then they are trying to give themselves the mode
         if($user == "") {
-            $user = $ircdata['user_nickname'];
+            $user = $ircdata['usernickname'];
         }
 
         switch($firstword) {
@@ -38,9 +35,9 @@ function opCommandUserMode($data) {
                 setMode("-","q",$user);
                 break;
         }
-        logEntry("Admin user '".$ircdata['user_nickname']."@".$ircdata['user_hostname']."' requested '".$firstword."".$user."'");
+        logEntry("Admin user '".$ircdata['usernickname']."@".$ircdata['userhostname']."' requested '".$firstword."".$user."'");
     } else {
-        logEntry("Denied non-admin user '".$ircdata['user_nickname']."@".$ircdata['user_hostname']."' requesting '".$firstword."".$user."'");
+        logEntry("Denied non-admin user '".$ircdata['usernickname']."@".$ircdata['userhostname']."' requesting '".$firstword."".$user."'");
     }
     return true;
 }

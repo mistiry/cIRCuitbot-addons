@@ -10,7 +10,7 @@ function getQuote($data) {
     //they are probably searching a specific id if search term is numeric
     if(is_numeric($search)) {
         $query = "SELECT * FROM quotes WHERE id = $search LIMIT 1";
-    } elseif($search != "") {
+    } elseif(strlen($search)>1) {
         $query = "SELECT * FROM quotes WHERE quote LIKE '%$search%' ORDER BY rand() LIMIT 1";
     } else {
         $query = "SELECT * FROM quotes ORDER BY rand() LIMIT 1";
@@ -76,7 +76,7 @@ function upvoteQuote($data) {
     } else {
         $message = "Invalid quote ID.";
     }
-    
+    echo "query is $query\n";
     $result = mysqli_query($dbconnection,$query);
     if(mysqli_num_rows($result) == 1) {
         //do the thing

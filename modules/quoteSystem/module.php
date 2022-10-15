@@ -83,11 +83,12 @@ function upvoteQuote($data) {
         echo "got result\n";
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
-            echo "\trow id is $id\n";
             $upvotes = $row['upvotes'];
-            echo "\tvoted_hostnames is ".$row['voted_hostnames']."";
-            $votedhostnamesArray = unserialize($row['voted_hostnames']);
-            print_r($votedhostnamesArray);
+            $voted_hostnames = $row['voted_hostnames'];
+            $votedhostnamesArray = unserialize($voted_hostnames);
+            if(empty($votedhostnamesArray)) {
+                $votedhostnamesArray = array();
+            }
             if(is_array($votedhostnamesArray)) {
                 if(in_array($data['userhostname'],$votedhostnamesArray)) {
                     $message = "You have already voted for quote #".$id."";

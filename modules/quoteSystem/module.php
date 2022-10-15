@@ -168,9 +168,8 @@ function getTopQuote($data) {
     } else {
         $message = "Encountered an error polling for quote stats.";
     }
-}
-sendPRIVMSG($data['location'],$message);
-return true;
+    sendPRIVMSG($data['location'],$message);
+    return true;
 }
 
 function getBottomQuote($data) {
@@ -191,9 +190,8 @@ function getBottomQuote($data) {
     } else {
         $message = "Encountered an error polling for quote stats.";
     }
-}
-sendPRIVMSG($data['location'],$message);
-return true;
+    sendPRIVMSG($data['location'],$message);
+    return true;
 }
 
 function getQuoteStats($data) {

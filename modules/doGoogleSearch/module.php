@@ -16,7 +16,7 @@ function doGoogleSearch($data) {
     $url = str_replace("&amp;","&",$url);
     $url = explode("&sa",$url);
     $url2 = $url[0];
-    $title = getTitle($url2);
+    $title = getURLTitle($url2);
 
     sendPRIVMSG($data['location'],"".$data['usernickname']." - ".$title." - ".$url2."");
     exec("rm -f ".$tempfile."");
@@ -29,7 +29,7 @@ function myUrlEncode($string) {
     return str_replace($entities, $replacements, urlencode($string));
 }
 
-function getTitle($url) {
+function getURLTitle($url) {
     $badExtensions = array(
         '.exe',
         '.pdf',

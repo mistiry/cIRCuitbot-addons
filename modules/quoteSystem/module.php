@@ -22,7 +22,7 @@ function getQuote($data) {
     }
 
     $result = mysqli_query($dbconnection, $query);
-    if(mysqli_num_rows($result) == 1) {
+    if(mysqli_num_rows($result)>0) {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $submittedby = $row['submittedby'];
@@ -76,9 +76,8 @@ function upvoteQuote($data) {
     } else {
         $message = "Invalid quote ID.";
     }
-    echo "query is $query\n";
     $result = mysqli_query($dbconnection,$query);
-    if(mysqli_num_rows($result) == 1) {
+    if(mysqli_num_rows($result)>0) {
         //do the thing
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];

@@ -16,13 +16,13 @@ function gitGud($data) {
         );
         $ggarraykey = array_rand($ggarray);
         $message = $ggarray[$ggarraykey];
-        sendPRIVMSG($location, "".$usertogitgud.": ".$message."");
+        sendPRIVMSG($data['location'], "".$usertogitgud.": ".$message."");
         usleep(rand(100,500));
-        sendPRIVMSG($location, "`   ┌─┐┬┌┬┐  ┌─┐┬ ┬┌┬┐  `");
+        sendPRIVMSG($$data['location'], "`   ┌─┐┬┌┬┐  ┌─┐┬ ┬┌┬┐  `");
         usleep(rand(100,500));
-        sendPRIVMSG($location, "`   │ ┬│ │   │ ┬│ │ ││  `");
+        sendPRIVMSG($$data['location'], "`   │ ┬│ │   │ ┬│ │ ││  `");
         usleep(rand(100,500));
-        sendPRIVMSG($location, "`   └─┘┴ ┴   └─┘└─┘─┴┘  `");
+        sendPRIVMSG($$data['location'], "`   └─┘┴ ┴   └─┘└─┘─┴┘  `");
         return true;
     }
 }

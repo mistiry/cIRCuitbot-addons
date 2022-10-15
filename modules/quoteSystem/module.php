@@ -10,13 +10,17 @@ function getQuote($data) {
     //they are probably searching a specific id if search term is numeric
     if(is_numeric($search)) {
         $query = "SELECT * FROM quotes WHERE id = $search LIMIT 1";
-    } else {
+    } elseif($search != "") {
         $query = "SELECT * FROM quotes WHERE quote LIKE '%$search%' ORDER BY rand() LIMIT 1";
+    } else {
+        $query = "SELECT * FROM quotes ORDER BY rand() LIMIT 1";
     }
+
     if(strlen($search) == 0) {
         $notnick = $data['usernickname'];
         $query = "SELECT * FROM quotes WHERE submittedby NOT LIKE '%".$notnick."%' AND downvotes < 3 ORDER BY rand() LIMIT 1";
     }
+    
     $result = mysqli_query($dbconnection, $query);
     if(mysqli_num_rows($result) == 1) {
         while($row = mysqli_fetch_assoc($result)) {

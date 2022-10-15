@@ -80,7 +80,6 @@ function upvoteQuote($data) {
     $query = "";
     if(mysqli_num_rows($result)>0) {
         //do the thing
-        echo "got result\n";
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $upvotes = $row['upvotes'];
@@ -89,6 +88,7 @@ function upvoteQuote($data) {
             if(empty($votedhostnamesArray)) {
                 $votedhostnamesArray = array();
             }
+            print_r($votedhostnamesArray);
             if(is_array($votedhostnamesArray)) {
                 if(in_array($data['userhostname'],$votedhostnamesArray)) {
                     $message = "You have already voted for quote #".$id."";
@@ -101,8 +101,6 @@ function upvoteQuote($data) {
                     $query = "UPDATE quotes SET upvotes = $newupvotes, voted_hostnames = '".$votedhostnames."' WHERE id = $id LIMIT 1";
                 }
             }
-
-            echo "query is $query\n";
             
             if(mysqli_query($dbconnection,$query)) {
                 $message = "".$data['usernickname'].": your upvote has been applied to quote #$id.";

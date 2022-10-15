@@ -1,8 +1,6 @@
 <?php
 function getQuote($data) {
     global $dbconnection;
-    global $ircdata;
-    global $setting;
 
     $search = $data['commandargs'];
     $search = mysqli_real_escape_string($dbconnection, $search);
@@ -20,6 +18,8 @@ function getQuote($data) {
         $notnick = $data['usernickname'];
         $query = "SELECT * FROM quotes WHERE submittedby NOT LIKE '%".$notnick."%' AND downvotes < 3 ORDER BY rand() LIMIT 1";
     }
+
+    echo "query is $query\n";
 
     $result = mysqli_query($dbconnection, $query);
     if(mysqli_num_rows($result)>0) {

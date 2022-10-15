@@ -40,7 +40,7 @@ function whatDay($data) {
         array_push($textList,$text);
     }
     foreach($linkArray as $link) {
-        array_push($linkArray,$link);
+        array_push($linkList,$link);
     }
 
     $randKeyText = array_rand($textList);

@@ -18,11 +18,11 @@ function gitGud($data) {
         $message = $ggarray[$ggarraykey];
         sendPRIVMSG($data['location'], "".$usertogitgud.": ".$message."");
         usleep(rand(100,500));
-        sendPRIVMSG($$data['location'], "`   ┌─┐┬┌┬┐  ┌─┐┬ ┬┌┬┐  `");
+        sendPRIVMSG($data['location'], "`   ┌─┐┬┌┬┐  ┌─┐┬ ┬┌┬┐  `");
         usleep(rand(100,500));
-        sendPRIVMSG($$data['location'], "`   │ ┬│ │   │ ┬│ │ ││  `");
+        sendPRIVMSG($data['location'], "`   │ ┬│ │   │ ┬│ │ ││  `");
         usleep(rand(100,500));
-        sendPRIVMSG($$data['location'], "`   └─┘┴ ┴   └─┘└─┘─┴┘  `");
+        sendPRIVMSG($data['location'], "`   └─┘┴ ┴   └─┘└─┘─┴┘  `");
         return true;
     }
 }

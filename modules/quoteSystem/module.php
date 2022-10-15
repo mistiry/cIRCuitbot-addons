@@ -19,8 +19,6 @@ function getQuote($data) {
         $query = "SELECT * FROM quotes WHERE submittedby NOT LIKE '%".$notnick."%' AND downvotes < 3 ORDER BY rand() LIMIT 1";
     }
 
-    echo "query is $query\n";
-
     $result = mysqli_query($dbconnection, $query);
     if(mysqli_num_rows($result)>0) {
         while($row = mysqli_fetch_assoc($result)) {

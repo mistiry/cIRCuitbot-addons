@@ -96,6 +96,8 @@ function upvoteQuote($data) {
                     $query = "UPDATE quotes SET upvotes = $newupvotes, voted_hostnames = '".$votedhostnames."' WHERE id = $id LIMIT 1";
                 }
             }
+
+            echo "query is $query\n";
             
             if(mysqli_query($dbconnection,$query)) {
                 $message = "".$data['usernickname'].": your upvote has been applied to quote #$id.";

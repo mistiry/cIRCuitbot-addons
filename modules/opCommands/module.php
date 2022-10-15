@@ -37,7 +37,7 @@ function opCommandUserMode($data) {
         }
         logEntry("opCommands: Admin user '".$data['usernickname']."@".$data['userhostname']."' requested '".$firstword." ".$user."'");
     } else {
-        logEntry("opCommands: denied non-admin user '".$data['usernickname']."@".$data['userhostname']." from running command '".$data['fullmessage']."");
+        logEntry("opCommands: denied non-admin user '".$data['usernickname']."@".$data['userhostname']."' from running command '".$data['fullmessage']."'");
     }
     return true;
 }

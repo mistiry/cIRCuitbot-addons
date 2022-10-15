@@ -32,10 +32,21 @@ function whatDay($data) {
             $linkArray = $dayData['saturdayLink'];
             break;
     }
-    $randKeyText = array_rand($textArray);
-    $randKeyLink = array_rand($linkArray);
-    $text = $textArray($randKeyText);
-    $link = $linkArray($randKeyLink);
+
+    $textList = array();
+    $linkList = array();
+
+    foreach($textArray as $text) {
+        array_push($textList,$text);
+    }
+    foreach($linkArray as $link) {
+        array_push($linkArray,$link);
+    }
+
+    $randKeyText = array_rand($textList);
+    $randKeyLink = array_rand($linkList);
+    $text = $textList($randKeyText);
+    $link = $linkList($randKeyLink);
     $message = "".$data['usernickname'].": ".$text." - ".$link."";
     sendPRIVMSG($data['location'],$message);
     return true;

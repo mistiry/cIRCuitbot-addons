@@ -77,11 +77,15 @@ function upvoteQuote($data) {
         $message = "Invalid quote ID.";
     }
     $result = mysqli_query($dbconnection,$query);
+    $query = "";
     if(mysqli_num_rows($result)>0) {
         //do the thing
+        echo "got result\n";
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
+            echo "\trow id is $id\n";
             $upvotes = $row['upvotes'];
+            echo "\tvoted_hostnames is ".$row['voted_hostnames']."";
             $votedhostnamesArray = unserialize($row['voted_hostnames']);
             print_r($votedhostnamesArray);
             if(is_array($votedhostnamesArray)) {

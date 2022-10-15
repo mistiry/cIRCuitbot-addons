@@ -45,8 +45,8 @@ function whatDay($data) {
 
     $randKeyText = array_rand($textList);
     $randKeyLink = array_rand($linkList);
-    $text = $textList($randKeyText);
-    $link = $linkList($randKeyLink);
+    $text = $textList[$randKeyText];
+    $link = $linkList[$randKeyLink];
     $message = "".$data['usernickname'].": ".$text." - ".$link."";
     sendPRIVMSG($data['location'],$message);
     return true;

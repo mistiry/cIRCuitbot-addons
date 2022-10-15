@@ -8,7 +8,7 @@ Copy the root `doMessageFromCommand` folder into the `modules` directory where y
 
 ## Customization
 
-In order to set the word and action you want the bot to use, you must modify `module.conf` and set both the command (defaults to `command`) and the action. 
+In order to set the command and reply message you want the bot to use, you must modify `module.conf` and set both the command (defaults to `command`) and the action. 
 
 In the `module.conf` file, edit the first line, that starts with `module[]=` and change `command` to the command you wish to use this module.
 

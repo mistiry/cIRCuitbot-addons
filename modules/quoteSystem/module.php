@@ -75,6 +75,8 @@ function upvoteQuote($data) {
         $query = "SELECT id,upvotes,downvotes,voted_hostnames FROM quotes WHERE id = $quoteid LIMIT 1";
     } else {
         $message = "Invalid quote ID.";
+        sendPRIVMSG($data['location'],$message);
+        return true;
     }
     $result = mysqli_query($dbconnection,$query);
     $query = "";
@@ -123,6 +125,8 @@ function downvoteQuote($data) {
         $query = "SELECT id,upvotes,downvotes,voted_hostnames FROM quotes WHERE id = $quoteid LIMIT 1";
     } else {
         $message = "Invalid quote ID.";
+        sendPRIVMSG($data['location'],$message);
+        return true;
     }
     $result = mysqli_query($dbconnection,$query);
     $query = "";

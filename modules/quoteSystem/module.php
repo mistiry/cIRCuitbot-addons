@@ -88,11 +88,10 @@ function upvoteQuote($data) {
             if(empty($votedhostnamesArray)) {
                 $votedhostnamesArray = array();
             }
-            print_r($votedhostnamesArray);
             if(is_array($votedhostnamesArray)) {
                 if(in_array($data['userhostname'],$votedhostnamesArray)) {
                     $message = "You have already voted for quote #".$id."";
-                    sendPRIVMSG($ircdata['location'],$message);
+                    sendPRIVMSG($data['location'],$message);
                     return true;
                 } else {
                     array_push($votedhostnamesArray,$data['userhostname']);
@@ -125,18 +124,22 @@ function downvoteQuote($data) {
     } else {
         $message = "Invalid quote ID.";
     }
-    
     $result = mysqli_query($dbconnection,$query);
-    if(mysqli_num_rows($result) == 1) {
+    $query = "";
+    if(mysqli_num_rows($result)>0) {
         //do the thing
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $downvotes = $row['downvotes'];
-            $votedhostnamesArray = unserialize($row['voted_hostnames']);
+            $voted_hostnames = $row['voted_hostnames'];
+            $votedhostnamesArray = unserialize($voted_hostnames);
+            if(empty($votedhostnamesArray)) {
+                $votedhostnamesArray = array();
+            }
             if(is_array($votedhostnamesArray)) {
                 if(in_array($data['userhostname'],$votedhostnamesArray)) {
                     $message = "You have already voted for quote #".$id."";
-                    sendPRIVMSG($ircdata['location'],$message);
+                    sendPRIVMSG($data['location'],$message);
                     return true;
                 } else {
                     array_push($votedhostnamesArray,$data['userhostname']);

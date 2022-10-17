@@ -3,6 +3,8 @@ function replyNoTag($ircdata) {
     $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
     $reply = $options['reply'];
     sendPRIVMSG($ircdata['location'], $reply);
+    $options = "";
+    $reply = "";
     return true;
 }
 
@@ -11,6 +13,8 @@ function replyWithTag($ircdata) {
     $reply = $options['reply'];
     $reply = "".$ircdata['usernickname'].": ".$reply."";
     sendPRIVMSG($ircdata['location'], $reply);
+    $options = "";
+    $reply = "";
     return true;
 }
 
@@ -24,6 +28,10 @@ function replyRandomNoTag($ircdata) {
     $randkey = array_rand($replyArray);
     $reply = $replyArray[$randkey];
     sendPRIVMSG($ircdata['location'], $reply);
+    $options = "";
+    $reply = "";
+    $replyArray = "";
+    $randkey = "";
     return true;
 }
 
@@ -38,6 +46,10 @@ function replyRandomWithTag($ircdata) {
     $reply = $replyArray[$randkey];
     $reply = "".$ircdata['usernickname'].": ".$reply."";
     sendPRIVMSG($ircdata['location'], $reply);
+    $options = "";
+    $reply = "";
+    $replyArray = "";
+    $randkey = "";
     return true;
 }
 
@@ -50,9 +62,13 @@ function replyTagOtherUser($ircdata) {
         $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
         $reply = $options['reply'];
         $reply = "".$userToTag.": ".$reply."";
+        $options = "";
+        $reply = "";
         sendPRIVMSG($ircdata['location'], $reply);
         return true;
     } else {
+        $options = "";
+        $reply = "";
         return false;
     }
 }
@@ -73,8 +89,16 @@ function replyRandomTagOtherUser($ircdata) {
         $reply = $replyArray[$randkey];
         $reply = "".$userToTag.": ".$reply."";
         sendPRIVMSG($ircdata['location'], $reply);
+        $options = "";
+        $reply = "";
+        $replyArray = "";
+        $randkey = "";
         return true;
     } else {
+        $options = "";
+        $reply = "";
+        $replyArray = "";
+        $randkey = "";
         return false;
     }
 }

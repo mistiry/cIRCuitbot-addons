@@ -1,6 +1,24 @@
 <?php
+function getFirstWordFromCommand($ircdata) {
+    global $config;
+    if($config['bridge_enabled'] == true) {
+        $bridgeMessage = trim($ircdata['fullmessage']);
+        $bridgeMessage = trim(str_replace("".$config['bridge_left_delimeter']."".$bridgeUser."".$config['bridge_right_delimeter']."","",$bridgeMessage));
+        $bridgeMessagePieces = explode(" ",$bridgeMessage);
+        $firstword = trim(strval($bridgeMessagePieces[1]));
+        $firstword = preg_replace('[^\w\d\!]', '', $firstword);
+    } else {
+        $messagearray = $ircdata['messagearray'];
+        $firstword = trim($messagearray[1]);    
+    }
+    
+    $firstword = trim(str_replace($config['command_flag'],"",$firstword));
+    return $firstword;
+}
+
 function replyNoTag($ircdata) {
-    $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
+    $commandGiven = getFirstWordFromCommand($ircdata);
+    $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven".conf");
     $reply = $options['reply'];
     sendPRIVMSG($ircdata['location'], $reply);
     $options = "";
@@ -9,7 +27,8 @@ function replyNoTag($ircdata) {
 }
 
 function replyWithTag($ircdata) {
-    $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
+    $commandGiven = getFirstWordFromCommand($ircdata);
+    $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven".conf");
     $reply = $options['reply'];
     $reply = "".$ircdata['usernickname'].": ".$reply."";
     sendPRIVMSG($ircdata['location'], $reply);
@@ -19,7 +38,8 @@ function replyWithTag($ircdata) {
 }
 
 function replyRandomNoTag($ircdata) {
-    $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
+    $commandGiven = getFirstWordFromCommand($ircdata);
+    $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven".conf");
     $replies = $options['replies'];
     $replyArray = array();
     foreach($replies as $reply) {
@@ -36,7 +56,8 @@ function replyRandomNoTag($ircdata) {
 }
 
 function replyRandomWithTag($ircdata) {
-    $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
+    $commandGiven = getFirstWordFromCommand($ircdata);
+    $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven".conf");
     $replies = $options['replies'];
     $replyArray = array();
     foreach($replies as $reply) {
@@ -59,7 +80,8 @@ function replyTagOtherUser($ircdata) {
     $userKnown = isKnownUser($userToTag);
 
     if($userKnown == "true" && strlen($userToTag)>1) {
-        $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
+        $commandGiven = getFirstWordFromCommand($ircdata);
+        $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven".conf");
         $reply = $options['reply'];
         $reply = "".$userToTag.": ".$reply."";
         $options = "";
@@ -79,7 +101,8 @@ function replyRandomTagOtherUser($ircdata) {
     $userKnown = isKnownUser($userToTag);
 
     if($userKnown == "true" && strlen($userToTag)>1) {
-        $options = parse_ini_file("./modules/doMessageFromCommand/module.conf");
+        $commandGiven = getFirstWordFromCommand($ircdata);
+        $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven".conf");
         $replies = $options['replies'];
         $replyArray = array();
         foreach($replies as $reply) {

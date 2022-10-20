@@ -248,7 +248,13 @@ function getQuoteStats($data) {
 }
 
 function getMyQuoteStats($data) {
-    global $dbconnection; 
+    global $dbconnection;
+    global $config;
+
+    //EXPERIMENTAL BRIDGE SUPPORT
+    if($config['bridge_enabled'] == true && stristr($data['usernickname'],$config['bridge_user_prefix'])) {
+        $data['usernickname'] = trim(str_replace($config['bridge_user_prefix'],"",$data['usernickname']));
+    }
 
     $totalcountquery = "SELECT count(*) AS totalcount FROM quotes";
     $mycountquery = "SELECT count(*) AS mytotal FROM quotes WHERE submittedby like '%".$data['usernickname']."%'";
@@ -313,7 +319,21 @@ function getMyQuoteStats($data) {
         $downvotePercentage = ( ($totalDownvotes / $downvoteCount) * 100);
         $downvotePercentage = round($downvotePercentage,2);
 
-        $message = "".$data['usernickname']."'s Quote Stats | Submitted: ".$myTotalCount." (".$myPercentage."% of all quotes). You have received ".$totalUpvotes." upvotes (".$upvotePercentage."%) and ".$totalDownvotes." downvotes (".$downvotePercentage."%). You've voted for ".$votedCount." quotes, and have been mentioned in ".$mentionedCount.". Your best quote is #".$bestQuote.", and your worst is #".$worstQuote.".";
+        if($myTotalCount == "0") {
+            $message = "".$data['usernickname']."'s Quote Stats | You have not submitted any quotes yet!";
+            if($mentionedCount == "0" || !is_numeric($mentionedCount)) {
+                $message = "".$message." You also haven't been mentioned in any quotes.";
+            } else {
+                $message = "".$message." However, you have been mentioned in ".$mentionedCount." quotes.";
+            }
+            if($votedCount == "0" || !is_numeric($votedCount)) {
+               $message = "".$message." You have not voted for any quotes, either!";
+            } else {
+               $message = "".$message." You have voted for ".$votedCount." quotes.";
+            }
+        } else {
+            $message = "".$data['usernickname']."'s Quote Stats | Submitted: ".$myTotalCount." (".$myPercentage."% of all quotes). You have received ".$totalUpvotes." upvotes (".$upvotePercentage."%) and ".$totalDownvotes." downvotes (".$downvotePercentage."%). You've voted for ".$votedCount." quotes, and have been mentioned in ".$mentionedCount.". Your best quote is #".$bestQuote.", and your worst is #".$worstQuote.".";
+        }
     }
     sendPRIVMSG($data['location'],$message);
     return true;

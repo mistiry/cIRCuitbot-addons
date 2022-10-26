@@ -19,7 +19,7 @@ function getStatsInfo($ircdata) {
                 $nickaliases = unserialize($row['nick_aliases']);
                 $totalwords = $row['total_words'];
                 $totallines = $row['total_lines'];
-                $nickcount = array_count_values($nickaliases);
+                $nickcount = count($nickaliases);
                 $totalnicks = $nickcount - 1;
             }
 

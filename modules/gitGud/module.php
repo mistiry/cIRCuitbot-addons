@@ -16,7 +16,7 @@ function gitGud($data) {
         );
         $ggarraykey = array_rand($ggarray);
         $message = $ggarray[$ggarraykey];
-        sendPRIVMSG($data['location'], "".$usertogitgud.": ".$message."");
+        sendPRIVMSG($data['location'], "".$usertogitgud." : ".$message."");
         usleep(rand(100,500));
         sendPRIVMSG($data['location'], "`   ┌─┐┬┌┬┐  ┌─┐┬ ┬┌┬┐  `");
         usleep(rand(100,500));

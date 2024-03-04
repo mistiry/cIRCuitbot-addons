@@ -5,7 +5,7 @@ function doActionFromWord1in20($ircdata) {
     global $socket;
     global $ircdata;
 
-    $options = parse_ini_file("./triggers/doActionFromWord/trigger.conf");
+    $options = parse_ini_file("./triggers/doActionFromWord1in20/trigger.conf");
 
     if(rand(0,19) == "4") {
         if($options['action'] != "") {

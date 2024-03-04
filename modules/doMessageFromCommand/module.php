@@ -30,7 +30,7 @@ function replyWithTag($ircdata) {
     $commandGiven = getFirstWordFromCommand($ircdata);
     $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven.".conf");
     $reply = $options['reply'];
-    $reply = "".$ircdata['usernickname'].": ".$reply."";
+    $reply = "".$ircdata['usernickname']." - ".$reply."";
     sendPRIVMSG($ircdata['location'], $reply);
     $options = "";
     $reply = "";
@@ -65,7 +65,7 @@ function replyRandomWithTag($ircdata) {
     }
     $randkey = array_rand($replyArray);
     $reply = $replyArray[$randkey];
-    $reply = "".$ircdata['usernickname'].": ".$reply."";
+    $reply = "".$ircdata['usernickname']." - ".$reply."";
     sendPRIVMSG($ircdata['location'], $reply);
     $options = "";
     $reply = "";
@@ -83,7 +83,7 @@ function replyTagOtherUser($ircdata) {
         $commandGiven = getFirstWordFromCommand($ircdata);
         $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven.".conf");
         $reply = $options['reply'];
-        $reply = "".$userToTag.": ".$reply."";
+        $reply = "".$userToTag." - ".$reply."";
         sendPRIVMSG($ircdata['location'], $reply);
         $options = "";
         $reply = "";
@@ -110,7 +110,7 @@ function replyRandomTagOtherUser($ircdata) {
         }
         $randkey = array_rand($replyArray);
         $reply = $replyArray[$randkey];
-        $reply = "".$userToTag.": ".$reply."";
+        $reply = "".$userToTag." - ".$reply."";
         sendPRIVMSG($ircdata['location'], $reply);
         $options = "";
         $reply = "";

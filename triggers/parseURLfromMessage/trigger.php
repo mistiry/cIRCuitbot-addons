@@ -8,7 +8,8 @@ function parseURLfromMessage($ircdata) {
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
             $urltitle = html_entity_decode($urltitle);
-            if(strlen($urltitle)>5) {
+            $urltitle = str_replace(array('\r','\r\n','\n','\n\r'), '', $urltitle);
+            if(strlen($urltitle)>5 && strlen($urltitle)<450)) {
                 $message = "".$ircdata['usernickname'].": URL Title - ".$urltitle."";
                 sendPRIVMSG($config['channel'], "".$message."");                        
             }
@@ -20,7 +21,8 @@ function parseURLfromMessage($ircdata) {
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
             $urltitle = html_entity_decode($urltitle);
-            if(strlen($urltitle)>5) {
+            $urltitle = str_replace(array('\r','\r\n','\n','\n\r'), '', $urltitle);
+            if(strlen($urltitle)>5 && strlen($urltitle)<450)) {
                 $message = "".$ircdata['usernickname'].": URL Title - ".$urltitle."";
                 sendPRIVMSG($config['channel'], "".$message."");                        
             }
@@ -47,7 +49,7 @@ function getTitle($url) {
         }
     }
 
-    $page = file_get_contents(trim($url));
+    $page = file_get_contents(trim($url), NULL, NULL, NULL, 16384);
     $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
     return $title;
 }

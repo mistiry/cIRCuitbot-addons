@@ -9,6 +9,7 @@ function parseURLfromMessage($ircdata) {
             $urltitle = urldecode($urltitle);
             $urltitle = html_entity_decode($urltitle);
             $urltitle = str_replace(array('\r','\r\n','\n','\n\r'), '', $urltitle);
+            $urltitle = preg_replace(array('\r','\r\n','\n','\n\r'),'', $urltitle);
             if(strlen($urltitle)>5 && strlen($urltitle)<450) {
                 $message = "".$ircdata['usernickname']." - URL Title - ".$urltitle."";
                 sendPRIVMSG($config['channel'], "".$message."");                        
@@ -22,6 +23,7 @@ function parseURLfromMessage($ircdata) {
             $urltitle = urldecode($urltitle);
             $urltitle = html_entity_decode($urltitle);
             $urltitle = str_replace(array('\r','\r\n','\n','\n\r'), '', $urltitle);
+            $urltitle = preg_replace(array('\r','\r\n','\n','\n\r'),'', $urltitle);
             if(strlen($urltitle)>5 && strlen($urltitle)<450) {
                 $message = "".$ircdata['usernickname']." - URL Title - ".$urltitle."";
                 sendPRIVMSG($config['channel'], "".$message."");                        

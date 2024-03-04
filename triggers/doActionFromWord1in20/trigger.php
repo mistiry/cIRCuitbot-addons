@@ -6,8 +6,9 @@ function doActionFromWord1in20($ircdata) {
     global $ircdata;
 
     $options = parse_ini_file("./triggers/doActionFromWord1in20/trigger.conf");
-
-    if(rand(0,19) == "4") {
+    
+    $rand = rand(0,19);
+    if($rand == "4") {
         if($options['action'] != "") {
             fputs($socket, "PRIVMSG ".$ircdata['location']." :\001ACTION ".$options['action']."\001\n");
         }

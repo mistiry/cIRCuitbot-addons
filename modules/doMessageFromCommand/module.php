@@ -6,16 +6,12 @@ function getFirstWordFromCommand($ircdata) {
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
 
     //Debug check that the $firstword is alphanumeric
-    $pattern = "/^(\w)+/";
-    $isalpha = preg_match($pattern,$firstword);
-    echo "\nFirst word is alpha? ".$isalpha."\n";
-
-    system("echo ".$firstword." > /tmp/bullshit.log");
+    // $pattern = "/^(\w)+/";
+    // $isalpha = preg_match($pattern,$firstword);
+    // echo "\nFirst word is alpha? ".$isalpha."\n";
 
     $firstword = preg_replace("/[^[:alnum:][:space:]]/u", '', $firstword);
     $firstword = preg_replace("/[^A-Za-z0-9 ]/", '', $firstword);
-
-    system("echo ".$firstword." > /tmp/bullshit2.log");
 
     return $firstword;
 }

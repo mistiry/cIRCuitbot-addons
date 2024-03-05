@@ -22,7 +22,7 @@ function getFirstWordFromCommand($ircdata) {
     $firstword = trim(strval($messagePieces[0]));
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
 
-    $pattern = '^(\w)+';
+    $pattern = "/^(\w)+/";
     $isalpha = preg_match($pattern,$firstword);
     echo "\nFirst word is alpha? ".$isalpha."\n";
 

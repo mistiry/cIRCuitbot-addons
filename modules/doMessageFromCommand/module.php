@@ -21,6 +21,11 @@ function getFirstWordFromCommand($ircdata) {
     $messagePieces = explode(" ",$ircdata['fullmessage']);
     $firstword = trim(strval($messagePieces[0]));
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
+
+    $pattern = "^(\w)+";
+    $isalpha = preg_match($pattern,$firstword);
+    echo "\nFirst word is alpha? ".$isalpha."\n";
+
     return $firstword;
 }
 
@@ -67,7 +72,7 @@ function replyRandomWithTag($ircdata) {
     $commandGiven = getFirstWordFromCommand($ircdata);
 
     $inifile = "./modules/doMessageFromCommand/".$commandGiven.".conf";
-    echo "INI File is '".$inifile."'";
+    echo "\nINI File is '".$inifile."'\n";
     $options = parse_ini_file($inifile);
     $replies = $options['replies'];
     $replyArray = array();

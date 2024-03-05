@@ -1,23 +1,25 @@
 <?php
 function getFirstWordFromCommand($ircdata) {
     global $config;
-    if($config['bridge_enabled'] == true && $ircdata['usernickname'] == $config['bridge_username']) {
-        $bridgeMessage = trim($ircdata['fullmessage']);
-        $bridgeMessage = trim(str_replace("".$config['bridge_left_delimeter']."".$bridgeUser."".$config['bridge_right_delimeter']."","",$bridgeMessage));
-        logEntry("Bridge message after username replace was: \"".$bridgeMessage."\"");
-        $bridgeMessagePieces = explode(" ",$bridgeMessage);
-        logEntry("Bridge message pieces:");
-        foreach($bridgeMessagePieces as $piece) {
-            logEntry("    $piece");
-        }
-        $firstword = trim(strval($bridgeMessagePieces[1]));
-        $firstword = preg_replace('[^\w\d\!]', '', $firstword);
-        logEntry("Bridge message firstword was: \"".$firstword."\"");
-    } else {
-        $messagearray = $ircdata['messagearray'];
-        $firstword = trim($messagearray[1]);    
-    }
+    // if($config['bridge_enabled'] == true && $ircdata['usernickname'] == $config['bridge_username']) {
+    //     $bridgeMessage = trim($ircdata['fullmessage']);
+    //     $bridgeMessage = trim(str_replace("".$config['bridge_left_delimeter']."".$bridgeUser."".$config['bridge_right_delimeter']."","",$bridgeMessage));
+    //     logEntry("Bridge message after username replace was: \"".$bridgeMessage."\"");
+    //     $bridgeMessagePieces = explode(" ",$bridgeMessage);
+    //     logEntry("Bridge message pieces:");
+    //     foreach($bridgeMessagePieces as $piece) {
+    //         logEntry("    $piece");
+    //     }
+    //     $firstword = trim(strval($bridgeMessagePieces[1]));
+    //     $firstword = preg_replace('[^\w\d\!]', '', $firstword);
+    //     logEntry("Bridge message firstword was: \"".$firstword."\"");
+    // } else {
+    //     $messagearray = $ircdata['messagearray'];
+    //     $firstword = trim($messagearray[1]);    
+    // }
     
+    $messagearray = $ircdata['messagearray'];
+    $firstword = trim($messagearray[1]);  
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
     return $firstword;
 }

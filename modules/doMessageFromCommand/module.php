@@ -29,6 +29,8 @@ function getFirstWordFromCommand($ircdata) {
     $isalpha = preg_match($pattern,$firstword);
     echo "\nFirst word is alpha? ".$isalpha."\n";
 
+    system("echo ".$firstword." > /tmp/bullshit.log");
+
     return $firstword;
 }
 

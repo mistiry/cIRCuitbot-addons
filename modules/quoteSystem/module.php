@@ -102,7 +102,7 @@ function upvoteQuote($data) {
             }
             
             if(mysqli_query($dbconnection,$query)) {
-                $message = "".$data['usernickname'].": your upvote has been applied to quote #$id.";
+                $message = "".$data['usernickname']." - your upvote has been applied to quote #$id.";
             } else {
                 $message = "Unable to apply vote. Please try again using !up [quote_id]";
             }
@@ -241,7 +241,7 @@ function getQuoteStats($data) {
         }
         $topPercentage = ( ($total / $totalQuotes) * 100 );
         $topPercentage = round($topPercentage,2);
-        $message = "".$data['usernickname'].": There are ".$totalQuotes." total quotes in the database, submitted by ".$totalSubmitters." unique usernames. A total of ".$totalUpvotes." upvotes and ".$totalDownvotes." downvotes have been counted. The user ".$submittedby." has submitted the most quotes at ".$total." - a total of ".$topPercentage."% of all quotes!";
+        $message = "".$data['usernickname']." - There are ".$totalQuotes." total quotes in the database, submitted by ".$totalSubmitters." unique usernames. A total of ".$totalUpvotes." upvotes and ".$totalDownvotes." downvotes have been counted. The user ".$submittedby." has submitted the most quotes at ".$total." - a total of ".$topPercentage."% of all quotes!";
     }
     sendPRIVMSG($data['location'],$message);
     return true;
@@ -320,7 +320,7 @@ function getMyQuoteStats($data) {
         $downvotePercentage = round($downvotePercentage,2);
 
         if($myTotalCount == "0") {
-            $message = "".$data['usernickname']."'s Quote Stats | You have not submitted any quotes yet!";
+            $message = "".$data['usernickname']." Quote Stats | You have not submitted any quotes yet!";
             if($mentionedCount == "0" || !is_numeric($mentionedCount)) {
                 $message = "".$message." You also haven't been mentioned in any quotes.";
             } else {
@@ -332,7 +332,7 @@ function getMyQuoteStats($data) {
                $message = "".$message." You have voted for ".$votedCount." quotes.";
             }
         } else {
-            $message = "".$data['usernickname']."'s Quote Stats | Submitted: ".$myTotalCount." (".$myPercentage."% of all quotes). You have received ".$totalUpvotes." upvotes (".$upvotePercentage."%) and ".$totalDownvotes." downvotes (".$downvotePercentage."%). You've voted for ".$votedCount." quotes, and have been mentioned in ".$mentionedCount.". Your best quote is #".$bestQuote.", and your worst is #".$worstQuote.".";
+            $message = "".$data['usernickname']." Quote Stats | Submitted: ".$myTotalCount." (".$myPercentage."% of all quotes). You have received ".$totalUpvotes." upvotes (".$upvotePercentage."%) and ".$totalDownvotes." downvotes (".$downvotePercentage."%). You've voted for ".$votedCount." quotes, and have been mentioned in ".$mentionedCount.". Your best quote is #".$bestQuote.", and your worst is #".$worstQuote.".";
         }
     }
     sendPRIVMSG($data['location'],$message);

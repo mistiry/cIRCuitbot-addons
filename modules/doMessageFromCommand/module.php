@@ -5,7 +5,7 @@ function getFirstWordFromCommand($ircdata) {
         $bridgeMessage = trim($ircdata['fullmessage']);
         $bridgeMessage = trim(str_replace("".$config['bridge_left_delimeter']."".$bridgeUser."".$config['bridge_right_delimeter']."","",$bridgeMessage));
         $bridgeMessagePieces = explode(" ",$bridgeMessage);
-        $firstword = trim(strval($bridgeMessagePieces[1]));
+        $firstword = trim(strval($bridgeMessagePieces[2]));
         $firstword = preg_replace('[^\w\d\!]', '', $firstword);
     } else {
         $messagearray = $ircdata['messagearray'];

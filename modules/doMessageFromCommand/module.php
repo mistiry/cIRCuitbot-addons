@@ -1,18 +1,18 @@
 <?php
 function getFirstWordFromCommand($ircdata) {
     global $config;
-    if($config['bridge_enabled'] == true && $ircdata['usernickname'] == $config['bridge_username']) {
-        $bridgeMessage = trim($ircdata['fullmessage']);
-        $bridgeMessage = trim(str_replace("".$config['bridge_left_delimeter']."".$bridgeUser."".$config['bridge_right_delimeter']."","",$bridgeMessage));
-        $bridgeMessagePieces = explode(" ",$bridgeMessage);
-        $firstword = trim(strval($bridgeMessagePieces[2]));
-        $firstword = preg_replace('[^\w\d\!]', '', $firstword);
-    } else {
-        $messagearray = $ircdata['messagearray'];
-        $firstword = trim($messagearray[1]);    
-    }
-    
+    global $firstword;
+
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
+
+    //Debug check that the $firstword is alphanumeric
+    // $pattern = "/^(\w)+/";
+    // $isalpha = preg_match($pattern,$firstword);
+    // echo "\nFirst word is alpha? ".$isalpha."\n";
+
+    $firstword = preg_replace("/[^[:alnum:][:space:]]/u", '', $firstword);
+    $firstword = preg_replace("/[^A-Za-z0-9 ]/", '', $firstword);
+
     return $firstword;
 }
 
@@ -57,7 +57,10 @@ function replyRandomNoTag($ircdata) {
 
 function replyRandomWithTag($ircdata) {
     $commandGiven = getFirstWordFromCommand($ircdata);
-    $options = parse_ini_file("./modules/doMessageFromCommand/".$commandGiven.".conf");
+
+    $inifile = "./modules/doMessageFromCommand/".$commandGiven.".conf";
+    echo "\nINI File is '".$inifile."'\n";
+    $options = parse_ini_file($inifile);
     $replies = $options['replies'];
     $replyArray = array();
     foreach($replies as $reply) {

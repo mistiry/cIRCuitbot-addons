@@ -21,10 +21,11 @@ function getFirstWordFromCommand($ircdata) {
     $messagePieces = explode(" ",$ircdata['fullmessage']);
     $firstword = trim(strval($messagePieces[0]));
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
+    $firstword = mb_convert_encoding($firstword, "UTF-8");
 
-    $pattern = "/^(\w)+/";
-    $isalpha = preg_match($pattern,$firstword);
-    echo "\nFirst word is alpha? ".$isalpha."\n";
+    // $pattern = "/^(\w)+/";
+    // $isalpha = preg_match($pattern,$firstword);
+    // echo "\nFirst word is alpha? ".$isalpha."\n";
 
     return $firstword;
 }

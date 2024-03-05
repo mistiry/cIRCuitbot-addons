@@ -3,33 +3,19 @@ function getFirstWordFromCommand($ircdata) {
     global $config;
     global $firstword;
 
-    // if($config['bridge_enabled'] == true && $ircdata['usernickname'] == $config['bridge_username']) {
-    //     $bridgeMessage = trim($ircdata['fullmessage']);
-    //     $bridgeMessage = trim(str_replace("".$config['bridge_left_delimeter']."".$bridgeUser."".$config['bridge_right_delimeter']."","",$bridgeMessage));
-    //     logEntry("Bridge message after username replace was: \"".$bridgeMessage."\"");
-    //     $bridgeMessagePieces = explode(" ",$bridgeMessage);
-    //     logEntry("Bridge message pieces:");
-    //     foreach($bridgeMessagePieces as $piece) {
-    //         logEntry("    $piece");
-    //     }
-    //     $firstword = trim(strval($bridgeMessagePieces[1]));
-    //     $firstword = preg_replace('[^\w\d\!]', '', $firstword);
-    //     logEntry("Bridge message firstword was: \"".$firstword."\"");
-    // } else {
-    //     $messagearray = $ircdata['messagearray'];
-    //     $firstword = trim($messagearray[1]);    
-    // }
-
-    // $messagePieces = explode(" ",$ircdata['fullmessage']);
-    // $firstword = trim(strval($messagePieces[0]));
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
-    // $firstword = mb_convert_encoding($firstword, "UTF-8");
 
+    //Debug check that the $firstword is alphanumeric
     $pattern = "/^(\w)+/";
     $isalpha = preg_match($pattern,$firstword);
     echo "\nFirst word is alpha? ".$isalpha."\n";
 
     system("echo ".$firstword." > /tmp/bullshit.log");
+
+    $firstword = preg_replace("/[^[:alnum:][:space:]]/u", '', $firstword);
+    $firstword = preg_replace("/[^A-Za-z0-9 ]/", '', $firstword);
+
+    system("echo ".$firstword." > /tmp/bullshit2.log");
 
     return $firstword;
 }

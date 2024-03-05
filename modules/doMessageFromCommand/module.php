@@ -17,11 +17,9 @@ function getFirstWordFromCommand($ircdata) {
     //     $messagearray = $ircdata['messagearray'];
     //     $firstword = trim($messagearray[1]);    
     // }
-    
-    $messagearray = $ircdata['messagearray'];
-    print_r($ircdata);
-    print_r($ircdata['fullmessage']);
-    $firstword = trim($messagearray[1]);  
+
+    $messagePieces = explode(" ",$ircdata['fullmessage']);
+    $firstword = $messagePieces[0]; 
     $firstword = trim(str_replace($config['command_flag'],"",$firstword));
     return $firstword;
 }

@@ -35,9 +35,6 @@ function triviaSystem_startGame($ircdata) {
         $triviaTopic = $topics[$randKey];
     }
 
-    logEntry("Trivia Starting with topic '".$triviaTopic."'");
-    sendPRIVMSG($ircdata['location'], "Starting Trivia! The topic is: ".$triviaTopic."");
-
     //Calculate timer expiration and set the timer
     $currentEpoch = time();
     $expiryTime = $currentEpoch + $configfile['questionTime'];
@@ -47,6 +44,7 @@ function triviaSystem_startGame($ircdata) {
     $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
     $json = file_get_contents($topicFile);
     $jsonData = json_decode($json);
+    print_r($jsonData);
     $randKey = array_rand($jsonData['questions']);
     $triviaQuestion = $jsonData['questions'][$randKey]['question'];
     $triviaAnswer = $jsonData['questions'][$randKey]['answer'];
@@ -54,20 +52,20 @@ function triviaSystem_startGame($ircdata) {
     //Load the answer into the triggers array
     $triggers[$triviaAnswer] = "triviaSystem_answerGiven";
 
-    // Stylize the intro message
-    $introText1 = stylizeText("-- T R I V I A --", "bold");
+    //Stylize the intro message
+    $introText1 = stylizeText("-- TRIVIA --", "bold");
     $introText1 = stylizeText($introText1, "bg_green");
     $introText1 = stylizeText($introText1, "color_white");
-    $introText2 = stylizeText("".$ircdata['username']." has started trivia. You have ".$configfile['questionTime']." seconds to answer! The topic is:", "bold");
+    $introText2 = stylizeText("".$ircdata['usernickname']." has started trivia. You have ".$configfile['questionTime']." seconds to answer! The topic is:", "bold");
     $introText3 = stylizeText($triviaTopic, "color_pink");
     $introText3 = stylizeText($introText3, "bold");
     $introLine = "".$introText1." ".$introText2." ".$introText3."";
 
-    // Stylize the question
+    //Stylize the question
     $triviaQuestion = stylizeText($triviaQuestion, "bold");
     $triviaQuestion = stylizeText($triviaQuestion, "color_yellow");
 
-    // Set the activeActivityArray and message the channel to begin!
+    //Set the activeActivityArray and message the channel to begin!
     $activeActivityArray[$activityName] = $triviaTopic;
     sendPRIVMSG($ircdata['location'], $introLine);
     sendPRIVMSG($ircdata['location'], $triviaQuestion);

@@ -128,6 +128,7 @@ function triviaSystem_timeExpired($ircdata) {
 
 
     //Activity should not be active anymore, remove from array
+    $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
     unset($activeActivityArray[$activityName]);
 

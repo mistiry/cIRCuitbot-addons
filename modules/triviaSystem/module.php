@@ -107,10 +107,11 @@ function triviaSystem_answerGiven($ircdata) {
     $answerKey = array_search("triviaSystem_answerGiven", $triggers);
     if($answerKey !== false) {
         $correctAnswer = stylizeText($answerKey, "bold");
+        $correctAnswer = stylizeText($correctAnswer, "color_cyan");
     }
 
     //Craft the message and send it
-    $message = "".$usernameText." ".$congratsText." ".$correctAnswer." and earned 1 point in the ".$triviaTopic." topic!";
+    $message = "".$usernameText." ".$congratsText." ".$correctAnswer."! They earned 1 point in the ".$triviaTopic." topic!";
     sendPRIVMSG($ircdata['location'], $message);
     
     //Get the answer from the trigger array based on the known value 'triviaSystem_answerGiven'

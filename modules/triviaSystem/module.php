@@ -40,6 +40,7 @@ function triviaSystem_mainFunc($ircdata) {
 
     //Start the trivia game!
     $isActivityActive = true;
+
     //Calculate timer expiration
     $currentEpoch = time();
     $expiryTime = $currentEpoch + $configfile['questionTime'];
@@ -47,10 +48,12 @@ function triviaSystem_mainFunc($ircdata) {
 
     //Load the answers from the topic.topic file in $triviaTopic
     //$triggers['answer'] = "triviaSystem_answerGiven";
+    return true;
 }
 
 function triviaSystem_timeExpired($ircdata) {
     global $isActivityActive;
 
+    $isActivityActive = false;
     sendPRIVMSG($ircdata['location'],"Time is up!");
 }

@@ -12,7 +12,7 @@ function triviaSystem_mainFunc($ircdata) {
 
     if(!empty($arg)) {
         if(in_array($arg,$topics)) {
-            $triviaTopic = $arg
+            $triviaTopic = $arg;
         } else {
             //they passed an arg but its not a valid topic
             sendPRIVMSG($ircdata['location'], "That is not a valid topic. Not starting!")

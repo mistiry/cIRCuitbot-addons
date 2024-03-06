@@ -53,8 +53,7 @@ function triviaSystem_startGame($ircdata) {
 
     //Stylize the intro message
     $introText1 = stylizeText("-- TRIVIA --", "bold");
-    $introText1 = stylizeText($introText1, "bg_green");
-    $introText1 = stylizeText($introText1, "color_white");
+    $introText1 = stylizeText($introText1, "color_green");
     $introText2 = stylizeText("".$ircdata['usernickname']." has started trivia. You have ".$configfile['questionTime']." seconds to answer! The topic is:", "bold");
     $introText3 = stylizeText($triviaTopic, "color_pink");
     $introText3 = stylizeText($introText3, "bold");
@@ -81,15 +80,16 @@ function triviaSystem_answerGiven($ircdata) {
     //The correct answer was given to get here.
     //Congrats texts, chosen at random for some personality.
     $congratsArray = array(
-        'you got it',
-        'good job',
-        'nice one',
-        'congratulations',
-        'congrats',
-        'good work',
-        'great job',
-        'excellent answer',
-        'great answer'
+        'you got it with',
+        'coming in clutch with',
+        'nailed it with',
+        'rekt everyone with',
+        'ftmfw with',
+        'obliterates the competition by answering',
+        'destroys everyone with the answer',
+        'takes the win with',
+        'shows their dominance with the correct answer',
+        'proves they arent just M$ Helldesk with'
     );
     $randKey = array_rand($congratsArray);
     $congratsText = $congratsArray[$randKey];
@@ -101,9 +101,16 @@ function triviaSystem_answerGiven($ircdata) {
     $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
     $triviaTopic = stylizeText($activeActivityArray[$activityName], "color_pink");
+    $triviaTopic = stylizeText($triviaTopic, "bold");
+
+    //The answer was
+    $answerKey = array_search("triviaSystem_answerGiven", $triggers);
+    if($answerKey !== false) {
+        $correctAnswer = stylizeText($answerKey, "bold");
+    }
 
     //Craft the message and send it
-    $message = "".$usernameText." - ".$congratsText."! You earned 1 point in the ".$triviaTopic." topic.";
+    $message = "".$usernameText." ".$congratsText." ".$correctAnswer." and earned 1 point in the ".$triviaTopic." topic!";
     sendPRIVMSG($ircdata['location'], $message);
     
     //Get the answer from the trigger array based on the known value 'triviaSystem_answerGiven'

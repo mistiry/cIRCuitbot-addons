@@ -1,9 +1,13 @@
 <?php
 function triviaSystem_mainFunc($ircdata) {
-    global $dbconnection;
     global $isActivityActive;
     global $timerArray;
     global $triggers;
+
+    if($isActivityActive == true) {
+        sendPRIVMSG($ircdata['location'],"Sorry, a game is already in progress!");
+        return true;
+    }
 
     //Since this is the main function, we need to first determine where we are
     //in the game, and if we need to send the current call off to another function
@@ -43,4 +47,10 @@ function triviaSystem_mainFunc($ircdata) {
 
     //Load the answers from the topic.topic file in $triviaTopic
     //$triggers['answer'] = "triviaSystem_answerGiven";
+}
+
+function triviaSystem_timeExpired($ircdata) {
+    global $isActivityActive;
+
+    sendPRIVMSG($ircdata['location'],"Time is up!");
 }

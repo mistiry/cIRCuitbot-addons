@@ -53,7 +53,8 @@ function triviaSystem_mainFunc($ircdata) {
 
 function triviaSystem_timeExpired($ircdata) {
     global $isActivityActive;
+    global $config;
 
     $isActivityActive = false;
-    sendPRIVMSG($ircdata['location'],"Time is up!");
+    sendPRIVMSG($config['channel'], "Time is up!");
 }

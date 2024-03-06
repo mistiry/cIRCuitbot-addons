@@ -22,6 +22,16 @@ function triviaSystem_startGame($ircdata) {
     //Determine if they passed a topic argument, else pick a random one
     $arg = trim($ircdata['commandargs']);
     if(!empty($arg)) {
+        //If they are requesting the topics
+        if($arg == "topics") {
+            foreach($topicArray as $topic) {
+                $topicsMessage .= " ".$topic." ";
+            }
+            $introText1 = stylizeText("-- TRIVIA --", "bold");
+            $introText1 = stylizeText($introText1, "color_green");
+            sendPRIVMSG($ircdata['location'], "".$intoText1." Available Topics: ".stylizeText($topicsMessage,"bold")."");
+            return true;
+        }
         if(in_array($arg,$topicArray)) {
             $triviaTopic = $arg;
         } else {
@@ -111,7 +121,7 @@ function triviaSystem_answerGiven($ircdata) {
     }
 
     //Craft the message and send it
-    $message = "".$usernameText." ".$congratsText." ".$correctAnswer."! They earned 1 point in the ".$triviaTopic." topic!";
+    $message = "".$usernameText." ".$congratsText." ".$correctAnswer."! They earned 1 point in the ".$triviaTopic." topic.";
     sendPRIVMSG($ircdata['location'], $message);
     
     //Get the answer from the trigger array based on the known value 'triviaSystem_answerGiven'
@@ -143,12 +153,30 @@ function triviaSystem_timeExpired($ircdata) {
         $answerMsg = "The correct answer was: ".stylizeText($answerKey,"bold")."";
     }
 
+    //Stylize
+    $timesup = stylizeText("Time is up!", "bold");
+    $timesup = stylizeText($timesup, "color_red");
+
+
     //Unset the timer
     unset($timerArray['triviaSystem_timeExpired']);
 
     //Unset the trigger and message the channel
     unset($triggers[$answerKey]);
-    sendPRIVMSG($config['channel'], "Time is up! ".$answerMsg."");
+    sendPRIVMSG($config['channel'], "".$timesup." ".$answerMsg."");
 
     return true;
+}
+
+function triviaSystem_getScores($ircdata) {
+    global $dbconnection;
+
+    $arg = trim($ircdata['commandargs']);
+    //If they passed an argument, 
+    
+
+}
+
+function triviaSystem_updateScores($ircdata) {
+
 }

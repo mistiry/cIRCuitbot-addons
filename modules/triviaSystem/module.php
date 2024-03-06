@@ -9,9 +9,13 @@ function triviaSystem_mainFunc($ircdata) {
     //Load all available trivia topics into array here based on the config file 
     $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
     $topics = $configfile['topics'];
+    $topicArray = array();
+    foreach($topics as $topic) {
+        array_push($topicArray, $topic);
+    }
 
     if(!empty($arg)) {
-        if(in_array($arg,$topics)) {
+        if(in_array($arg,$topicArray)) {
             $triviaTopic = $arg;
         } else {
             //they passed an arg but its not a valid topic

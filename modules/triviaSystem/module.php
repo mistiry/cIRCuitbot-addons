@@ -15,7 +15,7 @@ function triviaSystem_mainFunc($ircdata) {
             $triviaTopic = $arg;
         } else {
             //they passed an arg but its not a valid topic
-            sendPRIVMSG($ircdata['location'], "That is not a valid topic. Not starting!")
+            sendPRIVMSG($ircdata['location'], "That is not a valid topic. Not starting!");
             return true;
         }
     } else {

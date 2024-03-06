@@ -1,6 +1,9 @@
 <?php
 function triviaSystem_mainFunc($ircdata) {
     global $dbconnection;
+    global $isActivityActive;
+    global $timerArray;
+    global $triggers;
 
     //Since this is the main function, we need to first determine where we are
     //in the game, and if we need to send the current call off to another function
@@ -30,4 +33,14 @@ function triviaSystem_mainFunc($ircdata) {
 
     logEntry("Trivia Starting with topic '".$triviaTopic."'");
     sendPRIVMSG($ircdata['location'], "Starting Trivia! The topic is: ".$triviaTopic."");
+
+    //Start the trivia game!
+    $isActivityActive = true;
+    //Calculate timer expiration
+    $currentEpoch = time();
+    $expiryTime = $currentEpoch + $configfile['questionTime'];
+    $timerArray['triviaSystem_timeExpired'] = $expiryTime;
+
+    //Load the answers from the topic.topic file in $triviaTopic
+    //$triggers['answer'] = "triviaSystem_answerGiven";
 }

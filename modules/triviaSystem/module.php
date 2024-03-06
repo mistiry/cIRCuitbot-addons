@@ -42,6 +42,7 @@ function triviaSystem_startGame($ircdata) {
 
     //Load the trivia JSON and pick a random question/answer
     $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
+    echo "Topic file is '".$topicFile."'\n";
     $json = file_get_contents($topicFile);
     print_r($json);
     $jsonData = json_decode($json, true);

@@ -120,6 +120,7 @@ function triviaSystem_answerGiven($ircdata) {
 
 function triviaSystem_timeExpired($ircdata) {
     global $activeActivityArray;
+    global $timerArray;
     global $config;
     global $triggers;
 
@@ -133,6 +134,9 @@ function triviaSystem_timeExpired($ircdata) {
     if($answerKey !== false) {
         $answerMsg = "The correct answer was: ".stylizeText($answerKey,"bold")."";
     }
+
+    //Unset the timer
+    unset($timerArray['triviaSystem_timeExpired']);
 
     //Unset the trigger and message the channel
     unset($triggers[$answerKey]);

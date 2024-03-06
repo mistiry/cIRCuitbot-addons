@@ -79,6 +79,7 @@ function triviaSystem_answerGiven($ircdata) {
     global $activeActivityArray;
     global $timerArray;
     global $triggers;
+    global $ircdata;
 
     //The correct answer was given to get here.
     //Congrats texts, chosen at random for some personality.
@@ -100,6 +101,7 @@ function triviaSystem_answerGiven($ircdata) {
     $usernameText = stylizeText($usernameText,"color_light_green");
 
     //The topic for this question was
+    $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
     $triviaTopic = stylizeText($activeActivityArray[$activityName], "color_pink");
 

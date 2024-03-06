@@ -96,10 +96,11 @@ function triviaSystem_answerGiven($ircdata) {
     $randKey = array_rand($congratsArray);
     $congratsText = $congratsArray[$randKey];
     $congratsText = stylizeText($congratsText,"bold");
-    $usernameText = stylizeText($ircdata['username'],"bold");
+    $usernameText = stylizeText($ircdata['usernickname'],"bold");
     $usernameText = stylizeText($usernameText,"color_light_green");
 
     //The topic for this question was
+    $activityName = $configfile['activityName'];
     $triviaTopic = stylizeText($activeActivityArray[$activityName], "color_pink");
 
     //Craft the message and send it
@@ -122,7 +123,9 @@ function triviaSystem_timeExpired($ircdata) {
     global $config;
     global $triggers;
 
+
     //Activity should not be active anymore, remove from array
+    $activityName = $configfile['activityName'];
     unset($activeActivityArray[$activityName]);
 
     //Get the answer from the trigger array based on the known value 'triviaSystem_answerGiven'

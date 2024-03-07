@@ -235,8 +235,9 @@ function triviaSystem_getHiScores($ircdata) {
                         $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
                         $scoresMessage .= "  ".$messagePiece."  ";
                     }
-                    sendPRIVMSG($ircdata['location'],$scoresMessage);
+                    
                 }
+                sendPRIVMSG($ircdata['location'],$scoresMessage);
             }
         }
     }
@@ -261,20 +262,12 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $newLastUsedNickname = $nickname;
                 $newLastWinTime = time();
                 $oldScore = $scoresArray[$topic];
-                logEntry("oldScore is '".$oldScore."'");
-                logEntry("ScoresArray Topic '".$scoresArray[$topic]."'");
                 $newScore = ($oldScore + 1);
-                logEntry("newScore is '".$newScore."'");
                 unset($scoresArray[$topic]);
                 $scoresArray[$topic] = $newScore;
                 $newScoresArray = serialize($scoresArray);
-                logEntry("Old Score ".$oldScore." and New Score ".$newScore."");
-                var_dump($newScoresArray);
-                var_dump($scoresArray);
                 $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = '".$hostname."'";
-                logEntry("".$query."");
             }
-        
             $userhostname = "";
             $lastusednickname = "";
             $scoresArray = array();
@@ -286,7 +279,6 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
         $newScoresArray[$topic] = 1;
         $newScoresArray = serialize($newScoresArray);
         $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".time()."')";
-        logEntry("".$query."");
     } 
 
     if(mysqli_query($dbconnection,$query)) {

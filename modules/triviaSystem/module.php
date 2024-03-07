@@ -173,10 +173,11 @@ function triviaSystem_timeExpired($ircdata) {
 
 function triviaSystem_getMyScores($ircdata) {
     global $dbconnection;
+    global $ircdata;
 
     $hostname = $ircdata['userhostname'];
 
-    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."' LIMIT 1";
+    $query = "SELECT hostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."'";
     $result = mysqli_query($dbconnection,$query);
 
     $scoresMessage = "";

@@ -218,19 +218,10 @@ function triviaSystem_getHiScores($ircdata) {
                         } elseif($topicScore < $score) {
                             logEntry("topicScore ".$topicScore." is less than score ".$score."");
                             $newTopicScore = $score;
-                            if($newTopicNickname == "") {
-                                $newTopicNickname = "".$lastusednickname."";
-                            } else {
-                                $newTopicNickname = "".$newTopicNickname.", ".$lastusednickname."";
-                            }
+                            $newTopicNickname = $lastusednickname;
                         } elseif($topicScore > $score) {
                             logEntry("topicScore ".$topicScore." is greater than score ".$score."");
-                            $newTopicScore = $topicScore;
-                            if($newTopicNickname == "") {
-                                $newTopicNickname = "".$lastusednickname."";
-                            } else {
-                                $newTopicNickname = "".$newTopicNickname.", ".$lastusednickname."";
-                            }
+                            continue;
                         } elseif($topicScore == $score) {
                             logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             $newTopicScore = $topicScore;

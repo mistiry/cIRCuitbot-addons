@@ -182,11 +182,12 @@ function triviaSystem_getHiScores($ircdata) {
         /*
             $topicArray = array(
                 "windowsadmin"  =>  array(
-                                        "mistiry"   =>  3,
-                                        "pwnhoax"   =>  3
+                                        "nickname"   =>  "mistiry",
+                                        "score"   =>  3
                                     )
                 "linuxadmin"    =>  array(
-                                        "jollyrgrs" =>  5
+                                        "nickname" =>  "jollyrgrs",
+                                        "score"    =>  3
                                     )
             )
         */
@@ -240,6 +241,7 @@ function triviaSystem_getHiScores($ircdata) {
                                 $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
                             }
                         }
+                        logEntry("current nickname is ".$topicNickname." with score ".$topicScore."");
                         $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
                         var_dump($topicArray);
                     }

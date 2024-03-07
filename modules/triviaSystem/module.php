@@ -260,7 +260,9 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
             if($userhostname == $hostname) {
                 $newLastUsedNickname = $nickname;
                 $newLastWinTime = time();
-                $scoresArray[$topic] = $scoresArray[$topic] + 1;
+                $oldScore = $scoresArray[$topic];
+                $newScore = $oldScore++;
+                $scoresArray[$topic] = $newScore;
                 $newScoresArray = serialize($scoresArray);
                 $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = ".$hostname."";
             }
@@ -268,7 +270,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
     } else {
         $newScoresArray[$topic] = 1;
         $newScoresArray = serialize($newScoresArray);
-        $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".$newLastWinTime."')";
+        $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".time()."')";
     } 
 
     if(mysqli_query($dbconnection,$query)) {

@@ -236,11 +236,12 @@ function triviaSystem_getHiScores($ircdata) {
                         var_dump($topicArray);
                     }
                 }
-                foreach($topicArray as $topic => $details) {
-                    $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
-                    $scoresMessage .= "  ".$messagePiece."  ";
-                } 
+
             }
+        }
+        foreach($topicArray as $topic => $details) {
+            $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
+            $scoresMessage .= "  ".$messagePiece."  ";
         }
         $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");
         $firstMessage = stylizeText($firstMessage, "color_green");

@@ -203,27 +203,21 @@ function triviaSystem_getHiScores($ircdata) {
                 //is it a category in the array yet, if not add it
                 foreach($scoresArray as $topic => $score) {
                     if(!array_key_exists($topic,$topicArray)) {
-                        logEntry("Array key doesnt exist for '".$topic."'");
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);
                         $newTopicNickname = $lastusednickname;
                     } else {
                         //get current lastusednickname and score, compare to current row
                         $topicNickname = $topicArray[$topic]['nickname'];
                         $topicScore = $topicArray[$topic]['score'];
-                        logEntry("looking at nickname is ".$lastusednickname." with score ".$score."");
 
                         if($topicScore == $score && stristr($newTopicNickname,$lastusednickname)) {
-                            logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             continue;
                         } elseif($topicScore < $score) {
-                            logEntry("topicScore ".$topicScore." is less than score ".$score."");
                             $newTopicScore = $score;
                             $newTopicNickname = $lastusednickname;
                         } elseif($topicScore > $score) {
-                            logEntry("topicScore ".$topicScore." is greater than score ".$score."");
                             continue;
                         } elseif($topicScore == $score) {
-                            logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             $newTopicScore = $topicScore;
                             if($newTopicNickname == "") {
                                 $newTopicNickname = "".$lastusednickname."";
@@ -231,9 +225,7 @@ function triviaSystem_getHiScores($ircdata) {
                                 $newTopicNickname = "".$newTopicNickname.", ".$lastusednickname."";
                             }
                         }
-                        logEntry("current nickname is ".$lastusednickname." with score ".$score."");
                         $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
-                        var_dump($topicArray);
                     }
                 }
 

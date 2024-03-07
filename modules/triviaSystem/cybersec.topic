@@ -1,0 +1,196 @@
+{
+  "questions": [
+    {
+      "question": "What is the term for unauthorized access to computer systems or data?",
+      "answer": "hacking"
+    },
+    {
+      "question": "What is the process of disguising a message to hide its content?",
+      "answer": "encryption"
+    },
+    {
+      "question": "What is the name for a security mechanism that verifies the identity of a user or device?",
+      "answer": "authentication"
+    },
+    {
+      "question": "What is the term for software that appears legitimate but performs malicious activities?",
+      "answer": "malware"
+    },
+    {
+      "question": "What is the protocol used for securely transferring files over a network?",
+      "answer": "sftp"
+    },
+    {
+      "question": "What is the process of finding and exploiting weaknesses in computer systems or networks?",
+      "answer": "penetration testing"
+    },
+    {
+      "question": "What is the name for a program that monitors and controls network traffic?",
+      "answer": "firewall"
+    },
+    {
+      "question": "What is the term for a security flaw or weakness in a system that can be exploited by attackers?",
+      "answer": "vulnerability"
+    },
+    {
+      "question": "What is the protocol used for securely accessing a remote server?",
+      "answer": "ssh"
+    },
+    {
+      "question": "What is the process of converting data into a format that is unreadable without a key?",
+      "answer": "encryption"
+    },
+    {
+      "question": "What is the term for a program that scans for and removes malware from a computer system?",
+      "answer": "antivirus"
+    },
+    {
+      "question": "What is the name for a technique used to trick individuals into revealing sensitive information?",
+      "answer": "phishing"
+    },
+    {
+      "question": "What is the protocol used for sending and receiving emails securely?",
+      "answer": "pgp"
+    },
+    {
+      "question": "What is the term for a network of compromised computers controlled by a single entity?",
+      "answer": "botnet"
+    },
+    {
+      "question": "What is the process of restoring data to its original state after being encrypted?",
+      "answer": "decryption"
+    },
+    {
+      "question": "What is the name for a software program that searches for and removes malware from a computer system?",
+      "answer": "antivirus"
+    },
+    {
+      "question": "What is the term for a security measure that tracks and records system activities?",
+      "answer": "audit trail"
+    },
+    {
+      "question": "What is the protocol used for securely transferring documents over the internet?",
+      "answer": "https"
+    },
+    {
+      "question": "What is the term for a device or software that monitors network traffic for suspicious activities?",
+      "answer": "intrusion detection system"
+    },
+    {
+      "question": "What is the process of testing a system or network for potential vulnerabilities?",
+      "answer": "security assessment"
+    },
+    {
+      "question": "What is the name for a malicious program that masquerades as a legitimate application?",
+      "answer": "trojan"
+    },
+    {
+      "question": "What is the protocol used for securing web communication?",
+      "answer": "ssl"
+    },
+    {
+      "question": "What is the term for a security technique that hides sensitive information within other data?",
+      "answer": "steganography"
+    },
+    {
+      "question": "What is the process of tricking individuals into providing their credentials or sensitive information?",
+      "answer": "social engineering"
+    },
+    {
+      "question": "What is the name for a software tool that attempts to crack passwords?",
+      "answer": "password cracker"
+    },
+    {
+      "question": "What is the term for a security measure that limits access to only authorized users or devices?",
+      "answer": "access control"
+    },
+    {
+      "question": "What is the process of identifying and addressing security vulnerabilities in a system?",
+      "answer": "remediation"
+    },
+    {
+      "question": "What is the name for a program that monitors and logs network traffic?",
+      "answer": "packet sniffer"
+    },
+    {
+      "question": "What is the term for a security mechanism that verifies the integrity of data?",
+      "answer": "checksum"
+    },
+    {
+      "question": "What is the protocol used for securely transferring files over the internet?",
+      "answer": "ftps"
+    },
+    {
+      "question": "What is the process of analyzing and managing security threats and risks?",
+      "answer": "threat management"
+    },
+    {
+      "question": "What is the name for a malicious program that spreads from one computer to another?",
+      "answer": "worm"
+    },
+    {
+      "question": "What is the term for a network that is physically separated from other networks, often used for sensitive data?",
+      "answer": "air gap"
+    },
+    {
+      "question": "What is the process of denying access to unauthorized users or devices?",
+      "answer": "blocking"
+    },
+    {
+      "question": "What is the name for a software program that scans for and removes unwanted files from a computer?",
+      "answer": "cleaner"
+    },
+    {
+      "question": "What is the term for a software vulnerability that remains unpatched and can be exploited by attackers?",
+      "answer": "zero-day exploit"
+    },
+    {
+      "question": "What is the protocol used for securely transferring files over a network?",
+      "answer": "scp"
+    },
+    {
+      "question": "What is the process of ensuring that data is not accessed or modified by unauthorized users?",
+      "answer": "data integrity"
+    },
+    {
+      "question": "What is the name for a program that simulates attacks on a network or system to test its security?",
+      "answer": "penetration testing tool"
+    },
+    {
+      "question": "What is the term for a security measure that verifies the authenticity of a message or data?",
+      "answer": "digital signature"
+    },
+    {
+      "question": "What is the protocol used for securely accessing websites?",
+      "answer": "https"
+    },
+    {
+      "question": "What is the term for a security mechanism that restricts access based on user roles or permissions?",
+      "answer": "role-based access control"
+    },
+    {
+      "question": "What is the process of identifying, assessing, and prioritizing security risks?",
+      "answer": "risk management"
+    },
+    {
+      "question": "What is the name for a malicious program that encrypts files and demands payment for decryption?",
+      "answer": "ransomware"
+    },
+    {
+      "question": "What is the term for a technique that attempts to disrupt or disable a computer system or network?",
+      "answer": "denial of service"
+    },
+    {
+      "question": "What is the protocol used for securely transferring emails over a network?",
+      "answer": "smtps"
+    },
+    {
+      "question": "What is the term for a security measure that restricts access to specific areas or resources?",
+      "answer": "segmentation"
+    },
+    {
+      "question": "What is the process of protecting data by rendering it unreadable without the proper key?",
+      "answer": "encryption"
+    }
+  ]
+}

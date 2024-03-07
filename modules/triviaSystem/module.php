@@ -168,15 +168,111 @@ function triviaSystem_timeExpired($ircdata) {
     return true;
 }
 
-function triviaSystem_getScores($ircdata) {
+function triviaSystem_getHiScores($ircdata) {
     global $dbconnection;
 
-    $arg = trim($ircdata['commandargs']);
-    //If they passed an argument, 
-    
+    $query = "SELECT lastusednickname,scores FROM trivia";
+    $result = mysqli_query($dbconnection,$query);
 
+    if(mysqli_num_rows($result)>0) {
+        //do the thing
+        $topicArray = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $lastusednickname = $row['lastusednickname'];
+            $scores = $row['scores'];
+            $scoresArray = unserialize($scores);
+            if(empty($scoresArray)) {
+                $scoresArray = array();
+            }
+            if(is_array($scoresArray)) {
+                //is it a category in the array yet, if not add it
+                $newTopicNickname = "";
+                $newTopicScore = "";
+                foreach($scoresArray as $topic => $score) {
+                    if(!array_key_exists($topic,$topicArray)) {
+                        $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);
+                    } else {
+                        //get current lastusednickname and score, compare to current row
+                        $topicNickname = $topicArray[$topic]['nickname'];
+                        $topicScore = $topicArray[$topic]['score'];
+
+                        if($topicScore == $score && stristr($newTopicNickname,$topicNickname)) {
+                            continue;
+                        } elseif($topicScore < $score) {
+                            $newTopicScore = $score;
+                            if($newTopicNickname == "") {
+                                $newTopicNickname = "".$topicNickname."";
+                            } else {
+                                $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
+                            }
+                        } elseif($topicScore > $score) {
+                            $newTopicScore = $topicScore;
+                            if($newTopicNickname == "") {
+                                $newTopicNickname = "".$topicNickname."";
+                            } else {
+                                $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
+                            }
+                        } elseif($topicScore == $score) {
+                            if($newTopicNickname == "") {
+                                $newTopicNickname = "".$topicNickname."";
+                            } else {
+                                $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
+                            }
+                        }
+                        $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
+                    }
+
+                    $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");
+                    $firstMessage = stylizeText($firstMessage, "color_green");
+                    $message = stylizeText("".$firstMessage." Here are the top users and scores for each available topic!", "bold");
+                    sendPRIVMSG($ircdata['location'],$message);
+
+                    $scoresMessage = "";
+                    foreach($topicArray as $topic => $details) {
+                        $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
+                        $scoresMessage .= "  ".$messagePiece."  ";
+                    }
+                    sendPRIVMSG($ircdata['location'],$scoresMessage);
+                }
+            }
+        }
+    }
 }
 
-function triviaSystem_updateScores($ircdata) {
+function triviaSystem_updateScores($hostname,$nickname,$topic) {
+    global $dbconnection;
 
+    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."'";
+    $result = mysqli_query($dbconnection,$query);
+
+    if(mysqli_num_rows($result)>0) {
+        //user has existing entry
+        while($row = mysqli_fetch_assoc($result)) {
+            $userhostname = $row['userhostname'];
+            $lastusednickname = $row['lastusednickname'];
+            $scoresArray = unserialize($row['scores']);
+            $lastwintime = $row['lastwintime'];
+
+            //confirm hostname match
+            if($userhostname == $hostname) {
+                $newLastUsedNickname = $nickname;
+                $newLastWinTime = time();
+                $scoresArray[$topic] = $scoresArray[$topic] + 1;
+                $newScoresArray = serialize($scoresArray);
+                $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = ".$hostname."";
+            }
+        }
+    } else {
+        $newScoresArray[$topic] = 1;
+        $newScoresArray = serialize($newScoresArray);
+        $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray.",'".$newLastWinTime."')";
+    } 
+
+    if(mysqli_query($dbconnection,$query)) {
+        //succesfully updated scores
+        logEntry("Updated Trivia Scores: '".$nickname."@".$hostname."' topic '".$topic."' score '".$newScoresArray."'");
+    } else {
+        //failed updating scores
+        logEntry("Failed Updating Trivia Scores: '".$nickname."@".$hostname."' topic '".$topic."' score '".$newScoresArray."'");
+    }
 }

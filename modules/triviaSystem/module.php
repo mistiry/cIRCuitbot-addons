@@ -123,6 +123,9 @@ function triviaSystem_answerGiven($ircdata) {
     //Craft the message and send it
     $message = "".$usernameText." ".$congratsText." ".$correctAnswer."! They earned 1 point in the ".$triviaTopic." topic.";
     sendPRIVMSG($ircdata['location'], $message);
+
+    //Update scores
+    triviaSystem_updateScores($ircdata['userhostname'],$ircdata['usernickname'],($activeActivityArray[$activityName]);
     
     //Get the answer from the trigger array based on the known value 'triviaSystem_answerGiven'
     $answerTrigger = array_search("triviaSystem_answerGiven", $triggers);

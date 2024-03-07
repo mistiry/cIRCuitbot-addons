@@ -179,6 +179,7 @@ function triviaSystem_getMyScores($ircdata) {
     $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."' LIMIT 1";
     $result = mysqli_query($dbconnection,$query);
 
+    $scoresMessage = "";
     if(mysqli_num_rows($result)>0) {
         while($row = mysqli_fetch_assoc($result)) {
             $userhostname = $row['hostname'];
@@ -186,17 +187,15 @@ function triviaSystem_getMyScores($ircdata) {
             $scores = unserialize($row['scores']);
             $lastwintime = $row['lastwintime'];
         }
+        foreach($scores as $topic => $score) {
+            $topicText = stylizeText(stylizeText($topic,"color_cyan"), "bold");
+            $scoreText = "".$score."pts";
+            $scoresMessage .= "  ".$topicText." (".$scoreText.")  ";
+        }
     }
 
     $firstMessagePart = stylizeText("-- TRIVIA -- ", "color_green");
     $secondMessagePart = stylizeText("".$firstMessagePart." ".$ircdata['usernickname']." here are your scores!", "bold");
-
-    $scoresMessage = "";
-    foreach($scores as $topic => $score) {
-        $topicText = stylizeText(stylizeText($topic,"color_cyan"), "bold");
-        $scoreText = "".$score."pts";
-        $scoresMessage .= "  ".$topicText." (".$scoreText.")  ";
-    }
 
     sendPRIVMSG($ircdata['location'],"".$secondMessagePart."");
     sendPRIVMSG($ircdata['location'],"".$scoresMessage."");

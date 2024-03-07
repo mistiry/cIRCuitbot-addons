@@ -189,7 +189,7 @@ function triviaSystem_getMyScores($ircdata) {
     }
 
     $firstMessagePart = stylizeText("-- TRIVIA -- ", "color_green");
-    $secondMessagePart = stylizeText("".$firstMessagePart." "$ircdata['usernickname']." here are your scores!", "bold");
+    $secondMessagePart = stylizeText("".$firstMessagePart." ".$ircdata['usernickname']." here are your scores!", "bold");
 
     $scoresMessage = "";
     foreach($scores as $topic => $score) {

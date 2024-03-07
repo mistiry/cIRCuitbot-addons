@@ -171,6 +171,38 @@ function triviaSystem_timeExpired($ircdata) {
     return true;
 }
 
+function triviaSystem_getMyScores($ircdata) {
+    global $dbconnection;
+
+    $hostname = $ircdata['userhostname'];
+
+    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."' LIMIT 1";
+    $result = mysqli_query($dbconnection,$query);
+
+    if(mysqli_num_rows($result)>0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $userhostname = $row['hostname'];
+            $lastusednickname = $row['lastusednickname'];
+            $scores = unserialize($row['scores']);
+            $lastwintime = $row['lastwintime'];
+        }
+    }
+
+    $firstMessagePart = stylizeText("-- TRIVIA -- ", "color_green");
+    $secondMessagePart = stylizeText("".$firstMessagePart." "$ircdata['usernickname']." here are your scores!", "bold");
+
+    $scoresMessage = "";
+    foreach($scores as $topic => $score) {
+        $topicText = stylizeText(stylizeText($topic,"color_cyan"), "bold");
+        $scoreText = "".$score."pts";
+        $scoresMessage .= "  ".$topicText." (".$scoreText.")  ";
+    }
+
+    sendPRIVMSG($ircdata['location'],"".$secondMessagePart."");
+    sendPRIVMSG($ircdata['location'],"".$scoresMessage."");
+    return true;
+}
+
 function triviaSystem_getHiScores($ircdata) {
     global $dbconnection;
 
@@ -178,19 +210,6 @@ function triviaSystem_getHiScores($ircdata) {
     $result = mysqli_query($dbconnection,$query);
 
     if(mysqli_num_rows($result)>0) {
-        //do the thing
-        /*
-            $topicArray = array(
-                "windowsadmin"  =>  array(
-                                        "nickname"   =>  "mistiry",
-                                        "score"   =>  3
-                                    )
-                "linuxadmin"    =>  array(
-                                        "nickname" =>  "jollyrgrs",
-                                        "score"    =>  3
-                                    )
-            )
-        */
         $topicArray = array();
         while($row = mysqli_fetch_assoc($result)) {
             $lastusednickname = $row['lastusednickname'];

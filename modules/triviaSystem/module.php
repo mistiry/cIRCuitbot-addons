@@ -190,6 +190,7 @@ function triviaSystem_getMyScores($ircdata) {
             $scores = unserialize($row['scores']);
             $lastwintime = $row['lastwintime'];
         }
+        $scores = arsort($scores);
         foreach($scores as $topic => $score) {
             logEntry("Found score '".$score."' for topic '".$topic."'");
             $topicText = stylizeText(stylizeText($topic,"color_cyan"), "bold");
@@ -223,6 +224,7 @@ function triviaSystem_getHiScores($ircdata) {
             }
             if(is_array($scoresArray)) {
                 //is it a category in the array yet, if not add it
+                $scoresArray = arsort($scoresArray);
                 foreach($scoresArray as $topic => $score) {
                     if(!array_key_exists($topic,$topicArray)) {
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);

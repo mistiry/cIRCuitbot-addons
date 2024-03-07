@@ -268,7 +268,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
     } else {
         $newScoresArray[$topic] = 1;
         $newScoresArray = serialize($newScoresArray);
-        $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray.",'".$newLastWinTime."')";
+        $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".$newLastWinTime."')";
     } 
 
     if(mysqli_query($dbconnection,$query)) {

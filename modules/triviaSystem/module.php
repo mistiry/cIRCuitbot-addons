@@ -207,7 +207,7 @@ function triviaSystem_getHiScores($ircdata) {
                         $newTopicNickname = $lastusednickname;
                     } else {
                         //get current lastusednickname and score, compare to current row
-                        $topicNickname = $topicArray[$topic]['nickname'];
+                        $newTopicNickname = $topicArray[$topic]['nickname'];
                         $topicScore = $topicArray[$topic]['score'];
 
                         if($topicScore == $score && stristr($newTopicNickname,$lastusednickname)) {

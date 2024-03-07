@@ -206,7 +206,8 @@ function triviaSystem_getHiScores($ircdata) {
                     if(!array_key_exists($topic,$topicArray)) {
                         logEntry("Array key doesnt exist for '".$topic."'");
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);
-                        print_r($topicArray);
+                        var_dump($topicArray);
+                        var_dump($scoresArray);
                     } else {
                         //get current lastusednickname and score, compare to current row
                         $topicNickname = $topicArray[$topic]['nickname'];
@@ -241,6 +242,7 @@ function triviaSystem_getHiScores($ircdata) {
                             }
                         }
                         $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
+                        var_dump($topicArray);
                     }
                     $topicNickname = "";
                     $topicScore = "";
@@ -251,7 +253,6 @@ function triviaSystem_getHiScores($ircdata) {
                         $scoresMessage .= "  ".$messagePiece."  ";
                     } 
                 }
-                var_dump($topicArray);
             }
         }
         $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");

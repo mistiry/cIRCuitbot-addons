@@ -1,0 +1,120 @@
+{
+  "questions": [
+    {
+      "question": "What is the name of the nearest star to Earth?",
+      "answer": "sun"
+    },
+    {
+      "question": "What is the name of the galaxy containing the Milky Way?",
+      "answer": "andromeda"
+    },
+    {
+      "question": "What is the name of the largest planet in our solar system?",
+      "answer": "jupiter"
+    },
+    {
+      "question": "What is the name of the phenomenon where light from a celestial body is blocked by another?",
+      "answer": "eclipse"
+    },
+    {
+      "question": "What is the name of the galaxy group that includes the Milky Way and Andromeda galaxies?",
+      "answer": "local group"
+    },
+    {
+      "question": "What is the name of the small, rocky planet closest to the Sun?",
+      "answer": "mercury"
+    },
+    {
+      "question": "What is the name of the point in the sky directly above an observer?",
+      "answer": "zenith"
+    },
+    {
+      "question": "What is the name of the phenomenon where light is bent due to gravity?",
+      "answer": "gravitational lensing"
+    },
+    {
+      "question": "What is the name of the planet known as the 'Red Planet'?",
+      "answer": "mars"
+    },
+    {
+      "question": "What is the name of the large cloud of gas and dust in space where stars are born?",
+      "answer": "nebula"
+    },
+    {
+      "question": "What is the name of the point in the sky directly opposite the zenith?",
+      "answer": "nadir"
+    },
+    {
+      "question": "What is the name of the closest galaxy to the Milky Way?",
+      "answer": "andromeda"
+    },
+    {
+      "question": "What is the name of the phenomenon where a celestial body passes in front of another?",
+      "answer": "transit"
+    },
+    {
+      "question": "What is the name of the planet known as the 'Ringed Planet'?",
+      "answer": "saturn"
+    },
+    {
+      "question": "What is the name of the large-scale structure in the universe made up of clusters of galaxies?",
+      "answer": "filament"
+    },
+    {
+      "question": "What is the name of the phenomenon where a celestial body appears to move backwards in the sky?",
+      "answer": "retrograde motion"
+    },
+    {
+      "question": "What is the name of the brightest star in the night sky?",
+      "answer": "sirius"
+    },
+    {
+      "question": "What is the name of the region in space where gravity is so strong that nothing can escape, not even light?",
+      "answer": "black hole"
+    },
+    {
+      "question": "What is the name of the planet known as the 'Blue Planet'?",
+      "answer": "earth"
+    },
+    {
+      "question": "What is the name of the large-scale structure in the universe that consists of millions or billions of galaxies?",
+      "answer": "galaxy cluster"
+    },
+    {
+      "question": "What is the name of the point in a planet's orbit where it is farthest from the Sun?",
+      "answer": "aphelion"
+    },
+    {
+      "question": "What is the name of the small, icy body that orbits the Sun in the outer regions of the solar system?",
+      "answer": "comet"
+    },
+    {
+      "question": "What is the name of the natural satellite of Earth?",
+      "answer": "moon"
+    },
+    {
+      "question": "What is the name of the planet known as the 'Evening Star' or 'Morning Star'?",
+      "answer": "venus"
+    },
+    {
+      "question": "What is the name of the point in a planet's orbit where it is closest to the Sun?",
+      "answer": "perihelion"
+    },
+    {
+      "question": "What is the name of the phenomenon where light is spread out into its component colors?",
+      "answer": "dispersion"
+    },
+    {
+      "question": "What is the name of the small, rocky planet second from the Sun?",
+      "answer": "venus"
+    },
+    {
+      "question": "What is the name of the imaginary line through a planet's poles around which it rotates?",
+      "answer": "axis"
+    },
+    {
+      "question": "What is the name of the large-scale structure in the universe that contains many galaxy superclusters?",
+      "answer": "supercluster"
+    }
+  ]
+}

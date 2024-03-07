@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "question": "In which year did the United States declare independence from Great Britain?",
+      "answer": "1776"
+    },
+    {
+      "question": "What was the name of the ancient civilization that built the pyramids in Egypt?",
+      "answer": "egyptians"
+    },
+    {
+      "question": "Who was the first emperor of Rome?",
+      "answer": "augustus"
+    },
+    {
+      "question": "Which ancient civilization was known for building the Great Wall of China?",
+      "answer": "chinese"
+    },
+    {
+      "question": "What event marked the beginning of the French Revolution?",
+      "answer": "storming of the bastille"
+    },
+    {
+      "question": "Who was the first female monarch of England?",
+      "answer": "queen elizabeth i"
+    },
+    {
+      "question": "What was the name of the conflict between Athens and Sparta in ancient Greece?",
+      "answer": "peloponnesian war"
+    },
+    {
+      "question": "Who was the leader of the Soviet Union during World War II?",
+      "answer": "joseph stalin"
+    },
+    {
+      "question": "Which ancient empire was known for its extensive road network, connecting its vast territories?",
+      "answer": "roman empire"
+    },
+    {
+      "question": "What was the name of the period of renewed interest in art, culture, and learning in Europe during the 14th to 17th centuries?",
+      "answer": "renaissance"
+    },
+    {
+      "question": "Who was the first emperor of China, known for unifying the country and building the Great Wall?",
+      "answer": "qin shi huang"
+    },
+    {
+      "question": "What event marked the end of the Roman Republic and the beginning of the Roman Empire?",
+      "answer": "assassination of julius caesar"
+    },
+    {
+      "question": "Who was the founder of the Mongol Empire, which became the largest contiguous empire in history?",
+      "answer": "genghis khan"
+    },
+    {
+      "question": "What was the name of the period of rapid industrialization and urbanization that began in Britain in the late 18th century?",
+      "answer": "industrial revolution"
+    },
+    {
+      "question": "Who was the ancient Greek philosopher known for his teachings and writings on ethics and politics?",
+      "answer": "aristotle"
+    },
+    {
+      "question": "What was the name of the ship that carried the Pilgrims to America in 1620?",
+      "answer": "mayflower"
+    },
+    {
+      "question": "Who was the leader of the Soviet Union during the Cuban Missile Crisis?",
+      "answer": "nikita khrushchev"
+    },
+    {
+      "question": "What was the name of the ancient civilization that developed in the valley of the Tigris and Euphrates rivers?",
+      "answer": "mesopotamia"
+    },
+    {
+      "question": "Who was the first European explorer to reach India by sea?",
+      "answer": "vasco da gama"
+    },
+    {
+      "question": "What was the name of the series of religious wars fought between Christians and Muslims in the Holy Land during the Middle Ages?",
+      "answer": "crusades"
+    },
+    {
+      "question": "Who was the first president of the United States?",
+      "answer": "george washington"
+    },
+    {
+      "question": "What was the name of the famous naval battle in 1588 in which the English defeated the Spanish Armada?",
+      "answer": "battle of graveney"
+    },
+    {
+      "question": "Who was the last emperor of Russia, whose reign ended with the Russian Revolution?",
+      "answer": "nicholas ii"
+    },
+    {
+      "question": "What was the name of the ancient city that was destroyed by a volcanic eruption in 79 AD?",
+      "answer": "pompeii"
+    },
+    {
+      "question": "Who was the leader of Nazi Germany during World War II?",
+      "answer": "adolf hitler"
+    },
+    {
+      "question": "What was the name of the first successful English colony in North America, established in 1607?",
+      "answer": "jamestown"
+    },
+    {
+      "question": "Who was the Egyptian queen known for her relationships with Julius Caesar and Mark Antony?",
+      "answer": "cleopatra"
+    },
+    {
+      "question": "What was the name of the system of racial segregation in South Africa that lasted from 1948 to 1994?",
+      "answer": "apartheid"
+    },
+    {
+      "question": "Who was the first female prime minister of the United Kingdom?",
+      "answer": "margaret thatcher"
+    },
+    {
+      "question": "What was the name of the conference held after World War I to reorganize Europe and establish peace?",
+      "answer": "paris peace conference"
+    },
+    {
+      "question": "Who was the founder of Buddhism?",
+      "answer": "siddhartha gautama"
+    },
+    {
+      "question": "What was the name of the Native American woman who served as a guide and interpreter for the Lewis and Clark expedition?",
+      "answer": "sacagawea"
+    },
+    {
+      "question": "Who was the ancient Greek mathematician known as the 'Father of Geometry'?",
+      "answer": "euclid"
+    },
+    {
+      "question": "What was the name of the Russian mystic who gained considerable influence over Tsarina Alexandra?",
+      "answer": "rasputin"
+    },
+    {
+      "question": "Who was the first European explorer to reach the southern tip of Africa?",
+      "answer": "bartolomeu dias"
+    },
+    {
+      "question": "What was the name of the conflict between the North and South regions of the United States from 1861 to 1865?",
+      "answer": "american civil war"
+    },
+    {
+      "question": "Who was the ancient Roman general and statesman who played a critical role in the demise of the Roman Republic?",
+      "answer": "julius caesar"
+    },
+    {
+      "question": "What was the name of the ancient city that served as the capital of the Aztec Empire?",
+      "answer": "tenochtitlan"
+    },
+    {
+      "question": "Who was the first emperor of Japan, traditionally believed to have ruled in the 7th century AD?",
+      "answer": "emperor jimmu"
+    },
+    {
+      "question": "What was the name of the period of cultural and intellectual flourishing in the Islamic world during the Middle Ages?",
+      "answer": "golden age of islam"
+    },
+    {
+      "question": "Who was the ancient Greek physician considered the 'Father of Medicine'?",
+      "answer": "hippocrates"
+    },
+    {
+      "question": "What was the name of the ship that carried Christopher Columbus on his first voyage to the Americas in 1492?",
+      "answer": "santa maria"
+    },
+    {
+      "question": "Who was the first emperor of the Byzantine Empire?",
+      "answer": "constantine i"
+    },
+    {
+      "question": "What was the name of the document that limited the power of the English monarchy and established the principle of the rule of law?",
+      "answer": "magna carta"
+    },
+    {
+      "question": "Who was the famous military leader who conquered much of Europe in the early 19th century?",
+      "answer": "napoleon bonaparte"
+    },
+    {
+      "question": "What was the name of the Chinese philosopher known for his teachings on ethics and morality?",
+      "answer": "confucius"
+    },
+    {
+      "question": "Who was the first female pharaoh of ancient Egypt?",
+      "answer": "hatshepsut"
+    },
+    {
+      "question": "What was the name of the ancient city that served as the capital of the Inca Empire?",
+      "answer": "cusco"
+    },
+    {
+      "question": "Who was the first woman to fly solo across the Atlantic Ocean?",
+      "answer": "amelia earhart"
+    },
+    {
+      "question": "What was the name of the event in 1517 that marked the beginning of the Protestant Reformation?",
+      "answer": "ninety-five theses"
+    },
+    {
+      "question": "Who was the first emperor of the Holy Roman Empire?",
+      "answer": "charlemagne"
+    }
+  ]
+}

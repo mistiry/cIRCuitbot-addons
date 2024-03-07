@@ -210,6 +210,7 @@ function triviaSystem_getHiScores($ircdata) {
                         //get current lastusednickname and score, compare to current row
                         $topicNickname = $topicArray[$topic]['nickname'];
                         $topicScore = $topicArray[$topic]['score'];
+                        logEntry("current nickname is ".$topicNickname." with score ".$topicScore."");
 
                         if($topicScore == $score && stristr($newTopicNickname,$topicNickname)) {
                             logEntry("topicScore ".$topicScore." is equal to score ".$score."");

@@ -1,0 +1,44 @@
+{
+  "questions": [
+    {
+      "question": "What is the primary tool used to manage Windows Server environments?",
+      "answer": "Active Directory"
+    },
+    {
+      "question": "What is the command-line interface for Windows called?",
+      "answer": "Command Prompt"
+    },
+    {
+      "question": "What is the registry editor tool in Windows called?",
+      "answer": "Regedit"
+    },
+    {
+      "question": "What is the name of the Windows feature that allows remote access to a computer's desktop?",
+      "answer": "Remote Desktop Protocol"
+    },
+    {
+      "question": "What tool is used for disk partitioning and formatting in Windows?",
+      "answer": "Disk Management"
+    },
+    {
+      "question": "What is the utility used to manage services in Windows?",
+      "answer": "Services.msc"
+    },
+    {
+      "question": "What is the command-line utility used to manage user accounts in Windows?",
+      "answer": "net user"
+    },
+    {
+      "question": "What is the graphical tool used to manage group policies in Windows environments?",
+      "answer": "Group Policy Management Console"
+    },
+    {
+      "question": "What tool is used to diagnose and troubleshoot network connectivity issues in Windows?",
+      "answer": "ping"
+    },
+    {
+      "question": "What is the primary scripting language used for administrative tasks in Windows?",
+      "answer": "PowerShell"
+    }
+  ]
+}

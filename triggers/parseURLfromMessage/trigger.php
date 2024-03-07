@@ -55,7 +55,7 @@ function getTitle($url) {
         }
     }
 
-    $page = file_get_contents(trim($url), NULL, NULL, NULL, 16384);
+    $page = file_get_contents(trim($url), NULL, NULL, NULL, 65536);
     $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
     return $title;
 }

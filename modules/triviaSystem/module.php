@@ -178,7 +178,7 @@ function triviaSystem_getMyScores($ircdata) {
     $hostname = $ircdata['userhostname'];
     logEntry("Getting scores for hostname '".$hostname."'");
 
-    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."'";
+    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."'";
     $result = mysqli_query($dbconnection,$query);
 
     $scoresMessage = "";

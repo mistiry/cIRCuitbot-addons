@@ -269,6 +269,11 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = '".$hostname."'";
                 logEntry("".$query."");
             }
+        
+            $userhostname = "";
+            $lastusednickname = "";
+            $scoresArray = array();
+            $lastwintime = "";
         }
     } else {
         $newScoresArray[$topic] = 1;

@@ -201,12 +201,11 @@ function triviaSystem_getHiScores($ircdata) {
             }
             if(is_array($scoresArray)) {
                 //is it a category in the array yet, if not add it
-                $newTopicNickname = "";
-                $newTopicScore = "";
                 foreach($scoresArray as $topic => $score) {
                     if(!array_key_exists($topic,$topicArray)) {
                         logEntry("Array key doesnt exist for '".$topic."'");
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);
+                        $newTopicNickname = $lastusednickname;
                     } else {
                         //get current lastusednickname and score, compare to current row
                         $topicNickname = $topicArray[$topic]['nickname'];
@@ -245,9 +244,6 @@ function triviaSystem_getHiScores($ircdata) {
                         $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
                         var_dump($topicArray);
                     }
-                    $topicNickname = "";
-                    $topicScore = "";
-                    $scoresMessage = "";
                 }
                 foreach($topicArray as $topic => $details) {
                     $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";

@@ -176,14 +176,15 @@ function triviaSystem_getMyScores($ircdata) {
     global $ircdata;
 
     $hostname = $ircdata['userhostname'];
+    logEntry("Getting scores for hostname '".$hostname."'");
 
-    $query = "SELECT hostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."'";
+    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE hostname = '".$hostname."'";
     $result = mysqli_query($dbconnection,$query);
 
     $scoresMessage = "";
     if(mysqli_num_rows($result)>0) {
         while($row = mysqli_fetch_assoc($result)) {
-            $userhostname = $row['hostname'];
+            $userhostname = $row['userhostname'];
             $lastusednickname = $row['lastusednickname'];
             $scores = unserialize($row['scores']);
             $lastwintime = $row['lastwintime'];

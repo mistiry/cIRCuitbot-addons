@@ -245,7 +245,7 @@ function triviaSystem_getHiScores($ircdata) {
 function triviaSystem_updateScores($hostname,$nickname,$topic) {
     global $dbconnection;
 
-    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."'";
+    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."' LIMIT 1";
     $result = mysqli_query($dbconnection,$query);
 
     if(mysqli_num_rows($result)>0) {
@@ -274,6 +274,8 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
             $lastusednickname = "";
             $scoresArray = array();
             $lastwintime = "";
+            $oldScore = "";
+            $newScore = "";
         }
     } else {
         $newScoresArray[$topic] = 1;

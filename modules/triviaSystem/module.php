@@ -184,12 +184,14 @@ function triviaSystem_getMyScores($ircdata) {
     $scoresMessage = "";
     if(mysqli_num_rows($result)>0) {
         while($row = mysqli_fetch_assoc($result)) {
+            logEntry("Found row for hostname '".$hostname."'");
             $userhostname = $row['userhostname'];
             $lastusednickname = $row['lastusednickname'];
             $scores = unserialize($row['scores']);
             $lastwintime = $row['lastwintime'];
         }
         foreach($scores as $topic => $score) {
+            logEntry("Found score '".$score."' for topic '".$topic."'");
             $topicText = stylizeText(stylizeText($topic,"color_cyan"), "bold");
             $scoreText = "".$score."pts";
             $scoresMessage .= "  ".$topicText." (".$scoreText.")  ";

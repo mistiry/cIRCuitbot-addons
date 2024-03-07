@@ -29,7 +29,7 @@ function triviaSystem_startGame($ircdata) {
             }
             $introText1 = stylizeText("-- TRIVIA --", "bold");
             $introText1 = stylizeText($introText1, "color_green");
-            sendPRIVMSG($ircdata['location'], "".$intoText1." Available Topics: ".stylizeText($topicsMessage,"bold")."");
+            sendPRIVMSG($ircdata['location'], "".$introText1." Available Topics: ".stylizeText($topicsMessage,"bold")."");
             return true;
         }
         if(in_array($arg,$topicArray)) {
@@ -239,7 +239,6 @@ function triviaSystem_getHiScores($ircdata) {
             $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
             $scoresMessage .= "  ".$messagePiece."  ";
         }
-        $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");
         $firstMessage = stylizeText($firstMessage, "color_green");
         $message = stylizeText("".$firstMessage." Here are the top users and scores for each available topic!", "bold");
         sendPRIVMSG($ircdata['location'],$message);

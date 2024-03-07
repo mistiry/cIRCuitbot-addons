@@ -179,6 +179,17 @@ function triviaSystem_getHiScores($ircdata) {
 
     if(mysqli_num_rows($result)>0) {
         //do the thing
+        /*
+            $topicArray = array(
+                "windowsadmin"  =>  array(
+                                        "mistiry"   =>  3,
+                                        "pwnhoax"   =>  3
+                                    )
+                "linuxadmin"    =>  array(
+                                        "jollyrgrs" =>  5
+                                    )
+            )
+        */
         $topicArray = array();
         while($row = mysqli_fetch_assoc($result)) {
             $lastusednickname = $row['lastusednickname'];
@@ -226,13 +237,13 @@ function triviaSystem_getHiScores($ircdata) {
                     }
 
                     $scoresMessage = "";
-
+                    
                     foreach($topicArray as $topic => $details) {
                         $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
                         $scoresMessage .= "  ".$messagePiece."  ";
-                    }
-                    
+                    } 
                 }
+                var_dump($topicArray);
             }
         }
         $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");

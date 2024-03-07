@@ -4,8 +4,8 @@ function parseURLfromMessage($ircdata) {
 
     if(stristr($ircdata['fullmessage'], "https://")) {
         preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
-        logEntry("Found URL in message: ".$urlmatch[0]."");
         foreach($urlmatch[0] as $url) {
+            logEntry("Found URL in message: ".$url."");
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
             $urltitle = html_entity_decode($urltitle);
@@ -22,8 +22,8 @@ function parseURLfromMessage($ircdata) {
     }
     if(stristr($ircdata['fullmessage'], "http://")) {
         preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
-        logEntry("Found URL in message: ".$urlmatch[0]."");
         foreach($urlmatch[0] as $url) {
+            logEntry("Found URL in message: ".$url."");
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
             $urltitle = html_entity_decode($urltitle);

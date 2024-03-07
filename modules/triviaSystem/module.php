@@ -204,6 +204,7 @@ function triviaSystem_getHiScores($ircdata) {
                 $newTopicScore = "";
                 foreach($scoresArray as $topic => $score) {
                     if(!array_key_exists($topic,$topicArray)) {
+                        logEntry("Array key doesnt exist for '".$topic."'");
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);
                     } else {
                         //get current lastusednickname and score, compare to current row
@@ -211,8 +212,10 @@ function triviaSystem_getHiScores($ircdata) {
                         $topicScore = $topicArray[$topic]['score'];
 
                         if($topicScore == $score && stristr($newTopicNickname,$topicNickname)) {
+                            logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             continue;
                         } elseif($topicScore < $score) {
+                            logEntry("topicScore ".$topicScore." is less than score ".$score."");
                             $newTopicScore = $score;
                             if($newTopicNickname == "") {
                                 $newTopicNickname = "".$topicNickname."";
@@ -220,6 +223,7 @@ function triviaSystem_getHiScores($ircdata) {
                                 $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
                             }
                         } elseif($topicScore > $score) {
+                            logEntry("topicScore ".$topicScore." is greater than score ".$score."");
                             $newTopicScore = $topicScore;
                             if($newTopicNickname == "") {
                                 $newTopicNickname = "".$topicNickname."";
@@ -227,6 +231,7 @@ function triviaSystem_getHiScores($ircdata) {
                                 $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
                             }
                         } elseif($topicScore == $score) {
+                            logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             if($newTopicNickname == "") {
                                 $newTopicNickname = "".$topicNickname."";
                             } else {

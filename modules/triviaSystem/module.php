@@ -226,20 +226,20 @@ function triviaSystem_getHiScores($ircdata) {
                     }
 
                     $scoresMessage = "";
-                    
+
                     foreach($topicArray as $topic => $details) {
                         $messagePiece = "".stylizeText(stylizeText($topic,"color_cyan"), "bold")." (".$details['score']."pts: ".$details['nickname'].")";
                         $scoresMessage .= "  ".$messagePiece."  ";
                     }
                     
                 }
-                $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");
-                $firstMessage = stylizeText($firstMessage, "color_green");
-                $message = stylizeText("".$firstMessage." Here are the top users and scores for each available topic!", "bold");
-                sendPRIVMSG($ircdata['location'],$message);
-                sendPRIVMSG($ircdata['location'],$scoresMessage);
             }
         }
+        $firstMessage = stylizeText("-- TRIVIA SCORES --", "bold");
+        $firstMessage = stylizeText($firstMessage, "color_green");
+        $message = stylizeText("".$firstMessage." Here are the top users and scores for each available topic!", "bold");
+        sendPRIVMSG($ircdata['location'],$message);
+        sendPRIVMSG($ircdata['location'],$scoresMessage);
     }
 }
 

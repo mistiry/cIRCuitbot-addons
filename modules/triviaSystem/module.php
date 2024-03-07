@@ -227,7 +227,6 @@ function triviaSystem_getHiScores($ircdata) {
                         }
                         $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
                     }
-                    $newTopicNickname = "";
                     $topic = "";
                     $score = "";
                     $topicNickname = "";

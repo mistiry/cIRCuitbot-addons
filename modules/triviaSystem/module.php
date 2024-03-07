@@ -206,8 +206,6 @@ function triviaSystem_getHiScores($ircdata) {
                     if(!array_key_exists($topic,$topicArray)) {
                         logEntry("Array key doesnt exist for '".$topic."'");
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);
-                        var_dump($topicArray);
-                        var_dump($scoresArray);
                     } else {
                         //get current lastusednickname and score, compare to current row
                         $topicNickname = $topicArray[$topic]['nickname'];
@@ -235,6 +233,7 @@ function triviaSystem_getHiScores($ircdata) {
                             }
                         } elseif($topicScore == $score) {
                             logEntry("topicScore ".$topicScore." is equal to score ".$score."");
+                            $newTopicScore = $topicScore;
                             if($newTopicNickname == "") {
                                 $newTopicNickname = "".$topicNickname."";
                             } else {

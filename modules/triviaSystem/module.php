@@ -265,14 +265,14 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $scoresArray[$topic] = $newScore;
                 $newScoresArray = serialize($scoresArray);
                 $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = ".$hostname."";
-                logEntry($query);
+                logEntry("".$query."");
             }
         }
     } else {
         $newScoresArray[$topic] = 1;
         $newScoresArray = serialize($newScoresArray);
         $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".time()."')";
-        logEntry($query);
+        logEntry("".$query."");
     } 
 
     if(mysqli_query($dbconnection,$query)) {

@@ -4,6 +4,7 @@ function parseURLfromMessage($ircdata) {
 
     if(stristr($ircdata['fullmessage'], "https://")) {
         preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
+        logEntry("Found URL in message: ".$urlmatch[0]."");
         foreach($urlmatch[0] as $url) {
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
@@ -12,6 +13,7 @@ function parseURLfromMessage($ircdata) {
             $urltitle = preg_replace('/\r/','', $urltitle);
             $urltitle = preg_replace('/\n/','', $urltitle);
             $urltitle = preg_replace('/\n\r/','', $urltitle);
+            logEntry("URL Title extracted: ".$urltitle."");
             if(strlen($urltitle)>5 && strlen($urltitle)<450) {
                 $message = "".$ircdata['usernickname']." - URL Title - ".$urltitle."";
                 sendPRIVMSG($config['channel'], "".$message."");                        
@@ -20,6 +22,7 @@ function parseURLfromMessage($ircdata) {
     }
     if(stristr($ircdata['fullmessage'], "http://")) {
         preg_match_all('#\bhttp?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#i', $ircdata['fullmessage'], $urlmatch);
+        logEntry("Found URL in message: ".$urlmatch[0]."");
         foreach($urlmatch[0] as $url) {
             $urltitle = trim(getTitle($url));
             $urltitle = urldecode($urltitle);
@@ -28,6 +31,7 @@ function parseURLfromMessage($ircdata) {
             $urltitle = preg_replace('/\r/','', $urltitle);
             $urltitle = preg_replace('/\n/','', $urltitle);
             $urltitle = preg_replace('/\n\r/','', $urltitle);
+            logEntry("URL Title extracted: ".$urltitle."");
             if(strlen($urltitle)>5 && strlen($urltitle)<450) {
                 $message = "".$ircdata['usernickname']." - URL Title - ".$urltitle."";
                 sendPRIVMSG($config['channel'], "".$message."");                        
@@ -55,7 +59,7 @@ function getTitle($url) {
         }
     }
 
-    $page = file_get_contents(trim($url), NULL, NULL, NULL, 131072);
+    $page = file_get_contents(trim($url), NULL, NULL, NULL, 262144);
     $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
     return $title;
 }

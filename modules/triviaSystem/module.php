@@ -264,7 +264,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $newScore = $oldScore++;
                 $scoresArray[$topic] = $newScore;
                 $newScoresArray = serialize($scoresArray);
-                $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = ".$hostname."";
+                $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = '".$hostname."'";
                 logEntry("".$query."");
             }
         }

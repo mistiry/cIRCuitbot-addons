@@ -211,37 +211,37 @@ function triviaSystem_getHiScores($ircdata) {
                         //get current lastusednickname and score, compare to current row
                         $topicNickname = $topicArray[$topic]['nickname'];
                         $topicScore = $topicArray[$topic]['score'];
-                        logEntry("current nickname is ".$topicNickname." with score ".$topicScore."");
+                        logEntry("looking at nickname is ".$lastusednickname." with score ".$score."");
 
-                        if($topicScore == $score && stristr($newTopicNickname,$topicNickname)) {
+                        if($topicScore == $score && stristr($newTopicNickname,$lastusednickname)) {
                             logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             continue;
                         } elseif($topicScore < $score) {
                             logEntry("topicScore ".$topicScore." is less than score ".$score."");
                             $newTopicScore = $score;
                             if($newTopicNickname == "") {
-                                $newTopicNickname = "".$topicNickname."";
+                                $newTopicNickname = "".$lastusednickname."";
                             } else {
-                                $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
+                                $newTopicNickname = "".$newTopicNickname.", ".$lastusednickname."";
                             }
                         } elseif($topicScore > $score) {
                             logEntry("topicScore ".$topicScore." is greater than score ".$score."");
                             $newTopicScore = $topicScore;
                             if($newTopicNickname == "") {
-                                $newTopicNickname = "".$topicNickname."";
+                                $newTopicNickname = "".$lastusednickname."";
                             } else {
-                                $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
+                                $newTopicNickname = "".$newTopicNickname.", ".$lastusednickname."";
                             }
                         } elseif($topicScore == $score) {
                             logEntry("topicScore ".$topicScore." is equal to score ".$score."");
                             $newTopicScore = $topicScore;
                             if($newTopicNickname == "") {
-                                $newTopicNickname = "".$topicNickname."";
+                                $newTopicNickname = "".$lastusednickname."";
                             } else {
-                                $newTopicNickname = "".$newTopicNickname.", ".$topicNickname."";
+                                $newTopicNickname = "".$newTopicNickname.", ".$lastusednickname."";
                             }
                         }
-                        logEntry("current nickname is ".$topicNickname." with score ".$topicScore."");
+                        logEntry("current nickname is ".$lastusednickname." with score ".$score."");
                         $topicArray[$topic] = array("nickname"=>$newTopicNickname, "score"=>$newTopicScore);
                         var_dump($topicArray);
                     }

@@ -263,7 +263,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $oldScore = $scoresArray[$topic];
                 logEntry("oldScore is '".$oldScore."'");
                 logEntry("ScoresArray Topic '".$scoresArray[$topic]."'");
-                $newScore = $oldScore++;
+                $newScore = ($oldScore + 1);
                 logEntry("newScore is '".$newScore."'");
                 unset($scoresArray[$topic]);
                 $scoresArray[$topic] = $newScore;

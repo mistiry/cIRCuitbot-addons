@@ -65,7 +65,7 @@ function triviaSystem_startGame($ircdata) {
 
     logEntry("Found a trivia question: '".$triviaQuestion."'");
 
-    if($attemptsToLoad <=10) {
+    if($attemptsToLoad >=10) {
         sendPRIVMSG($ircdata['location'], "".stylizeText(stylizeText("Apologies! Something has gone wrong and I have to abort this attempt. Please try again.", "bold"), "color_red")."");
         //Unset everything and end the game
         unset($activeActivityArray[$activityName]);

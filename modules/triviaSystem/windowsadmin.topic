@@ -37,10 +37,6 @@
       "answer": "remote desktop"
     },
     {
-      "question": "What is the command-line tool used to manage networking settings in Windows?",
-      "answer": "netsh"
-    },
-    {
       "question": "What is the process of ensuring that Windows systems are up-to-date with the latest patches and security updates?",
       "answer": "patch management"
     },
@@ -139,10 +135,6 @@
     {
       "question": "What is the tool used to manage and troubleshoot group policies in Windows?",
       "answer": "group policy management console"
-    },
-    {
-      "question": "What is the command-line tool used to manage network connections in Windows?",
-      "answer": "netsh"
     },
     {
       "question": "What is the process of configuring and managing system security settings in Windows?",

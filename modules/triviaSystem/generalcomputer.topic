@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "question": "What is the command-line tool used to test network connectivity on Windows?",
+      "answer": "ping"
+    },
+    {
+      "question": "What is the programming language commonly used for web development?",
+      "answer": "html"
+    },
+    {
+      "question": "What is the term for a high-speed memory that stores recently accessed data?",
+      "answer": "cache"
+    },
+    {
+      "question": "What is the process of finding errors and bugs in software?",
+      "answer": "debugging"
+    },
+    {
+      "question": "What is the file format for executable programs in Windows?",
+      "answer": "exe"
+    },
+    {
+      "question": "What is the protocol used to send emails over the internet?",
+      "answer": "smtp"
+    },
+    {
+      "question": "What does CPU stand for?",
+      "answer": "central processing unit"
+    },
+    {
+      "question": "What is the term for a software program that replicates itself and spreads to other computers?",
+      "answer": "virus"
+    },
+    {
+      "question": "What is the fundamental unit of information in computing?",
+      "answer": "bit"
+    },
+    {
+      "question": "What programming language is commonly used for creating dynamic web pages?",
+      "answer": "javascript"
+    },
+    {
+      "question": "What is the process of converting data into a format that can be stored and transmitted?",
+      "answer": "encoding"
+    },
+    {
+      "question": "What is the name for a collection of servers that deliver content to a large number of users over the internet?",
+      "answer": "content delivery network"
+    },
+    {
+      "question": "What is the term for a set of rules governing communication between devices in a network?",
+      "answer": "protocol"
+    },
+    {
+      "question": "What is the process of hiding the implementation details of an object?",
+      "answer": "encapsulation"
+    },
+    {
+      "question": "What is the file format for a compressed archive?",
+      "answer": "zip"
+    },
+    {
+      "question": "What programming language is often used for scientific and numerical computing?",
+      "answer": "python"
+    },
+    {
+      "question": "What is the term for a software program that performs repetitive tasks at scheduled times?",
+      "answer": "scheduler"
+    },
+    {
+      "question": "What is the name for a network topology where each device is connected to a central hub?",
+      "answer": "star"
+    },
+    {
+      "question": "What is the term for a software program that translates high-level programming languages into machine code?",
+      "answer": "compiler"
+    },
+    {
+      "question": "What is the protocol used for securely transferring files over a network?",
+      "answer": "ftp"
+    },
+    {
+      "question": "What is the term for a program designed to prevent unauthorized access to or from a private network?",
+      "answer": "firewall"
+    },
+    {
+      "question": "What is the programming language commonly used for system administration tasks?",
+      "answer": "bash"
+    },
+    {
+      "question": "What is the term for a collection of related data items treated as a single unit?",
+      "answer": "array"
+    },
+    {
+      "question": "What is the file format for a document that contains formatted text, images, and other media?",
+      "answer": "pdf"
+    },
+    {
+      "question": "What is the name for a software program that searches for and removes malware from a computer system?",
+      "answer": "antivirus"
+    },
+    {
+      "question": "What is the process of converting human-readable code into machine code?",
+      "answer": "compilation"
+    },
+    {
+      "question": "What is the term for a program that appears legitimate but performs malicious activities when executed?",
+      "answer": "trojan"
+    },
+    {
+      "question": "What is the protocol used for retrieving emails from a remote server?",
+      "answer": "pop"
+    },
+    {
+      "question": "What is the term for a network that covers a large geographical area, such as a city or country?",
+      "answer": "wan"
+    },
+    {
+      "question": "What is the programming language often used for creating desktop applications?",
+      "answer": "java"
+    },
+    {
+      "question": "What is the name for a program that translates assembly language into machine code?",
+      "answer": "assembler"
+    },
+    {
+      "question": "What is the term for the process of organizing data into a structured format?",
+      "answer": "serialization"
+    },
+    {
+      "question": "What is the file format for a document that contains formatted text and images, commonly used for word processing?",
+      "answer": "docx"
+    },
+    {
+      "question": "What is the term for the process of restoring data to its original state after being encrypted?",
+      "answer": "decryption"
+    },
+    {
+      "question": "What is the name for a network topology where each device is connected to every other device?",
+      "answer": "mesh"
+    },
+    {
+      "question": "What is the programming language commonly used for developing mobile applications?",
+      "answer": "swift"
+    },
+    {
+      "question": "What is the term for a software program that manages hardware resources and provides services for other software?",
+      "answer": "operating system"
+    },
+    {
+      "question": "What is the file format for a video file?",
+      "answer": "mp4"
+    },
+    {
+      "question": "What is the name for a software program that monitors and controls network traffic?",
+      "answer": "network firewall"
+    },
+    {
+      "question": "What is the term for a program that masquerades as a legitimate application?",
+      "answer": "spoofing"
+    },
+    {
+      "question": "What is the protocol used for transferring files securely over a network?",
+      "answer": "sftp"
+    },
+    {
+      "question": "What is the term for the process of converting machine-readable code into human-readable code?",
+      "answer": "decompilation"
+    },
+    {
+      "question": "What is the programming language often used for developing applications for iOS devices?",
+      "answer": "objective-c"
+    },
+    {
+      "question": "What is the name for a software program that monitors and logs network traffic?",
+      "answer": "packet sniffer"
+    },
+    {
+      "question": "What is the term for a security mechanism that verifies the identity of a user or device?",
+      "answer": "authentication"
+    },
+    {
+      "question": "What is the protocol used for securely accessing a remote server?",
+      "answer": "ssh"
+    },
+    {
+      "question": "What is the term for a network topology where each device is connected in a daisy-chain fashion?",
+      "answer": "bus"
+    },
+    {
+      "question": "What is the programming language often used for creating interactive web pages?",
+      "answer": "javascript"
+    },
+    {
+      "question": "What is the name for a software program that scans for and removes unwanted files from a computer?",
+      "answer": "cleaner"
+    },
+    {
+      "question": "What is the term for a program that appears to be performing a useful function but is actually performing malicious activities?",
+      "answer": "malware"
+    },
+    {
+      "question": "What is the protocol used for transferring hypertext documents over the internet?",
+      "answer": "http"
+    }
+  ]
+}

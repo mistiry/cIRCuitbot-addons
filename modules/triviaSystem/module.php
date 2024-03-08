@@ -171,6 +171,42 @@ function triviaSystem_timeExpired($ircdata) {
     return true;
 }
 
+function triviaSystem_getMyScores($ircdata) {
+    global $dbconnection;
+    global $ircdata;
+
+    $hostname = $ircdata['userhostname'];
+    logEntry("Getting scores for hostname '".$hostname."'");
+
+    $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."'";
+    $result = mysqli_query($dbconnection,$query);
+
+    $scoresMessage = "";
+    if(mysqli_num_rows($result)>0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            logEntry("Found row for hostname '".$hostname."'");
+            $userhostname = $row['userhostname'];
+            $lastusednickname = $row['lastusednickname'];
+            $scores = unserialize($row['scores']);
+            $lastwintime = $row['lastwintime'];
+        }
+        arsort($scores);
+        foreach($scores as $topic => $score) {
+            logEntry("Found score '".$score."' for topic '".$topic."'");
+            $topicText = stylizeText(stylizeText($topic,"color_cyan"), "bold");
+            $scoreText = "".$score."pts";
+            $scoresMessage .= "  ".$topicText." (".$scoreText.")  ";
+        }
+    }
+
+    $firstMessagePart = stylizeText("-- TRIVIA -- ", "color_green");
+    $secondMessagePart = stylizeText("".$firstMessagePart." ".$ircdata['usernickname']." here are your scores!", "bold");
+
+    sendPRIVMSG($ircdata['location'],"".$secondMessagePart."");
+    sendPRIVMSG($ircdata['location'],"".$scoresMessage."");
+    return true;
+}
+
 function triviaSystem_getHiScores($ircdata) {
     global $dbconnection;
 
@@ -178,19 +214,6 @@ function triviaSystem_getHiScores($ircdata) {
     $result = mysqli_query($dbconnection,$query);
 
     if(mysqli_num_rows($result)>0) {
-        //do the thing
-        /*
-            $topicArray = array(
-                "windowsadmin"  =>  array(
-                                        "nickname"   =>  "mistiry",
-                                        "score"   =>  3
-                                    )
-                "linuxadmin"    =>  array(
-                                        "nickname" =>  "jollyrgrs",
-                                        "score"    =>  3
-                                    )
-            )
-        */
         $topicArray = array();
         while($row = mysqli_fetch_assoc($result)) {
             $lastusednickname = $row['lastusednickname'];
@@ -201,6 +224,7 @@ function triviaSystem_getHiScores($ircdata) {
             }
             if(is_array($scoresArray)) {
                 //is it a category in the array yet, if not add it
+                arsort($scoresArray);
                 foreach($scoresArray as $topic => $score) {
                     if(!array_key_exists($topic,$topicArray)) {
                         $topicArray[$topic] = array("nickname"=>$lastusednickname, "score"=>$score);

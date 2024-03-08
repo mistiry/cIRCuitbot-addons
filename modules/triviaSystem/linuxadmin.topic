@@ -1,44 +1,172 @@
 {
   "questions": [
     {
-      "question": "What is the primary tool used to manage Windows Server environments?",
-      "answer": "Active Directory"
+      "question": "What is the command-line tool used to manage disk partitions in Linux?",
+      "answer": "fdisk"
     },
     {
-      "question": "What is the command-line interface for Windows called?",
-      "answer": "Command Prompt"
+      "question": "What is the process of setting up and managing user accounts and permissions in Linux?",
+      "answer": "user management"
     },
     {
-      "question": "What is the registry editor tool in Windows called?",
-      "answer": "Regedit"
+      "question": "What is the utility used to schedule tasks to run automatically in Linux?",
+      "answer": "cron"
     },
     {
-      "question": "What is the name of the Windows feature that allows remote access to a computer's desktop?",
-      "answer": "Remote Desktop Protocol"
+      "question": "What is the tool used to view and manage running processes in Linux?",
+      "answer": "top"
     },
     {
-      "question": "What tool is used for disk partitioning and formatting in Windows?",
-      "answer": "Disk Management"
+      "question": "What is the process of installing, configuring, and updating software in Linux?",
+      "answer": "package management"
     },
     {
-      "question": "What is the utility used to manage services in Windows?",
-      "answer": "Services.msc"
+      "question": "What is the command-line tool used to manage services in Linux?",
+      "answer": "systemctl"
     },
     {
-      "question": "What is the command-line utility used to manage user accounts in Windows?",
-      "answer": "net user"
+      "question": "What is the utility used to view and configure system hardware in Linux?",
+      "answer": "lshw"
     },
     {
-      "question": "What is the graphical tool used to manage group policies in Windows environments?",
-      "answer": "Group Policy Management Console"
+      "question": "What is the process of monitoring and managing system resources in Linux?",
+      "answer": "resource monitoring"
     },
     {
-      "question": "What tool is used to diagnose and troubleshoot network connectivity issues in Windows?",
+      "question": "What is the tool used to remotely manage Linux servers and workstations?",
+      "answer": "ssh"
+    },
+    {
+      "question": "What is the command-line tool used to manage networking settings in Linux?",
+      "answer": "ifconfig"
+    },
+    {
+      "question": "What is the process of ensuring that Linux systems are up-to-date with the latest patches and security updates?",
+      "answer": "patch management"
+    },
+    {
+      "question": "What is the utility used to view and manage installed drivers in Linux?",
+      "answer": "lsmod"
+    },
+    {
+      "question": "What is the process of monitoring and analyzing system logs in Linux?",
+      "answer": "log analysis"
+    },
+    {
+      "question": "What is the tool used to diagnose and troubleshoot network connectivity issues in Linux?",
       "answer": "ping"
     },
     {
-      "question": "What is the primary scripting language used for administrative tasks in Windows?",
-      "answer": "PowerShell"
+      "question": "What is the command-line tool used to manage user accounts and groups in Linux?",
+      "answer": "useradd"
+    },
+    {
+      "question": "What is the process of configuring and managing system backups in Linux?",
+      "answer": "backup management"
+    },
+    {
+      "question": "What is the utility used to view and manage installed software and updates in Linux?",
+      "answer": "apt"
+    },
+    {
+      "question": "What is the process of ensuring that Linux systems are protected against malware and viruses?",
+      "answer": "antivirus management"
+    },
+    {
+      "question": "What is the tool used to manage disk volumes and file systems in Linux?",
+      "answer": "fdisk"
+    },
+    {
+      "question": "What is the command-line tool used to manage network shares in Linux?",
+      "answer": "samba"
+    },
+    {
+      "question": "What is the process of configuring and managing system-wide policies in Linux?",
+      "answer": "policy management"
+    },
+    {
+      "question": "What is the utility used to view and manage system performance in Linux?",
+      "answer": "top"
+    },
+    {
+      "question": "What is the tool used to manage and troubleshoot domain controllers in Linux?",
+      "answer": "ldap"
+    },
+    {
+      "question": "What is the command-line tool used to manage printers and printer settings in Linux?",
+      "answer": "lpadmin"
+    },
+    {
+      "question": "What is the process of configuring and managing network connections in Linux?",
+      "answer": "network management"
+    },
+    {
+      "question": "What is the utility used to view and manage installed updates and patches in Linux?",
+      "answer": "apt"
+    },
+    {
+      "question": "What is the tool used to monitor and manage system services in Linux?",
+      "answer": "systemctl"
+    },
+    {
+      "question": "What is the command-line tool used to manage disk volumes in Linux?",
+      "answer": "mkfs"
+    },
+    {
+      "question": "What is the process of setting up and managing file and folder permissions in Linux?",
+      "answer": "file permissions"
+    },
+    {
+      "question": "What is the utility used to view and manage system information in Linux?",
+      "answer": "lshw"
+    },
+    {
+      "question": "What is the tool used to manage and troubleshoot domain trusts in Linux?",
+      "answer": "ldap"
+    },
+    {
+      "question": "What is the command-line tool used to manage network adapters and settings in Linux?",
+      "answer": "ifconfig"
+    },
+    {
+      "question": "What is the process of configuring and managing user profiles in Linux?",
+      "answer": "user profile management"
+    },
+    {
+      "question": "What is the utility used to view and manage system event logs in Linux?",
+      "answer": "journalctl"
+    },
+    {
+      "question": "What is the tool used to manage and troubleshoot group policies in Linux?",
+      "answer": "policy management"
+    },
+    {
+      "question": "What is the command-line tool used to manage network connections in Linux?",
+      "answer": "nmcli"
+    },
+    {
+      "question": "What is the process of configuring and managing system security settings in Linux?",
+      "answer": "security configuration"
+    },
+    {
+      "question": "What is the utility used to view and manage system updates and patches in Linux?",
+      "answer": "apt"
+    },
+    {
+      "question": "What is the tool used to manage and troubleshoot domain sites and services in Linux?",
+      "answer": "ldap"
+    },
+    {
+      "question": "What is the command-line tool used to manage printers and printer settings in Linux?",
+      "answer": "lpadmin"
+    },
+    {
+      "question": "What is the process of configuring and managing system power settings in Linux?",
+      "answer": "power management"
+    },
+    {
+      "question": "What is the utility used to view and manage system services in Linux?",
+      "answer": "systemctl"
     }
   ]
 }

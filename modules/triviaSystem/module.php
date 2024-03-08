@@ -51,12 +51,26 @@ function triviaSystem_startGame($ircdata) {
     $timerArray['triviaSystem_timeExpired'] = $expiryTime;
 
     //Load the trivia JSON and pick a random question/answer
-    $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
-    $json = file_get_contents($topicFile);
-    $jsonData = json_decode($json, true);
-    $randKey = array_rand($jsonData['questions']);
-    $triviaQuestion = $jsonData['questions'][$randKey]['question'];
-    $triviaAnswer = $jsonData['questions'][$randKey]['answer'];
+    $attemptsToLoad = 0;
+    while(empty($triviaQuestion) || $attemptsToLoad >= 10) {
+        $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
+        $json = file_get_contents($topicFile);
+        $jsonData = json_decode($json, true);
+        $randKey = array_rand($jsonData['questions']);
+        $triviaQuestion = $jsonData['questions'][$randKey]['question'];
+        $triviaAnswer = $jsonData['questions'][$randKey]['answer'];
+        $attemptsToLoad++;
+    }
+
+    if($attemptsToLoad >=10) {
+        sendPRIVMSG($ircdata['location'], "".stylizeText(stylizeText("Apologies! Something has gone wrong and I have to abort this attempt. Please try again.", "bold"), "color_red");
+        //Unset everything and end the game
+        unset($activeActivityArray[$activityName]);
+        unset($triggers[$answerTrigger]);
+        unset($timerArray['triviaSystem_timeExpired']);
+        return true;
+    }
+
 
     //Load the answer into the triggers array
     $triggers[$triviaAnswer] = "triviaSystem_answerGiven";

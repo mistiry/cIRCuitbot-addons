@@ -187,6 +187,86 @@
     {
       "question": "What is the protocol used for transferring hypertext documents over the internet?",
       "answer": "http"
-    }
+    },
+	{
+    "question": "Although the keyboard shortcut for copying information is Ctrl + C, what is the shortcut letter for pasting information used in conjunction with Ctrl?",
+    "answer": "V"
+	},
+	{
+    "question": "Which tech corporation known for computers, software, and Bill Gates, is sometimes added to the 'Big Four' to form the 'Big Five' (or GAMAF)?",
+    "answer": "Microsoft" 
+	},
+	{
+    "question": "What Microsoft laptop with an 'S' name is a hybrid tablet/computer, first announced in 2012? Its name implies that it is the top layer of your computer needs.",
+    "answer": "Microsoft Surface"
+	},
+	{
+    "question": "When a password is limited strictly to numeric characters, the secret is often referred to as a PIN. What does that acronym stand for?",
+    "answer": "Personal Identification Number"
+	},
+	{
+    "question": "What word is often abbreviated as Fn on a keyboard?",
+    "answer": "Function"
+	},
+	{
+    "question": "In 2016 Niantic developed what smash-hit augmented reality smartphone game that captured tens of millions of players within days of its release?",
+    "answer": "Pokemon Go"
+	},
+	{
+    "question": "In the last year more than 250 billion PDFs were opened using products from what highly successful creative software company?",
+    "answer": "Adobe"
+	},
+	{
+    "question": "Supposedly pronounced as 'wizziwig,' what is the meaning of the acronym WYSIWYG? The phrase largely means that the printer will print what you see on your monitor.",
+    "answer": "What you see is what you get"
+	},
+	{
+    "question": "Who recorded the famous “You’ve got mail!” announcement for AOL in the '90s?",
+    "answer": "Elwood Edwards" 
+	},
+	{
+    "question": "What is the name of the calculating tool, still in use for teaching arithmetic to children in many parts of the world, which used beans or stones moved in grooves of sand to perform calculations?",
+    "answer": "Abacus"
+	},
+	{
+    "question": "What single word, also an announcement made in chess when the King is in initial danger, fills in the name of the IT security company co-founded in 1993 by Gil Shwed and based in Israel: ______ Point Software Technologies?",
+    "answer": "Check"
+	},
+	{
+    "question": "THINK was the company motto for more than 40 years, for the company often referred to as 'Big Blue'. What is this frequently-acronymed company?",
+    "answer": "IBM"
+	},
+	{ 
+    "question": "Typically considered the successor to dial-up internet access in many American homes, what was the 'B' term for wide bandwidth data transmission which was able to transport multiple signals and traffic types?",
+    "answer": "Broadband"
+	},
+	{
+    "question": "Web browser programmer Lou Montulli coined what delicious computer term to refer to information that is sent from the browser to the web server?",
+    "answer": "Cookie"
+	},
+	{
+    "question": "Mendicant Bias and Offensive Bias are fictional AIs in what 'holy' video game franchise that shares its name with a Beyonce´ song?",
+    "answer": "Halo"
+	},
+	{
+    "question": "What was the name of the first Android-powered device from Samsung Mobile which also became the first in a long-running product line for the company?",
+    "answer": "Samsung Galaxy"
+	}, 
+	{
+    "question": "Founded in 2013, what technology company has owned the popular smartphone cash transfer app Venmo since 2013?",
+    "answer": "Paypal"
+	},
+	{
+    "question": "What 'M' computer security company, founded by namesake John in 1987 before being acquired by Intel in 2011, is well known for its anti-virus software that is available to individual consumers? ",
+    "answer": "McAfee"
+	},
+	{
+    "question": "Drew Houston and Arash Ferdowsi were MIT students that founded a file hosting service in 2007. What is the name of this 'D' company? ",
+    "answer": "Dropbox"
+	},
+	{
+    "question": "Kevin Mitnick, Adrian Lamo, Albert Gonzalez, Anonymous, and Jeanson James Ancheta are all (in)famous in what specific area of computers?",
+    "answer": "security" 
+	}
   ]
 }

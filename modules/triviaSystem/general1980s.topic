@@ -6,7 +6,7 @@
     },
     {
       "question": "What was the name of the popular arcade game released in 1980 by Namco?",
-      "answer": "pac-man"
+      "answer": "pacman"
     },
     {
       "question": "Which American actor starred as Indiana Jones in the 1981 film 'Raiders of the Lost Ark'?",
@@ -25,12 +25,12 @@
       "answer": "ibm pc"
     },
     {
-      "question": "Which British musician released the album 'Thriller' in 1982?",
+      "question": "Which American musician released the album 'Thriller' in 1982?",
       "answer": "michael jackson"
     },
     {
       "question": "What was the name of the first compact disc player released in 1982 by Sony?",
-      "answer": "sony cdp-101"
+      "answer": "sony cdp 101"
     },
     {
       "question": "Which American president survived an assassination attempt in 1981?",
@@ -53,11 +53,7 @@
       "answer": "apple"
     },
     {
-      "question": "What was the name of the American sitcom that premiered in 1985, featuring a family headed by a purple dinosaur?",
-      "answer": "barney & friends"
-    },
-    {
-      "question": "Which British musician released the album 'Born in the U.S.A.' in 1984?",
+      "question": "Which American musician released the album 'Born in the U.S.A.' in 1984?",
       "answer": "bruce springsteen"
     },
     {
@@ -66,91 +62,7 @@
     },
     {
       "question": "Which American actor starred as Marty McFly in the 1985 film 'Back to the Future'?",
-      "answer": "michael j. fox"
-    },
-    {
-      "question": "What was the name of the disaster at the Ukrainian nuclear power plant that occurred in 1986?",
-      "answer": "chernobyl"
-    },
-    {
-      "question": "Which American singer released the album 'Like a Virgin' in 1984?",
-      "answer": "madonna"
-    },
-    {
-      "question": "What was the name of the American TV series that aired from 1983 to 1987, following the lives of a group of high school students?",
-      "answer": "fame"
-    },
-    {
-      "question": "Which American actor played the lead role in the film 'E.T. the Extra-Terrestrial', released in 1982?",
-      "answer": "henry thomas"
-    },
-    {
-      "question": "What was the name of the British prime minister who served throughout much of the 1980s?",
-      "answer": "margaret thatcher"
-    },
-    {
-      "question": "What was the name of the popular arcade game released in 1980 by Namco?",
-      "answer": "pac-man"
-    },
-    {
-      "question": "Which American actor starred as Indiana Jones in the 1981 film 'Raiders of the Lost Ark'?",
-      "answer": "harrison ford"
-    },
-    {
-      "question": "What was the name of the space shuttle that completed the first successful orbital flight in 1981?",
-      "answer": "columbia"
-    },
-    {
-      "question": "Who was the first woman to be appointed to the United States Supreme Court in 1981?",
-      "answer": "sandra day o'connor"
-    },
-    {
-      "question": "What was the name of the first commercially successful personal computer, released by IBM in 1981?",
-      "answer": "ibm pc"
-    },
-    {
-      "question": "Which British musician released the album 'Thriller' in 1982?",
-      "answer": "michael jackson"
-    },
-    {
-      "question": "What was the name of the first compact disc player released in 1982 by Sony?",
-      "answer": "sony cdp-101"
-    },
-    {
-      "question": "Which American president survived an assassination attempt in 1981?",
-      "answer": "ronald reagan"
-    },
-    {
-      "question": "What was the name of the popular American TV series that aired from 1982 to 1993, following the lives of a group of friends in a Boston bar?",
-      "answer": "cheers"
-    },
-    {
-      "question": "Which British musician famously performed at Live Aid in 1985?",
-      "answer": "queen"
-    },
-    {
-      "question": "What was the name of the Soviet leader who initiated policies of economic and political restructuring in the USSR during the 1980s?",
-      "answer": "mikhail gorbachev"
-    },
-    {
-      "question": "Which American computer company introduced the Macintosh personal computer in 1984?",
-      "answer": "apple"
-    },
-    {
-      "question": "What was the name of the American sitcom that premiered in 1985, featuring a family headed by a purple dinosaur?",
-      "answer": "barney & friends"
-    },
-    {
-      "question": "Which British musician released the album 'Born in the U.S.A.' in 1984?",
-      "answer": "bruce springsteen"
-    },
-    {
-      "question": "What was the name of the American space probe that encountered Halley's Comet in 1986?",
-      "answer": "giotto"
-    },
-    {
-      "question": "Which American actor starred as Marty McFly in the 1985 film 'Back to the Future'?",
-      "answer": "michael j. fox"
+      "answer": "michael j fox"
     },
     {
       "question": "What was the name of the disaster at the Ukrainian nuclear power plant that occurred in 1986?",

@@ -52,7 +52,8 @@ function triviaSystem_startGame($ircdata) {
 
     //Load the trivia JSON and pick a random question/answer
     $attemptsToLoad = 0;
-    while(empty($triviaQuestion) || $attemptsToLoad >= 10) {
+    while(strlen($triviaQuestion)<10 && $attemptsToLoad <= 10) {
+        logEntry("Trivia Question for topic '".$triviaTopic."' is empty, attempt number ".$attemptsToLoad."");
         $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
         $json = file_get_contents($topicFile);
         $jsonData = json_decode($json, true);
@@ -62,8 +63,10 @@ function triviaSystem_startGame($ircdata) {
         $attemptsToLoad++;
     }
 
+    logEntry("Found a trivia question: '".$triviaQuestion."'");
+
     if($attemptsToLoad >=10) {
-        sendPRIVMSG($ircdata['location'], "".stylizeText(stylizeText("Apologies! Something has gone wrong and I have to abort this attempt. Please try again.", "bold"), "color_red");
+        sendPRIVMSG($ircdata['location'], "".stylizeText(stylizeText("Apologies! Something has gone wrong and I have to abort this attempt. Please try again.", "bold"), "color_red")."");
         //Unset everything and end the game
         unset($activeActivityArray[$activityName]);
         unset($triggers[$answerTrigger]);

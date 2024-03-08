@@ -13,7 +13,7 @@
       "answer": "nintendo ds"
     },
     {
-      "question": "Which animated movie, released in 2001, featured the voices of Mike Myers, Eddie Murphy, and Cameron Diaz?",
+      "question": "Which animated movie, released in 2001, featured the voices of Eddie Murphy, and Cameron Diaz?",
       "answer": "shrek"
     },
     {
@@ -33,7 +33,7 @@
       "answer": "wikipedia"
     },
     {
-      "question": "Which Pixar movie, released in 2003, featured a clownfish named Marlin searching for his son Nemo?",
+      "question": "Which Pixar movie, released in 2003, featured a clownfish named Marlin searching for his son?",
       "answer": "finding nemo"
     },
     {
@@ -73,27 +73,19 @@
       "answer": "guitar hero"
     },
     {
-      "question": "What was the name of the popular TV series that followed the lives of a group of friends living in California, airing from 1994 to 2004?",
-      "answer": "friends"
-    },
-    {
       "question": "Which book series by Stephenie Meyer, featuring a love story between a human and a vampire, became a cultural phenomenon in the 2000s?",
       "answer": "twilight"
     },
     {
-      "question": "What was the name of the popular British TV show that first aired in 2005 and featured a time-traveling alien called the Doctor?",
-      "answer": "doctor who"
-    },
-    {
-      "question": "Which popular Disney movie, released in 2006, featured a young girl named Lilo and her alien friend Stitch?",
-      "answer": "lilo & stitch"
+      "question": "Which popular Disney movie, released in 2006, featured a young girl and her alien friend?",
+      "answer": "lilo and stitch"
     },
     {
       "question": "What was the name of the popular video game series by Nintendo featuring characters like Mario and Luigi?",
       "answer": "super mario"
     },
     {
-      "question": "Which animated movie, released in 2008, featured a robot named WALL-E?",
+      "question": "Which animated movie, released in 2008, featured a robot?",
       "answer": "wall-e"
     },
     {
@@ -105,7 +97,7 @@
       "answer": "cast away"
     },
     {
-      "question": "What was the name of the popular reality TV show that first aired in 2000 and featured contestants competing for a cash prize?",
+      "question": "What was the name of the popular reality TV show that first aired in 2000 and featured contestants competing for a cash prize on an island?",
       "answer": "survivor"
     },
     {
@@ -113,16 +105,8 @@
       "answer": "the incredibles"
     },
     {
-      "question": "What was the name of the popular TV show that followed a group of friends working at a Seattle coffeehouse, airing from 1994 to 2004?",
-      "answer": "friends"
-    },
-    {
       "question": "Which video game series, released in the early 2000s, featured an open-world environment where players could explore and complete missions?",
       "answer": "grand theft auto"
-    },
-    {
-      "question": "What was the name of the popular TV show that followed the lives of a group of high school students in a California beach town, airing from 1992 to 2000?",
-      "answer": "baywatch"
     },
     {
       "question": "Which animated movie, released in 2005, featured a young robot who dreams of becoming a real boy?",
@@ -137,28 +121,12 @@
       "answer": "the princess and the frog"
     },
     {
-      "question": "What was the name of the popular video game series by Nintendo featuring characters like Link and Zelda?",
-      "answer": "the legend of zelda"
-    },
-    {
       "question": "Which animated movie, released in 2007, featured the voices of Patton Oswalt and Brad Garrett as rats living in a Parisian restaurant?",
       "answer": "ratatouille"
     },
     {
       "question": "What was the name of the popular TV show that followed the lives of a group of high school students in a California beach town, airing from 1992 to 2000?",
       "answer": "saved by the bell"
-    },
-    {
-      "question": "Which Disney movie, released in 2002, featured a young Hawaiian girl who adopts an unusual pet named Stitch?",
-      "answer": "lilo & stitch"
-    },
-    {
-      "question": "What was the name of the popular TV show that followed a group of survivors living in a post-apocalyptic world overrun by zombies?",
-      "answer": "the walking dead"
-    },
-    {
-      "question": "Which animated movie, released in 2008, featured a robot named WALL-E?",
-      "answer": "wall-e"
     }
   ]
 }

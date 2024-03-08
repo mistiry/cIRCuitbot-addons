@@ -105,10 +105,6 @@
       "answer": "compilation"
     },
     {
-      "question": "What is the term for a program that appears legitimate but performs malicious activities when executed?",
-      "answer": "trojan"
-    },
-    {
       "question": "What is the protocol used for retrieving emails from a remote server?",
       "answer": "pop"
     },
@@ -149,20 +145,12 @@
       "answer": "operating system"
     },
     {
-      "question": "What is the file format for a video file?",
+      "question": "What is the most common file format for a video file?",
       "answer": "mp4"
     },
     {
       "question": "What is the name for a software program that monitors and controls network traffic?",
       "answer": "network firewall"
-    },
-    {
-      "question": "What is the term for a program that masquerades as a legitimate application?",
-      "answer": "spoofing"
-    },
-    {
-      "question": "What is the protocol used for transferring files securely over a network?",
-      "answer": "sftp"
     },
     {
       "question": "What is the term for the process of converting machine-readable code into human-readable code?",
@@ -195,10 +183,6 @@
     {
       "question": "What is the name for a software program that scans for and removes unwanted files from a computer?",
       "answer": "cleaner"
-    },
-    {
-      "question": "What is the term for a program that appears to be performing a useful function but is actually performing malicious activities?",
-      "answer": "malware"
     },
     {
       "question": "What is the protocol used for transferring hypertext documents over the internet?",

@@ -167,6 +167,10 @@
     {
       "question": "What is the utility used to view and manage system services in Windows?",
       "answer": "services.msc"
+    },
+    {
+      "question": "What is the command line tool to add, delete, and manage network drives?",
+      "answer": "net use"
     }
   ]
 }

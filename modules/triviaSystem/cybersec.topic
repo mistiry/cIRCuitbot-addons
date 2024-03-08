@@ -61,10 +61,6 @@
       "answer": "decryption"
     },
     {
-      "question": "What is the name for a software program that searches for and removes malware from a computer system?",
-      "answer": "antivirus"
-    },
-    {
       "question": "What is the term for a security measure that tracks and records system activities?",
       "answer": "audit trail"
     },
@@ -97,10 +93,6 @@
       "answer": "social engineering"
     },
     {
-      "question": "What is the name for a software tool that attempts to crack passwords?",
-      "answer": "password cracker"
-    },
-    {
       "question": "What is the term for a security measure that limits access to only authorized users or devices?",
       "answer": "access control"
     },
@@ -118,7 +110,7 @@
     },
     {
       "question": "What is the protocol used for securely transferring files over the internet?",
-      "answer": "ftps"
+      "answer": "sftp"
     },
     {
       "question": "What is the process of analyzing and managing security threats and risks?",
@@ -142,7 +134,7 @@
     },
     {
       "question": "What is the term for a software vulnerability that remains unpatched and can be exploited by attackers?",
-      "answer": "zero-day exploit"
+      "answer": "zero day exploit"
     },
     {
       "question": "What is the protocol used for securely transferring files over a network?",
@@ -153,8 +145,8 @@
       "answer": "data integrity"
     },
     {
-      "question": "What is the name for a program that simulates attacks on a network or system to test its security?",
-      "answer": "penetration testing tool"
+      "question": "What is the name for a process that simulates attacks on a network or system to test its security?",
+      "answer": "penetration testing"
     },
     {
       "question": "What is the term for a security measure that verifies the authenticity of a message or data?",
@@ -166,7 +158,7 @@
     },
     {
       "question": "What is the term for a security mechanism that restricts access based on user roles or permissions?",
-      "answer": "role-based access control"
+      "answer": "role based access control"
     },
     {
       "question": "What is the process of identifying, assessing, and prioritizing security risks?",
@@ -181,12 +173,32 @@
       "answer": "denial of service"
     },
     {
-      "question": "What is the protocol used for securely transferring emails over a network?",
-      "answer": "smtps"
-    },
-    {
       "question": "What is the term for a security measure that restricts access to specific areas or resources?",
       "answer": "segmentation"
+    },
+    {
+      "question": "The CIA triad contains confidentiality, integrity and what other componant?",
+      "answer": "availability"
+    },
+    {
+      "question": "What port number does HTTPs use?",
+      "answer": "443"
+    },
+    {
+      "question": "What port number does RDP use?",
+      "answer": "3389"
+    },
+    {
+      "question": "Name the popular network scanning tool that has the "xmas-tree option?",
+      "answer": "nmap"
+    },
+    {
+      "question": "What is the name of the process of attempting to crack passwords by matching them to known hashes?",
+      "answer": "rainbow tables"
+    },
+      {
+      "question": "This hashing method is used in Windows and is considered insecure",
+      "answer": "NTLM"
     },
     {
       "question": "What is the process of protecting data by rendering it unreadable without the proper key?",

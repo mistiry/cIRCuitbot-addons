@@ -181,6 +181,10 @@
       "answer": "availability"
     },
     {
+      "question": "What is the term for a program that masquerades as a legitimate application?",
+      "answer": "spoofing"
+    },
+    {
       "question": "What port number does HTTPs use?",
       "answer": "443"
     },

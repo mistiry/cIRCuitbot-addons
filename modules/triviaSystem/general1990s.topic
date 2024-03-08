@@ -57,16 +57,8 @@
       "answer": "the lion king"
     },
     {
-      "question": "What was the name of the popular handheld electronic game device released by Tiger Electronics in the 1990s?",
-      "answer": "game boy"
-    },
-    {
       "question": "What was the name of the popular trading card game launched in the 1990s featuring creatures called Pokémon?",
       "answer": "pokemon"
-    },
-    {
-      "question": "What was the name of the iconic sitcom featuring a group of six friends living in New York City during the 1990s?",
-      "answer": "friends"
     },
     {
       "question": "What was the name of the dance-pop group formed by Spice Girls creator Simon Fuller in the late 1990s?",
@@ -78,15 +70,7 @@
     },
     {
       "question": "What was the name of the popular children's TV show featuring a group of colorful talking dinosaurs that aired in the 1990s?",
-      "answer": "barney & friends"
-    },
-    {
-      "question": "What was the name of the virtual pet toy that was a massive craze in the late 1990s?",
-      "answer": "tamagotchi"
-    },
-    {
-      "question": "What was the name of the handheld electronic device released by Nintendo in the 1990s that featured a monochrome screen?",
-      "answer": "game boy"
+      "answer": "barney and friends"
     },
     {
       "question": "What was the name of the famous sitcom set in a Boston bar that aired throughout the 1980s and 1990s?",
@@ -117,22 +101,6 @@
       "answer": "reader rabbit"
     },
     {
-      "question": "What was the name of the famous TV show featuring a group of six friends living in New York City during the 1990s?",
-      "answer": "friends"
-    },
-    {
-      "question": "What was the name of the popular handheld gaming device released by Nintendo in the 1990s?",
-      "answer": "game boy"
-    },
-    {
-      "question": "What was the name of the famous sitcom featuring four single friends living in New York City during the 1990s?",
-      "answer": "seinfeld"
-    },
-    {
-      "question": "What was the name of the popular video game console released by Sony in the mid-1990s?",
-      "answer": "playstation"
-    },
-    {
       "question": "What was the name of the popular children's TV show featuring a group of colorful characters who lived in a big house?",
       "answer": "teletubbies"
     },
@@ -145,28 +113,12 @@
       "answer": "aladdin"
     },
     {
-      "question": "What was the name of the popular TV show featuring a group of six friends living in New York City during the 1990s?",
-      "answer": "friends"
-    },
-    {
-      "question": "What was the name of the popular handheld gaming device released by Nintendo in the 1990s?",
-      "answer": "game boy"
-    },
-    {
       "question": "What was the name of the popular Disney movie released in 1994, featuring a young lion named Simba?",
       "answer": "the lion king"
     },
     {
-      "question": "What was the name of the famous sitcom featuring a group of six friends living in New York City during the 1990s?",
-      "answer": "friends"
-    },
-    {
       "question": "What was the name of the popular children's TV show featuring a group of crime-fighting turtles?",
       "answer": "teenage mutant ninja turtles"
-    },
-    {
-      "question": "What was the name of the popular children's TV show featuring a group of animated rescue dogs?",
-      "answer": "paw patrol"
     }
   ]
 }

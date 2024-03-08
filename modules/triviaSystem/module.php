@@ -52,7 +52,7 @@ function triviaSystem_startGame($ircdata) {
 
     //Load the trivia JSON and pick a random question/answer
     $attemptsToLoad = 0;
-    while(strlen($triviaQuestion)<10 || $attemptsToLoad <= 10) {
+    while(strlen($triviaQuestion)<10 && $attemptsToLoad <= 10) {
         logEntry("Trivia Question is empty, attempt number ".$attemptsToLoad."");
         $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
         $json = file_get_contents($topicFile);

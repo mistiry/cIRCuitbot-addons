@@ -129,7 +129,7 @@
       "answer": "blocking"
     },
     {
-      "question": "What is the name for a software program that scans for and removes unwanted files from a computer?",
+      "question": "What is the name for a typically illegitimate application that scans for unwanted files from a computer?",
       "answer": "cleaner"
     },
     {
@@ -177,7 +177,7 @@
       "answer": "segmentation"
     },
     {
-      "question": "The CIA triad contains confidentiality, integrity and what other componant?",
+      "question": "The CIA triad contains confidentiality, integrity and what other component?",
       "answer": "availability"
     },
     {

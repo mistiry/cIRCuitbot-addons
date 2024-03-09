@@ -204,6 +204,10 @@
       "question": "This hashing method is used in Windows and is considered insecure",
       "answer": "NTLM"
     },
+        {
+      "question": "Also known as UNC 3944, this hacking group successfully ransomware'd MGM properties in 2023 ",
+      "answer": "scattered spider"
+    },
     {
       "question": "What is the process of protecting data by rendering it unreadable without the proper key?",
       "answer": "encryption"

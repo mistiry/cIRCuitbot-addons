@@ -28,7 +28,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $timerArray['googleGemini_timeoutExpired'] = $expiryTime;
 
         //The user prompt
-        $geminiPrompt = trim("".$ircdata['commandargs']." [no emoji, newlines, or control characters in response]");
+        $geminiPrompt = trim($ircdata['commandargs']);
 
         $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=".$apiKey."";
         $curl = curl_init($apiURL);
@@ -44,7 +44,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         curl_close($curl);
 
         print_r($geminiResult);
-        $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
+        $geminiResponse = trim(preg_replace('/\s\s+/',' ', $geminiResult["candidates"][0]["content"]["parts"][0]["text"]));
 
         if(strlen($geminiResponse) > 5) {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$geminiResponse."");

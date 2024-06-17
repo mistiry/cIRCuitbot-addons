@@ -34,9 +34,10 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $curl = curl_init($apiURL);
         $requestJson = "{\"contents\":[{\"parts\":[{\"text\": \"".$geminiPrompt."\"}]}]}";
         curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=".$apiKey."",
             CURLOPT_POSTFIELDS => $requestJson,
             CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
-            RETURNTRANSFER => 1
+            CURLOPT_RETURNTRANSFER => 1
         ));
         
         $geminiResult = json_decode(curl_exec($curl), true);

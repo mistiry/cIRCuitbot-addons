@@ -42,10 +42,9 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         
         $geminiResultJson = curl_exec($curl);
         $geminiResult = json_decode($geminiResultJson);
-        curl_close($curl);
 
         echo $geminiResultJson;
-        
+
         $geminiResponse = trim(preg_replace('/\s\s+/',' ', $geminiResult["candidates"][0]["content"]["parts"][0]["text"]));
 
         if(strlen($geminiResponse) > 5) {
@@ -53,6 +52,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         } else {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." Something happened.");
         }
+        curl_close($curl);
         return true;
     }
 }

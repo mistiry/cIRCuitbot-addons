@@ -41,7 +41,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         ));
         
         $geminiResultJson = curl_exec($curl);
-        $geminiResult = json_decode($geminiResultJson);
+        $geminiResult = json_decode($geminiResultJson, true);
 
         echo $geminiResultJson;
 

@@ -40,10 +40,12 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
             CURLOPT_RETURNTRANSFER => 1
         ));
         
-        $geminiResult = json_decode(curl_exec($curl), true);
+        $geminiResultJson = curl_exec($curl);
+        $geminiResult = json_decode($geminiResultJson);
         curl_close($curl);
 
-        print_r($geminiResult);
+        echo $geminiResultJson;
+        
         $geminiResponse = trim(preg_replace('/\s\s+/',' ', $geminiResult["candidates"][0]["content"]["parts"][0]["text"]));
 
         if(strlen($geminiResponse) > 5) {

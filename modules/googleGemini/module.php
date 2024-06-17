@@ -63,8 +63,9 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
 function googleGemini_saveGeneratedOutput($output) {
     //This function likely only works for the website for https://dotheneedful.online
     $filepath = "/var/www/html/gemini";
-    $rand = random_bytes(27);
-    $fullnewfile = "".$filepath."/".$rand.".php";
+    $rand = rand();
+    $rand = hash("sha-256", $rand)
+    $fullnewfile = "".$filepath."/".$rand.".geminiresult";
     file_put_contents($fullnewfile, $output);
     return true;
 }

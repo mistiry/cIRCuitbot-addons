@@ -33,12 +33,17 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=".$apiKey."";
         $curl = curl_init($apiURL);
         $requestJson = "{\"contents\":[{\"parts\":[{\"text\": \"".$geminiPrompt."\"}]}]}";
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $requestJson);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($curl, RETURNTRANSFER, true);
+        curl_setopt_array($curl, array(
+            CURLOPT_POSTFIELDS => $requestJson,
+            CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
+            RETURNTRANSFER => true
+        ));
+        
         $geminiResult = json_decode(curl_exec($curl), true);
         curl_close($curl);
         $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
+
+        echo "geminiResponse: ".$geminiResponse."\n";
 
         if(strlen($geminiResponse) > 5) {
             sendPRIVMSG($ircdata['location'], $geminiResponse);

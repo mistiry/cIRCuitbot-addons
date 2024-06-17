@@ -36,7 +36,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         curl_setopt_array($curl, array(
             CURLOPT_POSTFIELDS => $requestJson,
             CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
-            RETURNTRANSFER => true
+            RETURNTRANSFER => 1
         ));
         
         $geminiResult = json_decode(curl_exec($curl), true);

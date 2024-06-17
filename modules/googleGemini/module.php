@@ -46,7 +46,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         echo $geminiResultJson;
 
         $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
-        $geminiResponse = str_replace("\n"," ",$geminiResponse);
+        $geminiResponse = str_replace("\n","  ",$geminiResponse);
 
         if(strlen($geminiResponse) > 5) {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$geminiResponse."");

@@ -43,10 +43,12 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $geminiResultJson = curl_exec($curl);
         $geminiResult = json_decode($geminiResultJson, true);
 
-        echo $geminiResultJson;
-
         $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
         $geminiResponse = str_replace("\n","  ",$geminiResponse);
+
+        //Create random hash to save the generated results to custom HTML output
+        $outputToSave = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
+        $savedOutput = googleGemini_saveGeneratedOutput($outputToSave);
 
         if(strlen($geminiResponse) > 5) {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$geminiResponse."");
@@ -56,6 +58,15 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         curl_close($curl);
         return true;
     }
+}
+
+function googleGemini_saveGeneratedOutput($output) {
+    //This function likely only works for the website for https://dotheneedful.online
+    $filepath = "/var/www/html/gemini";
+    $rand = random_bytes(27);
+    $fullnewfile = "".$filepath."/".$rand.".php";
+    file_put_contents($fullnewfile, $output);
+    return true;
 }
 
 function googleGemini_timeoutExpired($data) {

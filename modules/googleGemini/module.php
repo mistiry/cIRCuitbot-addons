@@ -16,7 +16,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $currentEpoch = time();
         $expiryTime = $timerArray['googleGemini_timeoutExpired'];
         $timeRemaining = $expiryTime - $currentEpoch;
-        sendPRIVMSG($ircdata['location'],"Sorry, it has not been long enough since the last use ($timeRemaining seconds remaining)");
+        sendPRIVMSG($ircdata['location'],"".$geminiBanner." Sorry, it has not been long enough since the last use ($timeRemaining seconds remaining)");
         return true;
     } else {
         //Set this as active activity
@@ -44,10 +44,8 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         curl_close($curl);
         $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
 
-        echo "geminiResponse: ".$geminiResponse."\n";
-
         if(strlen($geminiResponse) > 5) {
-            sendPRIVMSG($ircdata['location'], $geminiResponse);
+            sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$geminiResponse."");
         } else {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." Something happened.");
         }

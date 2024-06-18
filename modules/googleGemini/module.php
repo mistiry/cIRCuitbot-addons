@@ -48,7 +48,8 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
 
         //Create random hash to save the generated results to custom HTML output
         $outputToSave = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
-        $savedOutput = googleGemini_saveGeneratedOutput($outputToSave);
+
+        $savedOutput = googleGemini_saveGeneratedOutput($prompt,$outputToSave);
 
         if(strlen($geminiResponse) > 5) {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." Generation successful - check out my response at ".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."");
@@ -60,12 +61,13 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
     }
 }
 
-function googleGemini_saveGeneratedOutput($output) {
+function googleGemini_saveGeneratedOutput($prompt,$output) {
     $filepath = "/var/www/html/gemini";
     $rand = rand();
     $rand = sha1($rand);
     $fullnewfile = "".$filepath."/".$rand.".geminiresult";
-    file_put_contents($fullnewfile, $output);
+    file_put_contents("prompt:".$prompt."\n\n");
+    file_put_contents($fullnewfile, $output, FILE_APPEND);
     return $rand;
 }
 

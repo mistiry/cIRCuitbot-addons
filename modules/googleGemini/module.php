@@ -47,7 +47,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $geminiResult = json_decode($geminiResultJson, true);
 
         $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
-        $geminiResponse = str_replace("\n","  ",$geminiResponse);
+        //$geminiResponse = str_replace("\n","  ",$geminiResponse);
 
         //Create random hash to save the generated results to custom HTML output
         $outputToSave = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);

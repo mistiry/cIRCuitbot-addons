@@ -31,7 +31,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $timerArray['googleGemini_timeoutExpired'] = $expiryTime;
 
         //The user prompt
-        $geminiPrompt = trim(addslashes($ircdata['commandargs']));
+        $geminiPrompt = trim(urlencode($ircdata['commandargs']));
 
         $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=".$apiKey."";
         $curl = curl_init($apiURL);

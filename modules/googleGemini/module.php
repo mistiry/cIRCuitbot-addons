@@ -66,7 +66,7 @@ function googleGemini_saveGeneratedOutput($prompt,$output) {
     $rand = rand();
     $rand = sha1($rand);
     $fullnewfile = "".$filepath."/".$rand.".geminiresult";
-    file_put_contents("prompt:".$prompt."\n\n");
+    file_put_contents($fullnewfile, "prompt:".$prompt."\n\n");
     file_put_contents($fullnewfile, $output, FILE_APPEND);
     return $rand;
 }

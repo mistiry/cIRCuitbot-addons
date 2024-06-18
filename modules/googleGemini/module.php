@@ -61,9 +61,9 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
             $successText1 = stylizeText(stylizeText("Success!","color_light_green"), "bold");
             $successText2 = stylizeText("(next run available in ".$timeRemaining."s) - check out my response at", "bold");
             $successText3 = stylizeText(stylizeText("".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."", "color_blue"), "bold");
-            $failText = stylizeText(stylizeText("Something Happened!","color_red"), "bold");
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$successText1." ".$successText2." ".$successText3."");
         } else {
+            $failText = stylizeText(stylizeText("Something Happened!","color_red"), "bold");
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$failText."");
         }
         curl_close($curl);

@@ -58,9 +58,11 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
             $currentEpoch = time();
             $expiryTime = $timerArray['googleGemini_timeoutExpired'];
             $timeRemaining = $expiryTime - $currentEpoch;
-            $successText = stylizeText(stylizeText("Success!","color_light_green"), "bold");
+            $successText1 = stylizeText(stylizeText("Success!","color_light_green"), "bold");
+            $successText2 = stylizeText("(next run available in ".$timeRemaining."s) - check out my response at", "bold");
+            $successText3 = stylizeText(stylizeText("".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."", "color_blue"), "bold");
             $failText = stylizeText(stylizeText("Something Happened!","color_red"), "bold");
-            sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$successText." (next run available in ".$timeRemaining."s) - check out my response at ".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."");
+            sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$successText1." ".$successText2." ".$successText3."");
         } else {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$failText."");
         }

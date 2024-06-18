@@ -51,7 +51,7 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $savedOutput = googleGemini_saveGeneratedOutput($outputToSave);
 
         if(strlen($geminiResponse) > 5) {
-            sendPRIVMSG($ircdata['location'], "".$geminiBanner." Generation successful - check out my response at ".$configfile['baseOutputUrl']."/view.php?gen=".$rand."");
+            sendPRIVMSG($ircdata['location'], "".$geminiBanner." Generation successful - check out my response at ".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."");
         } else {
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." Something happened.");
         }

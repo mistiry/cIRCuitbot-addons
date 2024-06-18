@@ -52,9 +52,14 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $savedOutput = googleGemini_saveGeneratedOutput($geminiPrompt,$outputToSave);
 
         if(strlen($geminiResponse) > 5) {
-            sendPRIVMSG($ircdata['location'], "".$geminiBanner." Generation successful - check out my response at ".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."");
+            $currentEpoch = time();
+            $expiryTime = $timerArray['googleGemini_timeoutExpired'];
+            $timeRemaining = $expiryTime - $currentEpoch;
+            $successText = stylizeText(stylizeText("Success!","color_light_green"), "bold");
+            $failText = stylizeText(stylizeText("Something Happened!","color_red"), "bold");
+            sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$successText." (next run available in ".$timeRemaining."s) - check out my response at ".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."");
         } else {
-            sendPRIVMSG($ircdata['location'], "".$geminiBanner." Something happened.");
+            sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$failText."");
         }
         curl_close($curl);
         return true;

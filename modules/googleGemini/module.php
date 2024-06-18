@@ -16,7 +16,10 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $currentEpoch = time();
         $expiryTime = $timerArray['googleGemini_timeoutExpired'];
         $timeRemaining = $expiryTime - $currentEpoch;
-        sendPRIVMSG($ircdata['location'],"".$geminiBanner." Sorry, it has not been long enough since the last use ($timeRemaining seconds remaining)");
+        $timeoutText1 = stylizeText(stylizeText("Uh oh!","color_yellow"), "bold");
+        $timeoutText2 = stylizeText("Not enough time has elapsed since the last run. Time remaining:", "bold");
+        $timeoutText3 = stylizeText(stylizeText("".$timeRemaining."s", "color_cyan"), "bold");
+        sendPRIVMSG($ircdata['location'],"".$geminiBanner." ".$timeoutText1." ".$timeoutText2." ".$timeoutText3."");
         return true;
     } else {
         //Set this as active activity

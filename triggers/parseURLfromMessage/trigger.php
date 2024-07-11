@@ -59,7 +59,7 @@ function getTitle($url) {
         }
     }
 
-    $page = file_get_contents(trim($url), NULL, NULL, NULL, 262144);
+    $page = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
     if(empty($page)) {
         $page = file_get_contents(trim($url));
     }

@@ -68,6 +68,7 @@ function getTitle($url) {
         // Extract the title from the HTML
         if (preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $matches)) {
             $title = $matches[1];
+            print_r($matches);
             echo $title; 
             // Trim and strip non-printable characters
             $title = trim($title);

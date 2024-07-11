@@ -40,7 +40,7 @@ function getTitle($url) {
         }
 
         // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
-        $disallowedDomains = ['youtube.com'];
+        $disallowedDomains = ['xyoutube.com'];
         foreach($disallowedDomains as $domainCheck) {
             if(stristr($url, $domainCheck)) {
                 logEntry("Domain is disallowed.");

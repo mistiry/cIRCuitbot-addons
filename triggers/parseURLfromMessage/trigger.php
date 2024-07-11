@@ -16,7 +16,7 @@ function parseURLfromMessage($ircdata) {
         if(strlen($urltitle)>5 && strlen($urltitle)<450) {
             $urlBanner = stylizeText("-- URL Title --", "bold");
             $urlBanner = stylizeText($urlBanner, "color_orange");
-            $styledTitle = stylizeText($urltitle, "bold")
+            $styledTitle = stylizeText($urltitle, "bold");
             $message = "".$urlBanner." ".$styledTitle."";
             sendPRIVMSG($config['channel'], "".$message."");                        
         }

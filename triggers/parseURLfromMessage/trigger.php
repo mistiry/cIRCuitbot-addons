@@ -63,7 +63,7 @@ function getTitle($url) {
         // }
         // curl_close($ch);
 
-        $html = file_get_contents($url);
+        $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
 
         // Extract the title from the HTML
         $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;

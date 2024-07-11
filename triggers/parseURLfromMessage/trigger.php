@@ -49,19 +49,21 @@ function getTitle($url) {
         }
     
         // Use cURL to fetch the content of the webpage
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Set a timeout for the request
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        // curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Set a timeout for the request
+        // curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
-        $html = curl_exec($ch);
-        if (curl_errno($ch)) {
-            logEntry(curl_error($ch));
-            return false;
-        }
-        curl_close($ch);
+        // $html = curl_exec($ch);
+        // if (curl_errno($ch)) {
+        //     logEntry(curl_error($ch));
+        //     return false;
+        // }
+        // curl_close($ch);
+
+        $html = file_get_contents($url);
 
         // Extract the title from the HTML
         if (preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $matches)) {

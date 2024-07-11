@@ -66,16 +66,20 @@ function getTitle($url) {
         $html = file_get_contents($url);
 
         // Extract the title from the HTML
-        if (preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $matches)) {
-            $title = $matches[1];
-            print_r($matches);
-            echo $title; 
-            // Trim and strip non-printable characters
-            $title = trim($title);
-            //$title = preg_replace('/[\x00-\x1F\x7F]/u', '', $title);
-            return $title;
-        } else {
-            return false;
-        }
+        $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
+        $title = trim($title);
+        return $title;
+
+        // if (preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $matches)) {
+        //     $title = $matches[1];
+        //     print_r($matches);
+        //     echo $title; 
+        //     // Trim and strip non-printable characters
+        //     $title = trim($title);
+        //     //$title = preg_replace('/[\x00-\x1F\x7F]/u', '', $title);
+        //     return $title;
+        // } else {
+        //     return false;
+        // }
     }
 }

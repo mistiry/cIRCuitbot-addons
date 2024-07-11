@@ -38,7 +38,13 @@ function getTitle($url) {
             $message = "Unable to parse URL that points to ".$extension." file.";
             return $message;
         }
-        
+
+        // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
+        $disallowedDomains = ['youtube.com'];
+        if (in_array(strtolower($parsedUrl), $disallowedDomains)) {
+            return false;
+        }
+    
         // Use cURL to fetch the content of the webpage
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

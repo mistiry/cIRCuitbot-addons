@@ -46,6 +46,7 @@ function getTitle($url) {
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
         $html = curl_exec($ch);
+        echo $html;
         if (curl_errno($ch)) {
             logEntry(curl_error($ch));
             return false;

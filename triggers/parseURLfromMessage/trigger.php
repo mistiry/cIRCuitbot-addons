@@ -47,6 +47,7 @@ function getTitle($url) {
 
         $html = curl_exec($ch);
         if (curl_errno($ch)) {
+            logEntry(curl_error($ch));
             return false;
         }
         curl_close($ch);

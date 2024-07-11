@@ -14,7 +14,10 @@ function parseURLfromMessage($ircdata) {
         $urltitle = trim(getTitle($url));
         logEntry("URL Title extracted: ".$urltitle."");
         if(strlen($urltitle)>5 && strlen($urltitle)<450) {
-            $message = "".$ircdata['usernickname']." - URL Title - ".$urltitle."";
+            $urlBanner = stylizeText("-- URL Title --", "bold");
+            $urlBanner = stylizeText($urlBanner, "color_orange");
+            $styledTitle = stylizeText($urltitle, "bold")
+            $message = "".$urlBanner." ".$styledTitle."";
             sendPRIVMSG($config['channel'], "".$message."");                        
         }
     }

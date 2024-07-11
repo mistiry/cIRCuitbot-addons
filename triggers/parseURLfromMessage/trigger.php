@@ -41,7 +41,7 @@ function getTitle($url) {
 
         // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
         $disallowedDomains = ['youtube.com'];
-        if (in_array(strtolower($parsedUrl), $disallowedDomains)) {
+        if (in_array(strtolower($url), $disallowedDomains)) {
             return false;
         }
     

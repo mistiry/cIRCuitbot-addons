@@ -85,6 +85,7 @@ function googleGemini_saveGeneratedOutput($prompt,$output) {
 function googleGemini_timeoutExpired($data) {
     global $activeActivityArray;
     global $timerArray;
+    global $config;
 
     //Config file parsing
     $configfile = parse_ini_file("".$config['addons_dir']."/modules/googleGemini/module.conf");

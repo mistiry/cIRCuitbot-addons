@@ -3,9 +3,10 @@ function triviaSystem_startGame($ircdata) {
     global $activeActivityArray;
     global $timerArray;
     global $triggers;
+    global $config;
 
     //Load configuration file and build topics array 
-    $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
     $topics = $configfile['topics'];
     $topicArray = array();
@@ -125,7 +126,7 @@ function triviaSystem_answerGiven($ircdata) {
     $usernameText = stylizeText($usernameText,"color_light_green");
 
     //The topic for this question was
-    $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
     $triviaTopic = stylizeText($activeActivityArray[$activityName], "color_pink");
     $triviaTopic = stylizeText($triviaTopic, "bold");
@@ -163,7 +164,7 @@ function triviaSystem_timeExpired($ircdata) {
 
 
     //Activity should not be active anymore, remove from array
-    $configfile = parse_ini_file("./modules/triviaSystem/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
     unset($activeActivityArray[$activityName]);
 

@@ -2,12 +2,13 @@
 function googleGemini_generateTextByTextPrompt($ircdata) {
     global $activeActivityArray;
     global $timerArray;
+    global $options;
 
     $geminiBanner = stylizeText("-- GEMINI --", "bold");
     $geminiBanner = stylizeText($geminiBanner, "color_light_blue");
 
     //Config file parsing
-    $configfile = parse_ini_file("./modules/googleGemini/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/googleGemini/module.conf");
     $apiKey = $configfile['geminiAPIkey'];
     $activityName = $configfile['activityName'];
 

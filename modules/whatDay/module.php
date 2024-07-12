@@ -1,6 +1,8 @@
 <?php
 function whatDay($data) {
-    $dayData = parse_ini_file("./modules/whatDay/module.conf");
+    global $config;
+
+    $dayData = parse_ini_file("".$config['addons_dir']."/modules/whatDay/module.conf");
     $today = date('l');
     switch($today) {
         case "Sunday":

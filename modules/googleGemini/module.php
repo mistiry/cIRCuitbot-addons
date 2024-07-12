@@ -87,7 +87,7 @@ function googleGemini_timeoutExpired($data) {
     global $timerArray;
 
     //Config file parsing
-    $configfile = parse_ini_file("./modules/googleGemini/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/googleGemini/module.conf");
     $activityName = $configfile['activityName'];
 
     unset($activeActivityArray[$activityName]);

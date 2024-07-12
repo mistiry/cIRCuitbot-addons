@@ -2,7 +2,7 @@
 function googleGemini_generateTextByTextPrompt($ircdata) {
     global $activeActivityArray;
     global $timerArray;
-    global $options;
+    global $config;
 
     $geminiBanner = stylizeText("-- GEMINI --", "bold");
     $geminiBanner = stylizeText($geminiBanner, "color_light_blue");

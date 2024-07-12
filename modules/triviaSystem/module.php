@@ -42,8 +42,8 @@ function triviaSystem_startGame($ircdata) {
         }
     } else {
         //No arg was passed, topic will be random
-        $randKey = array_rand($topics);
-        $triviaTopic = $topics[$randKey];
+        $randKey = array_rand($topicArray);
+        $triviaTopic = $topicArray[$randKey];
     }
 
     //Calculate timer expiration and set the timer
@@ -55,7 +55,7 @@ function triviaSystem_startGame($ircdata) {
     $attemptsToLoad = 0;
     while(strlen($triviaQuestion)<10 && $attemptsToLoad <= 10) {
         logEntry("Trivia Question for topic '".$triviaTopic."' is empty, attempt number ".$attemptsToLoad."");
-        $topicFile = "./modules/triviaSystem/".$triviaTopic.".topic";
+        $topicFile = "".$config['addons_dir']."/modules/triviaSystem/".$triviaTopic.".topic";
         $json = file_get_contents($topicFile);
         $jsonData = json_decode($json, true);
         $randKey = array_rand($jsonData['questions']);

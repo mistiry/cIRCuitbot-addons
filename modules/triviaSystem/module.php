@@ -105,6 +105,7 @@ function triviaSystem_answerGiven($ircdata) {
     global $timerArray;
     global $triggers;
     global $ircdata;
+    global $config;
 
     //The correct answer was given to get here.
     //Congrats texts, chosen at random for some personality.

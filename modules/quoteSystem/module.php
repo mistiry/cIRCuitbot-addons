@@ -25,12 +25,7 @@ function getQuote($data) {
             $id = $row['id'];
             $submittedby = $row['submittedby'];
             $quote = $row['quote'];
-            $quoteEncoding = mb_detect_encoding($quote, mb_list_encodings(), true);
-            if($quoteEncoding === false) {
-                echo "Unable to determing encoding of the quote.";
-                return false;
-            }
-            $quote = mb_convert_encoding($quote, 'UTF-8', $quoteEncoding);
+            $quote = preg_replace('/[^\x20-\x7E]/', '', $quote);
             $timestamp = $row['timestamp'];
             $upvotes = $row['upvotes'];
             $downvotes = $row['downvotes'];

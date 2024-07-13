@@ -24,7 +24,7 @@ function getQuote($data) {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $submittedby = $row['submittedby'];
-            $quote = $row['quote'];
+            $quote = mb_convert_encoding($row['quote'], 'UTF-8', 'auto');
             $timestamp = $row['timestamp'];
             $upvotes = $row['upvotes'];
             $downvotes = $row['downvotes'];

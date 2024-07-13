@@ -28,7 +28,8 @@ function getQuote($data) {
             //$quote = str_replace("â€‹", '', $quote);
             #$quote = iconv('ISO-8859-1', 'UTF-8//IGNORE', $quote);
             //$quoteEncoding = mb_detect_encoding($quote, 'UTF-8', true);
-            $quote = mb_convert_encoding($quote, 'UTF-8', 'auto');
+            //$quote = mb_convert_encoding($quote, 'UTF-8', 'auto');
+            $quote = utf8_encode($quote);
             $timestamp = $row['timestamp'];
             $upvotes = $row['upvotes'];
             $downvotes = $row['downvotes'];

@@ -24,8 +24,13 @@ function getQuote($data) {
         while($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $submittedby = $row['submittedby'];
-            $quote = mb_convert_encoding($row['quote'], 'UTF-8', 'auto');
-            $quote = iconv('ISO-8859-1', 'UTF-8//IGNORE', $quote);
+            $quote = $row['quote'];
+            $quoteEncoding = mb_detect_encoding($quote, mb_list_encodings(), true);
+            if($quoteEncoding === false) {
+                echo "Unable to determing encoding of the quote.";
+                return false;
+            }
+            $quote = mb_convert_encoding($quote, 'UTF-8', $quoteEncoding);
             $timestamp = $row['timestamp'];
             $upvotes = $row['upvotes'];
             $downvotes = $row['downvotes'];

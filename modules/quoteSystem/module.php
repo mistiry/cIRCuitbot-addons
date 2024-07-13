@@ -25,8 +25,7 @@ function getQuote($data) {
             $id = $row['id'];
             $submittedby = $row['submittedby'];
             $quote = $row['quote'];
-            $pattern = '/[^\p{L}\p{N}\p{P}\p{Z}\p{Sm}\p{Sc}\p{So}]/u';
-            $quote = preg_replace($pattern, '', $quote);
+            $quote = str_replace("\xE2\x80\x8B", '', $quote);
             $timestamp = $row['timestamp'];
             $upvotes = $row['upvotes'];
             $downvotes = $row['downvotes'];

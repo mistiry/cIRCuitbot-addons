@@ -25,6 +25,7 @@ function getQuote($data) {
             $id = $row['id'];
             $submittedby = $row['submittedby'];
             $quote = mb_convert_encoding($row['quote'], 'UTF-8', 'auto');
+            $quote = iconv('ISO-8859-1', 'UTF-8//IGNORE', $quote);
             $timestamp = $row['timestamp'];
             $upvotes = $row['upvotes'];
             $downvotes = $row['downvotes'];

@@ -2,12 +2,13 @@
 function googleGemini_generateTextByTextPrompt($ircdata) {
     global $activeActivityArray;
     global $timerArray;
+    global $config;
 
     $geminiBanner = stylizeText("-- GEMINI --", "bold");
     $geminiBanner = stylizeText($geminiBanner, "color_light_blue");
 
     //Config file parsing
-    $configfile = parse_ini_file("./modules/googleGemini/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/googleGemini/module.conf");
     $apiKey = $configfile['geminiAPIkey'];
     $activityName = $configfile['activityName'];
 
@@ -84,9 +85,10 @@ function googleGemini_saveGeneratedOutput($prompt,$output) {
 function googleGemini_timeoutExpired($data) {
     global $activeActivityArray;
     global $timerArray;
+    global $config;
 
     //Config file parsing
-    $configfile = parse_ini_file("./modules/googleGemini/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/modules/googleGemini/module.conf");
     $activityName = $configfile['activityName'];
 
     unset($activeActivityArray[$activityName]);

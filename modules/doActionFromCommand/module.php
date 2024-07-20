@@ -3,8 +3,9 @@ function doActionFromCommand($ircdata) {
     //We need to pull in the socket object so we can directly send an ACTION
     //with the proper control characters.
     global $socket;
+    global $config;
 
-    $options = parse_ini_file("./modules/doActionFromCommand/module.conf");
+    $options = parse_ini_file("".$config['addons_dir']."/modules/doActionFromCommand/module.conf");
 
     //Determine what to send
     switch($options['action']) {

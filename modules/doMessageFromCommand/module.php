@@ -17,6 +17,8 @@ function getFirstWordFromCommand() {
 }
 
 function replyNoTag($ircdata) {
+    global $config;
+
     $commandGiven = getFirstWordFromCommand();
     $options = parse_ini_file("".$config['addons_dir']."/modules/doMessageFromCommand/".$commandGiven.".conf");
     $reply = $options['reply'];
@@ -27,6 +29,8 @@ function replyNoTag($ircdata) {
 }
 
 function replyWithTag($ircdata) {
+    global $config;
+
     $commandGiven = getFirstWordFromCommand();
     $options = parse_ini_file("".$config['addons_dir']."/modules/doMessageFromCommand/".$commandGiven.".conf");
     $reply = $options['reply'];
@@ -38,6 +42,8 @@ function replyWithTag($ircdata) {
 }
 
 function replyRandomNoTag($ircdata) {
+    global $config;
+
     $commandGiven = getFirstWordFromCommand();
     $options = parse_ini_file("".$config['addons_dir']."/modules/doMessageFromCommand/".$commandGiven.".conf");
     $replies = $options['replies'];
@@ -56,6 +62,8 @@ function replyRandomNoTag($ircdata) {
 }
 
 function replyRandomWithTag($ircdata) {
+    global $config;
+
     $commandGiven = getFirstWordFromCommand();
 
     $inifile = "".$config['addons_dir']."/modules/doMessageFromCommand/".$commandGiven.".conf";
@@ -78,6 +86,8 @@ function replyRandomWithTag($ircdata) {
 }
 
 function replyTagOtherUser($ircdata) {
+    global $config;
+
     $argpieces = explode(" ",$ircdata['commandargs']);
     $userToTag = trim($argpieces[0]);
     $userKnown = isKnownUser($userToTag);
@@ -99,6 +109,8 @@ function replyTagOtherUser($ircdata) {
 }
 
 function replyRandomTagOtherUser($ircdata) {
+    global $config;
+
     $argpieces = explode(" ",$ircdata['commandargs']);
     $userToTag = $argpieces[0];
     $userKnown = isKnownUser($userToTag);
@@ -130,6 +142,8 @@ function replyRandomTagOtherUser($ircdata) {
 }
 
 function isKnownUser($user) {
+    global $config;
+    
     global $dbconnection;
     $query = "SELECT id FROM known_users WHERE nick_aliases LIKE '%".$user."%' LIMIT 1";
     $result = mysqli_query($dbconnection, $query);

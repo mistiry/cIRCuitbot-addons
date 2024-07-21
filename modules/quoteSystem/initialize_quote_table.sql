@@ -7,4 +7,4 @@ CREATE TABLE `quotes` (
   `downvotes` bigint(20) DEFAULT NULL,
   `voted_hostnames` varchar(16384) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4;

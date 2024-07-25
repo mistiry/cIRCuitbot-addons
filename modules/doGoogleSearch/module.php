@@ -5,22 +5,26 @@ function doGoogleSearch($data) {
     $searchterm = myUrlEncode($search);
     $searchurl = "".$baseurl."".$searchterm."";
 
-    //get some values
-    $randval = rand(00000000,99999999);
-    $tempfile = ".googlesearch_".$randval."";
-    exec("lynx -source ".$searchurl." > ".$tempfile."");
-    $rawhtml = exec("cat ".$tempfile."");
-    $htmlpieces = explode("?q",$rawhtml);
-    $url = get_string_between($rawhtml,"/url?q=","\">");
-    $url = urldecode($url);
-    $url = str_replace("&amp;","&",$url);
-    $url = explode("&sa",$url);
-    $url2 = $url[0];
-    $title = getURLTitle($url2);
+    if($search == "") {
+        return false;
+    } else {
+        //get some values
+        $randval = rand(00000000,99999999);
+        $tempfile = ".googlesearch_".$randval."";
+        exec("lynx -source ".$searchurl." > ".$tempfile."");
+        $rawhtml = exec("cat ".$tempfile."");
+        $htmlpieces = explode("?q",$rawhtml);
+        $url = get_string_between($rawhtml,"/url?q=","\">");
+        $url = urldecode($url);
+        $url = str_replace("&amp;","&",$url);
+        $url = explode("&sa",$url);
+        $url2 = $url[0];
+        $title = getURLTitle($url2);
 
-    sendPRIVMSG($data['location'],"".$data['usernickname']." - ".$title." - ".$url2."");
-    exec("rm -f ".$tempfile."");
-    return true;
+        sendPRIVMSG($data['location'],"".$data['usernickname']." - ".$title." - ".$url2."");
+        exec("rm -f ".$tempfile."");
+        return true;
+    }
 }
 
 function myUrlEncode($string) {

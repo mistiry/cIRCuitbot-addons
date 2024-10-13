@@ -3,7 +3,7 @@ function parseURLfromMessage($ircdata) {
     global $config;
 
     //Config file parsing
-    $configfile = parse_ini_file("".$config['addons_dir']."/modules/parseURLfromMessage/module.conf");
+    $configfile = parse_ini_file("".$config['addons_dir']."/triggers/parseURLfromMessage/trigger.conf");
     $parseYouTube = $configfile['parseyoutube'];
     $youtubeAPIKey = $configfile['youtubeAPIKey'];
 
@@ -17,7 +17,9 @@ function parseURLfromMessage($ircdata) {
         logEntry("Found URL in message: ".$url."");
 
         if($parseYouTube == "true") {
-            getYouTubeInfo($url);
+            if(stristr($url, "youtube.com") || stristr($url, "yt.com")) {
+                getYouTubeInfo($url);
+            }
         } else {
             $urltitle = trim(getTitle($url));
             logEntry("URL Title extracted: ".$urltitle."");

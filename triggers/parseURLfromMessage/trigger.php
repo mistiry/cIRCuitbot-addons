@@ -79,7 +79,7 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
 
     // Get the response from the API
     $response = file_get_contents($apiUrl);
-    $videoData = json_decode($response);
+    $videoData = json_decode($response, true);
 
     if (isset($videoData['items']) && count($videoData['items']) > 0) {
         $videoInfo = $videoData['items'][0];

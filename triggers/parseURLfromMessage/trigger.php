@@ -91,7 +91,7 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
         $duration = formatDuration($videoInfo['contentDetails']['duration']);
         $urlBanner = stylizeText("-- YouTube --", "bold");
         $urlBanner = stylizeText($urlBanner, "color_red");
-        $message = ""$title." from ".$channelName." (".$duration.")";
+        $message = "".$title." from ".$channelName." (".$duration.")";
         sendPRIVMSG($config['channel'], "".$message."");
         return true;
     }

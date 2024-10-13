@@ -18,7 +18,7 @@ function parseURLfromMessage($ircdata) {
 
         if($parseYouTube == "true") {
             if(stristr($url, "youtube.com") || stristr($url, "yt.com")) {
-                getYouTubeInfo($url);
+                getYouTubeInfo($youtubeAPIKey, $url);
             }
         } else {
             $urltitle = trim(getTitle($url));

@@ -16,10 +16,8 @@ function parseURLfromMessage($ircdata) {
         }
         logEntry("Found URL in message: ".$url."");
 
-        if($parseYouTube == "true") {
-            if(stristr($url, "youtube.com") || stristr($url, "yt.com")) {
-                getYouTubeInfo($youtubeAPIKey, $url);
-            }
+        if($parseYouTube == "true" && ( stristr($url, "youtube.com") || stristr($url, "yt.com") ) {
+            getYouTubeInfo($youtubeAPIKey, $url);
         } else {
             $urltitle = trim(getTitle($url));
             logEntry("URL Title extracted: ".$urltitle."");
@@ -77,7 +75,6 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
 
     // API endpoint to get video details
     $apiUrl = "https://www.googleapis.com/youtube/v3/videos?id={$videoId}&part=snippet,contentDetails&key={$youtubeAPIKey}";
-    logEntry("Retrieving Video from API Call to ".$apiUrl."");
 
     // Get the response from the API
     $response = file_get_contents($apiUrl);
@@ -88,7 +85,7 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
 
         // Extract title, channel name, and duration
         $title = stylizeText($videoInfo['snippet']['title'], "bold");
-        $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_cyan");
+        $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_yellow");
         $channelName = stylizeText($channelName, "bold");
         $duration = formatDuration($videoInfo['contentDetails']['duration']);
         $urlBanner = stylizeText("-- YouTube --", "bold");

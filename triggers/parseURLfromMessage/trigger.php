@@ -2,6 +2,11 @@
 function parseURLfromMessage($ircdata) {
     global $config;
 
+    //Config file parsing
+    $configfile = parse_ini_file("".$config['addons_dir']."/triggers/parseURLfromMessage/trigger.conf");
+    $parseYouTube = $configfile['parseyoutube'];
+    $youtubeAPIKey = $configfile['youtubeAPIKey'];
+
     if(stristr($ircdata['fullmessage'], "https://") || stristr($ircdata['fullmessage'], "http://")) {
         $messagePieces = explode(" ", $ircdata['fullmessage']);
         foreach($messagePieces as $piece) {
@@ -9,18 +14,21 @@ function parseURLfromMessage($ircdata) {
                 $url = $piece;
             }
         }
-
         logEntry("Found URL in message: ".$url."");
-        $urltitle = trim(getTitle($url));
-        logEntry("URL Title extracted: ".$urltitle."");
-        if(strlen($urltitle)>5 && strlen($urltitle)<450) {
-            $urlBanner = stylizeText("-- URL --", "bold");
-            $urlBanner = stylizeText($urlBanner, "color_purple");
-            $message = "".$urlBanner." ".$urltitle."";
-            sendPRIVMSG($config['channel'], "".$message."");                        
+
+        if($parseYouTube == "true" && ( stristr($url, "youtube.com") || stristr($url, "yt.com") ) ) {
+            getYouTubeInfo($youtubeAPIKey, $url);
+        } else {
+            $urltitle = trim(getTitle($url));
+            logEntry("URL Title extracted: ".$urltitle."");
+            if(strlen($urltitle)>5 && strlen($urltitle)<450) {
+                $urlBanner = stylizeText("-- URL --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_purple");
+                $message = "".$urlBanner." ".$urltitle."";
+                sendPRIVMSG($config['channel'], "".$message."");                        
+            }
         }
     }
-
     return true;
 }
 
@@ -47,21 +55,6 @@ function getTitle($url) {
                 return false;
             }
         }
-    
-        // Use cURL to fetch the content of the webpage
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, $url);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        // curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Set a timeout for the request
-        // curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
-
-        // $html = curl_exec($ch);
-        // if (curl_errno($ch)) {
-        //     logEntry(curl_error($ch));
-        //     return false;
-        // }
-        // curl_close($ch);
 
         $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
 
@@ -69,17 +62,43 @@ function getTitle($url) {
         $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
         $title = trim($title);
         return $title;
-
-        // if (preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $matches)) {
-        //     $title = $matches[1];
-        //     print_r($matches);
-        //     echo $title; 
-        //     // Trim and strip non-printable characters
-        //     $title = trim($title);
-        //     //$title = preg_replace('/[\x00-\x1F\x7F]/u', '', $title);
-        //     return $title;
-        // } else {
-        //     return false;
-        // }
     }
+}
+
+function getYouTubeInfo($youtubeAPIKey, $url) {
+    global $config;
+
+    // Extract the video ID from the URL
+    parse_str(parse_url($url, PHP_URL_QUERY), $urlParams);
+    $videoId = $urlParams['v'];
+    logEntry("YouTube Video ID from URL: ".$videoId."");
+
+    // API endpoint to get video details
+    $apiUrl = "https://www.googleapis.com/youtube/v3/videos?id={$videoId}&part=snippet,contentDetails&key={$youtubeAPIKey}";
+
+    // Get the response from the API
+    $response = file_get_contents($apiUrl);
+    $videoData = json_decode($response, true);
+
+    if (isset($videoData['items']) && count($videoData['items']) > 0) {
+        $videoInfo = $videoData['items'][0];
+
+        // Extract title, channel name, and duration
+        $title = stylizeText($videoInfo['snippet']['title'], "bold");
+        $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_yellow");
+        $channelName = stylizeText($channelName, "bold");
+        $duration = formatDuration($videoInfo['contentDetails']['duration']);
+        $urlBanner = stylizeText("-- YouTube --", "bold");
+        $urlBanner = stylizeText($urlBanner, "color_red");
+        $message = "".$urlBanner." ".$title." from ".$channelName." (".$duration.")";
+        sendPRIVMSG($config['channel'], "".$message."");
+        return true;
+    }
+    return true;
+}
+
+// Helper function to format the ISO 8601 duration (PT#M#S)
+function formatDuration($isoDuration) {
+    $interval = new DateInterval($isoDuration);
+    return $interval->format('%H:%I:%S');
 }

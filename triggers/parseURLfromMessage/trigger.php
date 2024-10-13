@@ -79,19 +79,19 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
     // Get the response from the API
     $response = file_get_contents($apiUrl);
     $videoData = json_decode($response, true);
+    echo $response;
     print_r($videoData);
 
     if (isset($videoData['items']) && count($videoData['items']) > 0) {
         $videoInfo = $videoData['items'][0];
 
         // Extract title, channel name, and duration
-        $title = $videoInfo['snippet']['title'];
-        $channelName = $videoInfo['snippet']['channelTitle'];
+        $title = stylizeText($videoInfo['snippet']['title'], "bold");
+        $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_cyan");
         $duration = formatDuration($videoInfo['contentDetails']['duration']);
-
         $urlBanner = stylizeText("-- YouTube --", "bold");
         $urlBanner = stylizeText($urlBanner, "color_red");
-        $message = "".stylizeText($title, "bold")." from ".stylizeText($channelName, "color_cyan")." (".$duration.")";
+        $message = ""$title." from ".$channelName." (".$duration.")";
         sendPRIVMSG($config['channel'], "".$message."");
         return true;
     }

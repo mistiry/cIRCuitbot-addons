@@ -69,7 +69,7 @@ function getTitle($url) {
 
 function getYouTubeInfo($youtubeAPIKey, $url) {
     global $config;
-    
+
     // Extract the video ID from the URL
     parse_str(parse_url($url, PHP_URL_QUERY), $urlParams);
     $videoId = $urlParams['v'];
@@ -89,10 +89,11 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
         // Extract title, channel name, and duration
         $title = stylizeText($videoInfo['snippet']['title'], "bold");
         $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_cyan");
+        $channelName = stylizeText($channelName, "bold");
         $duration = formatDuration($videoInfo['contentDetails']['duration']);
         $urlBanner = stylizeText("-- YouTube --", "bold");
         $urlBanner = stylizeText($urlBanner, "color_red");
-        $message = "".$title." from ".$channelName." (".$duration.")";
+        $message = "".$urlBanner." ".$title." from ".$channelName." (".$duration.")";
         sendPRIVMSG($config['channel'], "".$message."");
         return true;
     }

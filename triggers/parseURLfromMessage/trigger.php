@@ -75,12 +75,13 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
 
     // API endpoint to get video details
     $apiUrl = "https://www.googleapis.com/youtube/v3/videos?id={$videoId}&part=snippet,contentDetails&key={$youtubeAPIKey}";
+    logEntry("Retrieving Video from API Call to ".$apiUrl."");
 
     // Get the response from the API
     $response = file_get_contents($apiUrl);
     $videoData = json_decode($response, true);
-    echo $response;
-    print_r($videoData);
+    logEntry($response);
+    logEntry(print_r($videoData));
 
     if (isset($videoData['items']) && count($videoData['items']) > 0) {
         $videoInfo = $videoData['items'][0];

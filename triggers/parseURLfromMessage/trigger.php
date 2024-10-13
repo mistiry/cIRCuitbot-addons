@@ -68,6 +68,8 @@ function getTitle($url) {
 }
 
 function getYouTubeInfo($youtubeAPIKey, $url) {
+    global $config;
+    
     // Extract the video ID from the URL
     parse_str(parse_url($url, PHP_URL_QUERY), $urlParams);
     $videoId = $urlParams['v'];

@@ -16,7 +16,7 @@ function parseURLfromMessage($ircdata) {
         }
         logEntry("Found URL in message: ".$url."");
 
-        if($parseYouTube == "true" && ( stristr($url, "youtube.com") || stristr($url, "yt.com") ) {
+        if($parseYouTube == "true" && ( stristr($url, "youtube.com") || stristr($url, "yt.com") ) ) {
             getYouTubeInfo($youtubeAPIKey, $url);
         } else {
             $urltitle = trim(getTitle($url));

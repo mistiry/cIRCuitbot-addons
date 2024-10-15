@@ -62,7 +62,7 @@ function getTitle($url) {
         $dom = new DOMDocument();
 
         // Suppress warnings due to malformed HTML by using @
-        @$dom->loadHTML($htmlContent);
+        @$dom->loadHTML($html);
 
         // Find the title tag
         $titleTags = $dom->getElementsByTagName('title');

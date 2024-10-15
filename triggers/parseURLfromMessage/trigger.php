@@ -56,7 +56,7 @@ function getTitle($url) {
             }
         }
 
-        $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
+        $html = file_get_contents($url);
 
         // Create a new DOMDocument instance
         $dom = new DOMDocument();

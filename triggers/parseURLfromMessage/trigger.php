@@ -56,7 +56,15 @@ function getTitle($url) {
             }
         }
 
-        $html = file_get_contents($url);
+        // Create a context with a custom User-Agent header
+        $contextOptions = [
+            'http' => [
+                'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\r\n"
+            ]
+        ];
+        $context = stream_context_create($contextOptions);
+
+        $html = file_get_contents($url, false, $context);
 
         // Create a new DOMDocument instance
         $dom = new DOMDocument();

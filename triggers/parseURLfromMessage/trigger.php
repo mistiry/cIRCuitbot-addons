@@ -58,10 +58,20 @@ function getTitle($url) {
 
         $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
 
-        // Extract the title from the HTML
-        $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
-        $title = trim($title);
-        return $title;
+        // Create a new DOMDocument instance
+        $dom = new DOMDocument();
+
+        // Suppress warnings due to malformed HTML by using @
+        @$dom->loadHTML($htmlContent);
+
+        // Find the title tag
+        $titleTags = $dom->getElementsByTagName('title');
+
+        // Get the title content
+        if ($titleTags->length > 0) {
+            $title = trim($titleTags->item(0)->nodeValue);
+            return $title;
+        }
     }
 }
 

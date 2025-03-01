@@ -4,9 +4,30 @@ function parseURLfromMessage($ircdata) {
 
     //Config file parsing
     $configfile = parse_ini_file("".$config['addons_dir']."/triggers/parseURLfromMessage/trigger.conf");
+    
+    //Get info to determine extension
+    $parsedUrl = parse_url($url);
+    $extension = pathinfo($parsedUrl['path'], PATHINFO_EXTENSION);
+    $disallowedExtensions = $configfile['disallowedExtensions'];
+    
+    // List of disallowed file extensions
+    if (in_array(strtolower($extension), $disallowedExtensions)) {
+        logEntry("URL '".$url."' points to an invalid extension.");
+        return true;
+    }
+
+    //If you set 'parseyoutube' to true you MUST provide an API key or bad things will happen
     $parseYouTube = $configfile['parseyoutube'];
     $youtubeAPIKey = $configfile['youtubeAPIKey'];
+    $youtubeDomains = $configfile['youtubeDomains'];
 
+    //If you se 'parsereddit' to true you MUST provide a client id and secret or bad things will happen
+    $parsereddit = $configfile['parsereddit'];
+    $redditclientid = $configfile['redditClientID'];
+    $redditclientsecret = $configfile['redditclientsecret'];
+    $redditDomains = $configfile['redditDomains'];
+
+    //First, detect if a URL was seen, then figure out if we need to send to custom parser or not
     if(stristr($ircdata['fullmessage'], "https://") || stristr($ircdata['fullmessage'], "http://")) {
         $messagePieces = explode(" ", $ircdata['fullmessage']);
         foreach($messagePieces as $piece) {
@@ -15,53 +36,75 @@ function parseURLfromMessage($ircdata) {
             }
         }
         logEntry("Found URL in message: ".$url."");
+        $parsedomain = parse_url($url);
+        $domain = $parsedomain['host'];
+        logEntry("URL is at domain: ".$domain."");
 
-        if($parseYouTube == "true" && ( stristr($url, "youtube.com") || stristr($url, "yt.com") ) ) {
-            getYouTubeInfo($youtubeAPIKey, $url);
-        } else {
-            $urltitle = trim(getTitle($url));
-            logEntry("URL Title extracted: ".$urltitle."");
-            if(strlen($urltitle)>5 && strlen($urltitle)<450) {
-                $urlBanner = stylizeText("-- URL --", "bold");
-                $urlBanner = stylizeText($urlBanner, "color_purple");
-                $message = "".$urlBanner." ".$urltitle."";
-                sendPRIVMSG($config['channel'], "".$message."");                        
-            }
+        //YouTube
+        if($parseYouTube == "true" && in_array($domain,$youtubeDomains)) {
+            $title = getYouTubeInfo($youtubeAPIKey,$url);
+            $urlBanner = stylizeText("-- YouTube --", "bold");
+            $urlBanner = stylizeText($urlBanner, "color_red");
+            $message = "".$urlBanner." ".$urltitle."";
+            sendPRIVMSG($config['channel'], "".$message."");
+            return true;
+        } elseif($parseYouTube == "false" && in_array($domain,$youtubeDomains)) {
+            return true;
         }
+
+        if($parsereddit == "true" && in_array($domain,$redditDomains)) {
+            $title = getRedditInfo($redditclientid, $redditclientsecret, $url);
+            $urlBanner = stylizeText("-- URL --", "bold");
+            $urlBanner = stylizeText($urlBanner, "color_purple");
+            $message = "".$urlBanner." ".$urltitle."";
+            sendPRIVMSG($config['channel'], "".$message."");
+            return true;
+        } elseif($parsereddit == "false" && in_array($domain,$redditDomains)) {
+            return true;
+        }
+
+        //Default Parser
+        $title = getTitle($url);
+        $urlBanner = stylizeText("-- URL --", "bold");
+        $urlBanner = stylizeText($urlBanner, "color_purple");
+        $message = "".$urlBanner." ".$urltitle."";
+        sendPRIVMSG($config['channel'], "".$message.""); 
     }
     return true;
 }
 
 function getTitle($url) {
+    global $config;
+
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
         return false;
     } else {
-        //Get info to determine extension
-        $parsedUrl = parse_url($url);
-        $extension = pathinfo($parsedUrl['path'], PATHINFO_EXTENSION);
-        
-        // List of disallowed file extensions
-        $disallowedExtensions = ['pdf', 'exe', 'sh', 'cmd', 'js', 'py', 'bat', 'pl', 'rb', 'ps1', 'vbs', 'msi', 'tcl'];
-        if (in_array(strtolower($extension), $disallowedExtensions)) {
-            $message = "Unable to parse URL that points to ".$extension." file.";
-            return $message;
+
+
+        // Create a context with a custom User-Agent header
+        $contextOptions = [
+            'http' => [
+                'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\r\n"
+            ]
+        ];
+        $context = stream_context_create($contextOptions);
+
+        $html = file_get_contents($url, false, $context);
+
+        // Create a new DOMDocument instance
+        $dom = new DOMDocument();
+
+        // Suppress warnings due to malformed HTML by using @
+        @$dom->loadHTML($html);
+
+        // Find the title tag
+        $titleTags = $dom->getElementsByTagName('title');
+
+        // Get the title content
+        if ($titleTags->length > 0) {
+            $title = trim($titleTags->item(0)->nodeValue);
+            return $title;
         }
-
-        // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
-        $disallowedDomains = ['xyoutube.com'];
-        foreach($disallowedDomains as $domainCheck) {
-            if(stristr($url, $domainCheck)) {
-                logEntry("Domain is disallowed.");
-                return false;
-            }
-        }
-
-        $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
-
-        // Extract the title from the HTML
-        $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
-        $title = trim($title);
-        return $title;
     }
 }
 
@@ -88,11 +131,8 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
         $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_yellow");
         $channelName = stylizeText($channelName, "bold");
         $duration = formatDuration($videoInfo['contentDetails']['duration']);
-        $urlBanner = stylizeText("-- YouTube --", "bold");
-        $urlBanner = stylizeText($urlBanner, "color_red");
-        $message = "".$urlBanner." ".$title." from ".$channelName." (".$duration.")";
-        sendPRIVMSG($config['channel'], "".$message."");
-        return true;
+        $message = "".$title." from ".$channelName." (".$duration.")";
+        return $message;
     }
     return true;
 }

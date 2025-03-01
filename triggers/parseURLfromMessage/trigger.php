@@ -72,41 +72,68 @@ function parseURLfromMessage($ircdata) {
     }
     return true;
 }
-
 function getTitle($url) {
-    global $config;
-
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
         return false;
     } else {
-
-
-        // Create a context with a custom User-Agent header
-        $contextOptions = [
-            'http' => [
-                'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\r\n"
-            ]
-        ];
-        $context = stream_context_create($contextOptions);
-
-        $html = file_get_contents($url, false, $context);
-
-        // Create a new DOMDocument instance
-        $dom = new DOMDocument();
-
-        // Suppress warnings due to malformed HTML by using @
-        @$dom->loadHTML($html);
-
-        // Find the title tag
-        $titleTags = $dom->getElementsByTagName('title');
-
-        // Get the title content
-        if ($titleTags->length > 0) {
-            $title = trim($titleTags->item(0)->nodeValue);
-            return $title;
+        //Get info to determine extension
+        $parsedUrl = parse_url($url);
+        $extension = pathinfo($parsedUrl['path'], PATHINFO_EXTENSION);
+        // List of disallowed file extensions
+        $disallowedExtensions = ['pdf', 'exe', 'sh', 'cmd', 'js', 'py', 'bat', 'pl', 'rb', 'ps1', 'vbs', 'msi', 'tcl'];
+        if (in_array(strtolower($extension), $disallowedExtensions)) {
+            $message = "Unable to parse URL that points to ".$extension." file.";
+            return $message;
         }
+        // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
+        $disallowedDomains = ['xyoutube.com'];
+        foreach($disallowedDomains as $domainCheck) {
+            if(stristr($url, $domainCheck)) {
+                logEntry("Domain is disallowed.");
+                return false;
+            }
+        }
+        $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
+        // Extract the title from the HTML
+        $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
+        $title = trim($title);
+        return $title;
     }
 }
+// function getTitle($url) {
+//     global $config;
+
+//     if (!filter_var($url, FILTER_VALIDATE_URL)) {
+//         return false;
+//     } else {
+
+
+//         // Create a context with a custom User-Agent header
+//         $contextOptions = [
+//             'http' => [
+//                 'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\r\n"
+//             ]
+//         ];
+//         $context = stream_context_create($contextOptions);
+
+//         $html = file_get_contents($url, false, $context);
+
+//         // Create a new DOMDocument instance
+//         $dom = new DOMDocument();
+
+//         // Suppress warnings due to malformed HTML by using @
+//         @$dom->loadHTML($html);
+
+//         // Find the title tag
+//         $titleTags = $dom->getElementsByTagName('title');
+
+//         // Get the title content
+//         if ($titleTags->length > 0) {
+//             $title = trim($titleTags->item(0)->nodeValue);
+//             return $title;
+//         }
+//     }
+// }
 
 function getYouTubeInfo($youtubeAPIKey, $url) {
     global $config;

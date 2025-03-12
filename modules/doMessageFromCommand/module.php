@@ -89,7 +89,7 @@ function replyTagOtherUser($ircdata) {
     global $config;
 
     $argpieces = explode(" ",$ircdata['commandargs']);
-    $userToTag = trim($argpieces[0]);
+    $userToTag = mysqli_real_escape_string(trim($argpieces[0]));
     $userKnown = isKnownUser($userToTag);
 
     if($userKnown == "true" && strlen($userToTag)>1) {
@@ -112,7 +112,7 @@ function replyRandomTagOtherUser($ircdata) {
     global $config;
 
     $argpieces = explode(" ",$ircdata['commandargs']);
-    $userToTag = $argpieces[0];
+    $userToTag = mysqli_real_escape_string(trim($argpieces[0]));
     $userKnown = isKnownUser($userToTag);
 
     if($userKnown == "true" && strlen($userToTag)>1) {

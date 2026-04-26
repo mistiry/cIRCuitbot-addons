@@ -68,12 +68,3 @@ function getURLTitle($url) {
     $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
     return $title;
 }
-
-function get_string_between($string, $start, $end) {
-    $startPos = strpos($string, $start);
-    if ($startPos === false) { return ""; }
-    $startPos += strlen($start);
-    $endPos = strpos($string, $end, $startPos);
-    if ($endPos === false) { return ""; }
-    return substr($string, $startPos, $endPos - $startPos);
-}

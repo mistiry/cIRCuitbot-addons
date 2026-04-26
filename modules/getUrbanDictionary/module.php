@@ -22,7 +22,11 @@ function getUrbanDictionary($data) {
     } else {
         $json = json_decode($response);
         $definitions = $json->{'list'};
-        $randval = rand(0,count($definitions));
+        if(empty($definitions) || count($definitions) == 0) {
+            sendPRIVMSG($data['location'],"".$data['usernickname'].": Sorry, no definition could be found for '".$data['commandargs']."'.");
+            return true;
+        }
+        $randval = rand(0, count($definitions) - 1);
         $def = $definitions[$randval]->{'definition'};
         $definition = preg_replace('/\s+/', ' ', trim($def));
         $definition = str_replace("[","",$definition);
@@ -36,7 +40,7 @@ function getUrbanDictionary($data) {
         }
 
         if($definition == "" && $link == "") {
-            $message = "".$data['usernickname'].": Sorry, no definition could be found for '".$search."'.";
+            $message = "".$data['usernickname'].": Sorry, no definition could be found for '".$data['commandargs']."'.";
         } else {
             $message = "".$data['usernickname'].": ".$definition." (".$link.")"; 
         }

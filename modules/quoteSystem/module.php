@@ -128,14 +128,8 @@ function addQuote($data) {
     $submittedby = $data['usernickname'];
     $query = "INSERT INTO quotes (submittedby,quote,timestamp,upvotes,downvotes) VALUES ('".$submittedby."','".$quotetoadd."','".$timestamp."',0,0)";
     if(mysqli_query($dbconnection, $query)) {
-        $query = "SELECT id FROM quotes ORDER BY timestamp DESC LIMIT 1";
-        $result = mysqli_query($dbconnection,$query);
-        if(mysqli_num_rows($result) == 1) {
-            while($row = mysqli_fetch_assoc($result)) {
-                $id = $row['id'];
-                sendPRIVMSG($data['location'],"Quote #$id added!");
-            }
-        }
+        $id = mysqli_insert_id($dbconnection);
+        sendPRIVMSG($data['location'],"Quote #$id added!");
     } else {
         sendPRIVMSG($data['location'],"Failed to add quote.");
     }
@@ -338,14 +332,16 @@ function getMyQuoteStats($data) {
         $data['usernickname'] = trim(str_replace($config['bridge_user_prefix'],"",$data['usernickname']));
     }
 
+    $safeNick = str_replace(['%','_'], ['\\%','\\_'], mysqli_real_escape_string($dbconnection, $data['usernickname']));
+    $safeHost = str_replace(['%','_'], ['\\%','\\_'], mysqli_real_escape_string($dbconnection, $data['userhostname']));
     $totalcountquery = "SELECT count(*) AS totalcount FROM quotes";
-    $mycountquery = "SELECT count(*) AS mytotal FROM quotes WHERE submittedby like '%".$data['usernickname']."%'";
-    $votedcountquery = "SELECT count(*) AS votedtotal FROM quotes WHERE voted_hostnames LIKE '%".$data['userhostname']."%'";
-    $mentionedcountquery = "SELECT count(*) AS mentionedtotal FROM quotes WHERE quote LIKE '%".$data['usernickname']."%'";
-    $bestquotequery = "SELECT id AS bestquoteid FROM quotes WHERE submittedby LIKE '%".$data['usernickname']."%' ORDER BY upvotes DESC LIMIT 1";
-    $worstquotequery = "SELECT id AS worstquoteid FROM quotes WHERE submittedby LIKE '%".$data['usernickname']."%' ORDER BY downvotes DESC LIMIT 1";
-    $totalupvotesquery = "SELECT SUM(upvotes) AS totalupvotes FROM quotes WHERE submittedby LIKE '%".$data['usernickname']."%'";
-    $totaldownvotesquery = "SELECT SUM(downvotes) AS totaldownvotes FROM quotes WHERE submittedby LIKE '%".$data['usernickname']."%'";
+    $mycountquery = "SELECT count(*) AS mytotal FROM quotes WHERE submittedby like '%".$safeNick."%'";
+    $votedcountquery = "SELECT count(*) AS votedtotal FROM quotes WHERE voted_hostnames LIKE '%".$safeHost."%'";
+    $mentionedcountquery = "SELECT count(*) AS mentionedtotal FROM quotes WHERE quote LIKE '%".$safeNick."%'";
+    $bestquotequery = "SELECT id AS bestquoteid FROM quotes WHERE submittedby LIKE '%".$safeNick."%' ORDER BY upvotes DESC LIMIT 1";
+    $worstquotequery = "SELECT id AS worstquoteid FROM quotes WHERE submittedby LIKE '%".$safeNick."%' ORDER BY downvotes DESC LIMIT 1";
+    $totalupvotesquery = "SELECT SUM(upvotes) AS totalupvotes FROM quotes WHERE submittedby LIKE '%".$safeNick."%'";
+    $totaldownvotesquery = "SELECT SUM(downvotes) AS totaldownvotes FROM quotes WHERE submittedby LIKE '%".$safeNick."%'";
     $upvotecountquery = "SELECT SUM(upvotes) AS allupvotes FROM quotes";
     $downvotecountquery = "SELECT SUM(downvotes) AS alldownvotes FROM quotes";
 
@@ -394,12 +390,9 @@ function getMyQuoteStats($data) {
         }
 
 
-        $myPercentage = ( ($myTotalCount / $totalCount) * 100 );
-        $myPercentage = round($myPercentage,2);
-        $upvotePercentage = ( ($totalUpvotes / $upvoteCount) * 100 );
-        $upvotePercentage = round($upvotePercentage,2);
-        $downvotePercentage = ( ($totalDownvotes / $downvoteCount) * 100);
-        $downvotePercentage = round($downvotePercentage,2);
+        $myPercentage = $totalCount > 0 ? round(($myTotalCount / $totalCount) * 100, 2) : 0;
+        $upvotePercentage = $upvoteCount > 0 ? round(($totalUpvotes / $upvoteCount) * 100, 2) : 0;
+        $downvotePercentage = $downvoteCount > 0 ? round(($totalDownvotes / $downvoteCount) * 100, 2) : 0;
 
         if($myTotalCount == "0") {
             $message = "".$data['usernickname']." Quote Stats | You have not submitted any quotes yet!";

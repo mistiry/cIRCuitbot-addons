@@ -16,12 +16,15 @@ function doGoogleSearch($data) {
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $rawhtml = curl_exec($ch);
         curl_close($ch);
-        $htmlpieces = explode("?q",$rawhtml);
-        $url = get_string_between($rawhtml,"/url?q=","\">");
-        $url = urldecode($url);
-        $url = str_replace("&amp;","&",$url);
-        $url = explode("&sa",$url);
-        $url2 = $url[0];
+        $urlRaw = get_string_between($rawhtml, "/url?q=", "\">");
+        if(empty($urlRaw)) {
+            sendPRIVMSG($data['location'],"".$data['usernickname']." - No results found.");
+            return true;
+        }
+        $urlRaw = urldecode($urlRaw);
+        $urlRaw = str_replace("&amp;","&",$urlRaw);
+        $urlParts = explode("&sa",$urlRaw);
+        $url2 = $urlParts[0];
         $title = getURLTitle($url2);
 
         sendPRIVMSG($data['location'],"".$data['usernickname']." - ".$title." - ".$url2."");
@@ -52,7 +55,25 @@ function getURLTitle($url) {
             return $title;
         }
     }
-    $page = file_get_contents(trim($url));
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, trim($url));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $page = curl_exec($ch);
+    curl_close($ch);
+    if (!$page) { return null; }
     $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
     return $title;
+}
+
+function get_string_between($string, $start, $end) {
+    $startPos = strpos($string, $start);
+    if ($startPos === false) { return ""; }
+    $startPos += strlen($start);
+    $endPos = strpos($string, $end, $startPos);
+    if ($endPos === false) { return ""; }
+    return substr($string, $startPos, $endPos - $startPos);
 }

@@ -82,7 +82,16 @@ function getTitle($url) {
                 return false;
             }
         }
-        $html = file_get_contents(trim($url), NULL, NULL, NULL, 524288);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, trim($url));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($ch);
+        curl_close($ch);
+        if (!$html) { return false; }
         // Extract the title from the HTML
         $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
         $title = trim($title);

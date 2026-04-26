@@ -32,11 +32,13 @@ function parseURLfromMessage($ircdata) {
         //YouTube
         if($parseYouTube == "true" && in_array($domain,$youtubeDomains)) {
             $title = getYouTubeInfo($youtubeAPIKey,$url);
-            $urlBanner = stylizeText("-- YouTube --", "bold");
-            $urlBanner = stylizeText($urlBanner, "color_red");
-            $message = "".$urlBanner." ".$title."";
-            sendPRIVMSG($config['channel'], "".$message."");
-            return true;
+            if($title !== null) {
+                $urlBanner = stylizeText("-- YouTube --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_red");
+                sendPRIVMSG($config['channel'], $urlBanner . " " . $title);
+                return true;
+            }
+            // null means unrecognized URL type (channel, playlist, etc.) — fall through to default parser
         } elseif($parseYouTube == "false" && in_array($domain,$youtubeDomains)) {
             return true;
         }
@@ -149,30 +151,41 @@ function getRedditTitle($url) {
 function getYouTubeInfo($youtubeAPIKey, $url) {
     global $config;
 
-    // Extract the video ID from the URL
+    $path = parse_url($url, PHP_URL_PATH);
+
+    // Channel URLs — return null so the caller falls through to the generic title parser
+    if (preg_match('/^\/@|^\/channel\/|^\/user\/|^\/c\//', $path)) {
+        return null;
+    }
+
+    // Extract video ID: standard watch?v=ID, shorts /shorts/ID
     parse_str(parse_url($url, PHP_URL_QUERY), $urlParams);
-    $videoId = $urlParams['v'];
+    $videoId = $urlParams['v'] ?? null;
+
+    if (!$videoId && preg_match('/\/shorts\/([a-zA-Z0-9_-]+)/', $path, $m)) {
+        $videoId = $m[1];
+    }
+
+    if (!$videoId) {
+        return null;
+    }
+
     logEntry("YouTube Video ID from URL: ".$videoId."");
 
-    // API endpoint to get video details
     $apiUrl = "https://www.googleapis.com/youtube/v3/videos?id={$videoId}&part=snippet,contentDetails&key={$youtubeAPIKey}";
-
-    // Get the response from the API
     $response = file_get_contents($apiUrl);
     $videoData = json_decode($response, true);
 
     if (isset($videoData['items']) && count($videoData['items']) > 0) {
         $videoInfo = $videoData['items'][0];
-
-        // Extract title, channel name, and duration
         $title = stylizeText($videoInfo['snippet']['title'], "bold");
         $channelName = stylizeText($videoInfo['snippet']['channelTitle'], "color_yellow");
         $channelName = stylizeText($channelName, "bold");
         $duration = formatDuration($videoInfo['contentDetails']['duration']);
-        $message = "".$title." from ".$channelName." (".$duration.")";
-        return $message;
+        return $title . " from " . $channelName . " (" . $duration . ")";
     }
-    return true;
+
+    return null;
 }
 
 // Helper function to format the ISO 8601 duration (PT#M#S)

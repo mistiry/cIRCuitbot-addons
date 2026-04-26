@@ -44,8 +44,8 @@ function parseURLfromMessage($ircdata) {
         if($parsereddit == "true" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
             $title = getRedditTitle($url);
             if(!empty($title)) {
-                $urlBanner = stylizeText("-- Reddit --", "bold");
-                $urlBanner = stylizeText($urlBanner, "color_orange");
+                $urlBanner = stylizeText("-- REDDIT --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_red");
                 sendPRIVMSG($config['channel'], "".$urlBanner." ".$title."");
             }
             return true;
@@ -140,11 +140,10 @@ function getRedditTitle($url) {
     $data = json_decode($response, true);
     if (json_last_error() !== JSON_ERROR_NONE) { return null; }
     $title = $data[0]['data']['children'][0]['data']['title'] ?? null;
-    $subreddit = $data[0]['data']['children'][0]['data']['subreddit_name_prefixed'] ?? null;
-    if ($title && $subreddit) {
-        return stylizeText($title, "bold") . " (" . $subreddit . ")";
+    if ($title) {
+        return stylizeText($title, "bold");
     }
-    return $title;
+    return null;
 }
 
 function getYouTubeInfo($youtubeAPIKey, $url) {

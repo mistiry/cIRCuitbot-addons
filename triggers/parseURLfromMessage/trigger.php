@@ -43,10 +43,11 @@ function parseURLfromMessage($ircdata) {
 
         if($parsereddit == "true" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
             $title = getRedditTitle($url);
-            $urlBanner = stylizeText("-- Reddit --", "bold");
-            $urlBanner = stylizeText($urlBanner, "color_orange");
-            $message = "".$urlBanner." ".$title."";
-            sendPRIVMSG($config['channel'], "".$message."");
+            if(!empty($title)) {
+                $urlBanner = stylizeText("-- Reddit --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_orange");
+                sendPRIVMSG($config['channel'], "".$urlBanner." ".$title."");
+            }
             return true;
         } elseif($parsereddit == "false" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
             return true;

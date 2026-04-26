@@ -34,7 +34,10 @@ function sedSubstitute($ircdata) {
         return true;
     }
 
-    // Not a sed command — add to buffer
+    // Not a sed command — add to buffer, skip CTCP messages (actions, etc.)
+    if(substr($message, 0, 1) === "\x01") {
+        return true;
+    }
     $sedBuffer[] = ['nick' => $nick, 'message' => $message];
     if(count($sedBuffer) > $bufferSize) {
         $sedBuffer = array_slice($sedBuffer, -$bufferSize);

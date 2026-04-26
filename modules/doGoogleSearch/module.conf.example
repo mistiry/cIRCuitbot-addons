@@ -1,2 +1,3 @@
 module[] = "google||doGoogleSearch"
 module[] = "g||doGoogleSearch"
+braveAPIKey = "YOUR_BRAVE_SEARCH_API_KEY_HERE"

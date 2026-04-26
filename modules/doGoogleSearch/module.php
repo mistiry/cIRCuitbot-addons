@@ -1,70 +1,45 @@
 <?php
 function doGoogleSearch($data) {
+    global $config;
     $search = trim($data['commandargs']);
-    $baseurl = "https://www.google.com/search?q=";
-    $searchterm = myUrlEncode($search);
-    $searchurl = "".$baseurl."".$searchterm."";
 
     if($search == "") {
         return false;
-    } else {
-        //get some values
-        $ch = curl_init($searchurl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        $rawhtml = curl_exec($ch);
-        curl_close($ch);
-        $urlRaw = get_string_between($rawhtml, "/url?q=", "\">");
-        if(empty($urlRaw)) {
-            sendPRIVMSG($data['location'],"".$data['usernickname']." - No results found.");
-            return true;
-        }
-        $urlRaw = urldecode($urlRaw);
-        $urlRaw = str_replace("&amp;","&",$urlRaw);
-        $urlParts = explode("&sa",$urlRaw);
-        $url2 = $urlParts[0];
-        $title = getURLTitle($url2);
+    }
 
-        sendPRIVMSG($data['location'],"".$data['usernickname']." - ".$title." - ".$url2."");
+    $configfile = parse_ini_file($config['addons_dir']."/modules/doGoogleSearch/module.conf");
+    $apiKey = $configfile['braveAPIKey'];
+
+    $ch = curl_init("https://api.search.brave.com/res/v1/web/search?q=" . urlencode($search) . "&count=1");
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_HTTPHEADER => [
+            "Accept: application/json",
+            "Accept-Encoding: gzip",
+            "X-Subscription-Token: " . $apiKey,
+        ],
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => false,
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    if (!$response) {
+        sendPRIVMSG($data['location'], $data['usernickname'] . " - No results found.");
         return true;
     }
-}
 
-function myUrlEncode($string) {
-    $entities = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
-    $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
-    return str_replace($entities, $replacements, urlencode($string));
-}
+    $results = json_decode($response, true);
+    $firstResult = $results['web']['results'][0] ?? null;
 
-function getURLTitle($url) {
-    $badExtensions = array(
-        '.exe',
-        '.pdf',
-        '.sh',
-        '.py',
-        '.pl',
-        '.tcl',
-        '.bat',
-    );
-    
-    foreach($badExtensions as $filecheck) {
-        if(stristr($url,$filecheck)) {
-            $title = "Unable to parse URL that points to a ".$filecheck." file.";
-            return $title;
-        }
+    if (!$firstResult) {
+        sendPRIVMSG($data['location'], $data['usernickname'] . " - No results found.");
+        return true;
     }
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, trim($url));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    $page = curl_exec($ch);
-    curl_close($ch);
-    if (!$page) { return null; }
-    $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
-    return $title;
+
+    $title = $firstResult['title'];
+    $url = $firstResult['url'];
+    sendPRIVMSG($data['location'], $data['usernickname'] . " - " . $title . " - " . $url);
+    return true;
 }

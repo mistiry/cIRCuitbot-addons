@@ -104,7 +104,6 @@ function triviaSystem_answerGiven($ircdata) {
     global $activeActivityArray;
     global $timerArray;
     global $triggers;
-    global $ircdata;
     global $config;
 
     //The correct answer was given to get here.
@@ -193,7 +192,6 @@ function triviaSystem_timeExpired($ircdata) {
 
 function triviaSystem_getMyScores($ircdata) {
     global $dbconnection;
-    global $ircdata;
 
     $hostname = $ircdata['userhostname'];
     logEntry("Getting scores for hostname '".$hostname."'");

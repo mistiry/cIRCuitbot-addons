@@ -9,10 +9,13 @@ function doGoogleSearch($data) {
         return false;
     } else {
         //get some values
-        $randval = rand(00000000,99999999);
-        $tempfile = ".googlesearch_".$randval."";
-        exec("lynx -source ".$searchurl." > ".$tempfile."");
-        $rawhtml = exec("cat ".$tempfile."");
+        $ch = curl_init($searchurl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        $rawhtml = curl_exec($ch);
+        curl_close($ch);
         $htmlpieces = explode("?q",$rawhtml);
         $url = get_string_between($rawhtml,"/url?q=","\">");
         $url = urldecode($url);
@@ -22,7 +25,6 @@ function doGoogleSearch($data) {
         $title = getURLTitle($url2);
 
         sendPRIVMSG($data['location'],"".$data['usernickname']." - ".$title." - ".$url2."");
-        exec("rm -f ".$tempfile."");
         return true;
     }
 }

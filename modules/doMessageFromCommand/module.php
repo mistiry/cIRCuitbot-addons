@@ -67,7 +67,6 @@ function replyRandomWithTag($ircdata) {
     $commandGiven = getFirstWordFromCommand();
 
     $inifile = "".$config['addons_dir']."/modules/doMessageFromCommand/".$commandGiven.".conf";
-    echo "\nINI File is '".$inifile."'\n";
     $options = parse_ini_file($inifile);
     $replies = $options['replies'];
     $replyArray = array();

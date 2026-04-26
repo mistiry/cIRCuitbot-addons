@@ -32,13 +32,13 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $timerArray['googleGemini_timeoutExpired'] = $expiryTime;
 
         //The user prompt
-        $geminiPrompt = trim(urlencode($ircdata['commandargs']));
+        $geminiPrompt = trim($ircdata['commandargs']);
 
-        $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=".$apiKey."";
+        $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=".$apiKey."";
         $curl = curl_init($apiURL);
-        $requestJson = "{\"contents\":[{\"parts\":[{\"text\": \"".$geminiPrompt."\"}]}]}";
+        $requestJson = json_encode(["contents" => [["parts" => [["text" => $geminiPrompt]]]]]);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=".$apiKey."",
+            CURLOPT_URL => "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=".$apiKey."",
             CURLOPT_POSTFIELDS => $requestJson,
             CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
             CURLOPT_RETURNTRANSFER => 1

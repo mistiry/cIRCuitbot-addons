@@ -67,7 +67,6 @@ function replyRandomWithTag($ircdata) {
     $commandGiven = getFirstWordFromCommand();
 
     $inifile = "".$config['addons_dir']."/modules/doMessageFromCommand/".$commandGiven.".conf";
-    echo "\nINI File is '".$inifile."'\n";
     $options = parse_ini_file($inifile);
     $replies = $options['replies'];
     $replyArray = array();
@@ -87,9 +86,10 @@ function replyRandomWithTag($ircdata) {
 
 function replyTagOtherUser($ircdata) {
     global $config;
+    global $dbconnection;
 
     $argpieces = explode(" ",$ircdata['commandargs']);
-    $userToTag = trim($argpieces[0]);
+    $userToTag = mysqli_real_escape_string($dbconnection, trim($argpieces[0]));
     $userKnown = isKnownUser($userToTag);
 
     if($userKnown == "true" && strlen($userToTag)>1) {
@@ -110,9 +110,10 @@ function replyTagOtherUser($ircdata) {
 
 function replyRandomTagOtherUser($ircdata) {
     global $config;
+    global $dbconnection;
 
     $argpieces = explode(" ",$ircdata['commandargs']);
-    $userToTag = $argpieces[0];
+    $userToTag = mysqli_real_escape_string($dbconnection, trim($argpieces[0]));
     $userKnown = isKnownUser($userToTag);
 
     if($userKnown == "true" && strlen($userToTag)>1) {

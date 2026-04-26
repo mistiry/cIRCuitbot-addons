@@ -5,17 +5,6 @@ function parseURLfromMessage($ircdata) {
     //Config file parsing
     $configfile = parse_ini_file("".$config['addons_dir']."/triggers/parseURLfromMessage/trigger.conf");
     
-    //Get info to determine extension
-    $parsedUrl = parse_url($url);
-    $extension = pathinfo($parsedUrl['path'], PATHINFO_EXTENSION);
-    $disallowedExtensions = $configfile['disallowedExtensions'];
-    
-    // List of disallowed file extensions
-    if (in_array(strtolower($extension), $disallowedExtensions)) {
-        logEntry("URL '".$url."' points to an invalid extension.");
-        return true;
-    }
-
     //If you set 'parseyoutube' to true you MUST provide an API key or bad things will happen
     $parseYouTube = $configfile['parseyoutube'];
     $youtubeAPIKey = $configfile['youtubeAPIKey'];
@@ -45,21 +34,22 @@ function parseURLfromMessage($ircdata) {
             $title = getYouTubeInfo($youtubeAPIKey,$url);
             $urlBanner = stylizeText("-- YouTube --", "bold");
             $urlBanner = stylizeText($urlBanner, "color_red");
-            $message = "".$urlBanner." ".$urltitle."";
+            $message = "".$urlBanner." ".$title."";
             sendPRIVMSG($config['channel'], "".$message."");
             return true;
         } elseif($parseYouTube == "false" && in_array($domain,$youtubeDomains)) {
             return true;
         }
 
-        if($parsereddit == "true" && in_array($domain,$redditDomains)) {
-            $title = getRedditInfo($redditclientid, $redditclientsecret, $url);
-            $urlBanner = stylizeText("-- URL --", "bold");
-            $urlBanner = stylizeText($urlBanner, "color_purple");
-            $message = "".$urlBanner." ".$urltitle."";
-            sendPRIVMSG($config['channel'], "".$message."");
+        if($parsereddit == "true" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
+            $title = getRedditTitle($url);
+            if(!empty($title)) {
+                $urlBanner = stylizeText("-- REDDIT --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_red");
+                sendPRIVMSG($config['channel'], "".$urlBanner." ".$title."");
+            }
             return true;
-        } elseif($parsereddit == "false" && in_array($domain,$redditDomains)) {
+        } elseif($parsereddit == "false" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
             return true;
         }
 
@@ -67,45 +57,93 @@ function parseURLfromMessage($ircdata) {
         $title = getTitle($url);
         $urlBanner = stylizeText("-- URL --", "bold");
         $urlBanner = stylizeText($urlBanner, "color_purple");
-        $message = "".$urlBanner." ".$urltitle."";
+        $message = "".$urlBanner." ".$title."";
         sendPRIVMSG($config['channel'], "".$message.""); 
     }
     return true;
 }
-
 function getTitle($url) {
-    global $config;
-
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
         return false;
     } else {
-
-
-        // Create a context with a custom User-Agent header
-        $contextOptions = [
-            'http' => [
-                'header' => "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36\r\n"
-            ]
-        ];
-        $context = stream_context_create($contextOptions);
-
-        $html = file_get_contents($url, false, $context);
-
-        // Create a new DOMDocument instance
-        $dom = new DOMDocument();
-
-        // Suppress warnings due to malformed HTML by using @
-        @$dom->loadHTML($html);
-
-        // Find the title tag
-        $titleTags = $dom->getElementsByTagName('title');
-
-        // Get the title content
-        if ($titleTags->length > 0) {
-            $title = trim($titleTags->item(0)->nodeValue);
-            return $title;
+        //Get info to determine extension
+        $parsedUrl = parse_url($url);
+        $extension = pathinfo($parsedUrl['path'], PATHINFO_EXTENSION);
+        // List of disallowed file extensions
+        $disallowedExtensions = ['pdf', 'exe', 'sh', 'cmd', 'js', 'py', 'bat', 'pl', 'rb', 'ps1', 'vbs', 'msi', 'tcl'];
+        if (in_array(strtolower($extension), $disallowedExtensions)) {
+            $message = "Unable to parse URL that points to ".$extension." file.";
+            return $message;
         }
+        // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
+        $disallowedDomains = ['xyoutube.com'];
+        foreach($disallowedDomains as $domainCheck) {
+            if(stristr($url, $domainCheck)) {
+                logEntry("Domain is disallowed.");
+                return false;
+            }
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, trim($url));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $html = curl_exec($ch);
+        curl_close($ch);
+        if (!$html) { return false; }
+        // Extract the title from the HTML
+        $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
+        $title = trim($title);
+        return $title;
     }
+}
+
+function getRedditTitle($url) {
+    global $config;
+    $configfile = parse_ini_file("".$config['addons_dir']."/triggers/parseURLfromMessage/trigger.conf");
+    $clientId = $configfile['redditClientID'];
+    $clientSecret = $configfile['redditClientSecret'];
+
+    // Get an application-only OAuth token
+    $ch = curl_init("https://www.reddit.com/api/v1/access_token");
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => "grant_type=client_credentials",
+        CURLOPT_USERPWD => $clientId . ":" . $clientSecret,
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0 by /u/mistiry",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => false,
+    ]);
+    $tokenResult = curl_exec($ch);
+    curl_close($ch);
+    if (!$tokenResult) { return null; }
+    $tokenData = json_decode($tokenResult, true);
+    $token = $tokenData['access_token'] ?? null;
+    if (!$token) { return null; }
+
+    // Fetch the post via the OAuth API endpoint
+    $postPath = rtrim(preg_replace('/[?#].*$/', '', parse_url(trim($url), PHP_URL_PATH)), '/') . '.json';
+    $ch = curl_init("https://oauth.reddit.com" . $postPath);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $token],
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0 by /u/mistiry",
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => false,
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    if (!$response) { return null; }
+    $data = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE) { return null; }
+    $title = $data[0]['data']['children'][0]['data']['title'] ?? null;
+    if ($title) {
+        return stylizeText($title, "bold");
+    }
+    return null;
 }
 
 function getYouTubeInfo($youtubeAPIKey, $url) {

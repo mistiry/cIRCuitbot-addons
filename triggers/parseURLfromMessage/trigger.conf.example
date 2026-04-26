@@ -20,9 +20,11 @@ parseyoutube = "true"
 youtubeAPIKey = "APIKEYHERE"
 youtubeDomains[] = "youtube.com"
 youtubeDomains[] = "yt.com"
+youtubeDomains[] = "www.youtube.com"
 
 ;Reddit
 parsereddit = "true"
 redditClientID = "CLIENTIDHERE"
 redditClientSecret = "CLIENTSECRETHERE"
 redditDomains[] = "reddit.com"
+redditDomains[] = "www.reddit.com"

@@ -1,0 +1,3 @@
+module[] = "search||doBraveSearch"
+module[] = "g||doBraveSearch"
+braveAPIKey = "YOUR_BRAVE_SEARCH_API_KEY_HERE"

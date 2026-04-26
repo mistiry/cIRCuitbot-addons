@@ -1,5 +1,5 @@
 <?php
-function doGoogleSearch($data) {
+function doBraveSearch($data) {
     global $config;
     $search = trim($data['commandargs']);
 
@@ -7,7 +7,7 @@ function doGoogleSearch($data) {
         return false;
     }
 
-    $configfile = parse_ini_file($config['addons_dir']."/modules/doGoogleSearch/module.conf");
+    $configfile = parse_ini_file($config['addons_dir']."/modules/doBraveSearch/module.conf");
     $apiKey = $configfile['braveAPIKey'];
 
     $ch = curl_init("https://api.search.brave.com/res/v1/web/search?q=" . urlencode($search) . "&count=1");

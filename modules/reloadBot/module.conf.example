@@ -1,0 +1,2 @@
+module[] = "restart||reloadBot_restart"
+module[] = "update||reloadBot_update"

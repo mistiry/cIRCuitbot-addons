@@ -101,15 +101,39 @@ function getTitle($url) {
 }
 
 function getRedditTitle($url) {
-    // Strip trailing slash, append .json to get Reddit's data API
-    $jsonUrl = rtrim(preg_replace('/[?#].*$/', '', trim($url)), '/') . '.json';
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $jsonUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_USERAGENT, "cIRCuitbot/1.0 IRC bot (by /u/mistiry)");
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    global $config;
+    $configfile = parse_ini_file("".$config['addons_dir']."/triggers/parseURLfromMessage/trigger.conf");
+    $clientId = $configfile['redditClientID'];
+    $clientSecret = $configfile['redditClientSecret'];
+
+    // Get an application-only OAuth token
+    $ch = curl_init("https://www.reddit.com/api/v1/access_token");
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => "grant_type=client_credentials",
+        CURLOPT_USERPWD => $clientId . ":" . $clientSecret,
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0 by /u/mistiry",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => false,
+    ]);
+    $tokenResult = curl_exec($ch);
+    curl_close($ch);
+    if (!$tokenResult) { return null; }
+    $tokenData = json_decode($tokenResult, true);
+    $token = $tokenData['access_token'] ?? null;
+    if (!$token) { return null; }
+
+    // Fetch the post via the OAuth API endpoint
+    $postPath = rtrim(preg_replace('/[?#].*$/', '', parse_url(trim($url), PHP_URL_PATH)), '/') . '.json';
+    $ch = curl_init("https://oauth.reddit.com" . $postPath);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $token],
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0 by /u/mistiry",
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => false,
+    ]);
     $response = curl_exec($ch);
     curl_close($ch);
     if (!$response) { return null; }

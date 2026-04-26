@@ -34,11 +34,11 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         //The user prompt
         $geminiPrompt = trim($ircdata['commandargs']);
 
-        $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$apiKey."";
+        $apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=".$apiKey."";
         $curl = curl_init($apiURL);
         $requestJson = json_encode(["contents" => [["parts" => [["text" => $geminiPrompt]]]]]);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$apiKey."",
+            CURLOPT_URL => "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=".$apiKey."",
             CURLOPT_POSTFIELDS => $requestJson,
             CURLOPT_HTTPHEADER => array('Content-Type: application/json'),
             CURLOPT_RETURNTRANSFER => 1

@@ -41,14 +41,14 @@ function parseURLfromMessage($ircdata) {
             return true;
         }
 
-        if($parsereddit == "true" && in_array($domain,$redditDomains)) {
-            $title = getTitle($url);
-            $urlBanner = stylizeText("-- URL --", "bold");
-            $urlBanner = stylizeText($urlBanner, "color_purple");
+        if($parsereddit == "true" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
+            $title = getRedditTitle($url);
+            $urlBanner = stylizeText("-- Reddit --", "bold");
+            $urlBanner = stylizeText($urlBanner, "color_orange");
             $message = "".$urlBanner." ".$title."";
             sendPRIVMSG($config['channel'], "".$message."");
             return true;
-        } elseif($parsereddit == "false" && in_array($domain,$redditDomains)) {
+        } elseif($parsereddit == "false" && (in_array($domain,$redditDomains) || stristr($domain,"reddit.com"))) {
             return true;
         }
 
@@ -97,6 +97,29 @@ function getTitle($url) {
         $title = trim($title);
         return $title;
     }
+}
+
+function getRedditTitle($url) {
+    // Strip trailing slash, append .json to get Reddit's data API
+    $jsonUrl = rtrim(preg_replace('/[?#].*$/', '', trim($url)), '/') . '.json';
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $jsonUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, "cIRCuitbot/1.0 IRC bot (by /u/mistiry)");
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    if (!$response) { return null; }
+    $data = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE) { return null; }
+    $title = $data[0]['data']['children'][0]['data']['title'] ?? null;
+    $subreddit = $data[0]['data']['children'][0]['data']['subreddit_name_prefixed'] ?? null;
+    if ($title && $subreddit) {
+        return stylizeText($title, "bold") . " (" . $subreddit . ")";
+    }
+    return $title;
 }
 
 function getYouTubeInfo($youtubeAPIKey, $url) {

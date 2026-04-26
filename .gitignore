@@ -1,0 +1,3 @@
+# Live configuration files - copy from *.conf.example and customise locally.
+# These are never committed so API keys and local settings stay off GitHub.
+*.conf

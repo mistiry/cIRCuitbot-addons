@@ -144,8 +144,10 @@ function replyRandomTagOtherUser($ircdata) {
 
 function isKnownUser($user) {
     global $config;
-    
+
     global $dbconnection;
+    $user = mysqli_real_escape_string($dbconnection, $user);
+    $user = str_replace(['%', '_'], ['\\%', '\\_'], $user);
     $query = "SELECT id FROM known_users WHERE nick_aliases LIKE '%".$user."%' LIMIT 1";
     $result = mysqli_query($dbconnection, $query);
     if(mysqli_num_rows($result) > 0) {

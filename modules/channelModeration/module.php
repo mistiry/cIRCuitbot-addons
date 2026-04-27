@@ -343,6 +343,39 @@ function channelModeration_formatDuration($secs) {
     return implode(' ', array_slice($parts, 0, 2));
 }
 
-// ---- Schedule initial expiry check --------------------------------------
-global $timerArray;
+// ---- Op-targeted message handler ----------------------------------------
+// Registered into $opHandlers so channelModeration can intercept ops-targeted
+// messages from quieted users before the core opNotice fallback fires.
+// Returns true if the event was handled (consumed), false otherwise.
+
+function channelMod_handleOpMessage($ircdata) {
+    global $config, $socket, $channelModeration_rateLimits;
+
+    $sender = $ircdata['usernickname'];
+    $action = channelModeration_getActiveAction($sender, 'quiet');
+    if (!$action) return false;
+
+    $cooldown = !empty($config['moderation_quiet_notice_cooldown']) ? (int)$config['moderation_quiet_notice_cooldown'] : 60;
+    $lastSent = $channelModeration_rateLimits[$sender] ?? 0;
+    if ((time() - $lastSent) < $cooldown) {
+        logEntry("Rate-limited quiet notice for {$sender}", 'DEBUG');
+        return true;
+    }
+
+    $channelModeration_rateLimits[$sender] = time();
+    $extra = '';
+    if (!empty($action['expires_at'])) {
+        $secs = strtotime($action['expires_at']) - time();
+        if ($secs > 0) {
+            $extra = ' Time remaining: ' . channelModeration_formatDuration($secs) . '.';
+        }
+    }
+    fputs($socket, "NOTICE {$sender} :You are muted in this channel.{$extra}\r\n");
+    logEntry("Sent quiet notice to {$sender}", 'DEBUG');
+    return true;
+}
+
+// ---- Register handlers and schedule initial expiry check ----------------
+global $opHandlers, $timerArray;
+$opHandlers[] = 'channelMod_handleOpMessage';
 $timerArray['channelModeration_checkExpired'] = time() + 60;

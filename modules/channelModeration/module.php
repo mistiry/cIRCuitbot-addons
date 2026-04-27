@@ -124,6 +124,13 @@ function channelMod($data) {
             }
             channelModeration_applyBan($data['usernickname'], $target, null, $reason, false, true);
             break;
+
+        case 'actions':
+            if ($data['location'] !== $config['nickname']) {
+                return;
+            }
+            channelModeration_dumpActiveActions($data['usernickname']);
+            break;
     }
 }
 
@@ -212,6 +219,36 @@ function channelModeration_removeBan($by, $target) {
     fputs($socket, "MODE {$config['channel']} -b {$mask}\r\n");
     channelModeration_liftAction($action['id'], $by);
     logEntry("channelModeration: {$by} unbanned {$target} ({$mask})", 'INFO');
+}
+
+// ---- Active action dump (PM debug command) ------------------------------
+
+function channelModeration_dumpActiveActions($replyNick) {
+    global $dbconnection, $socket;
+
+    $result = mysqli_query($dbconnection,
+        "SELECT * FROM moderation_actions
+         WHERE lifted_at IS NULL AND (expires_at IS NULL OR expires_at > NOW())
+         ORDER BY applied_at ASC"
+    );
+
+    $count  = $result ? mysqli_num_rows($result) : 0;
+    $header = "=== Active moderation actions ({$count}) ===";
+    fputs($socket, "NOTICE {$replyNick} :{$header}\r\n");
+
+    if ($count === 0) {
+        fputs($socket, "NOTICE {$replyNick} :  (none)\r\n");
+    } else {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $expires = !empty($row['expires_at']) ? $row['expires_at'] . ' UTC' : 'permanent';
+            $reason  = !empty($row['reason'])     ? $row['reason']              : '(no reason)';
+            $line    = "[{$row['action_type']}] target={$row['target_nick']} mask={$row['target_mask']} by={$row['applied_by']} at={$row['applied_at']} UTC expires={$expires} reason={$reason}";
+            fputs($socket, "NOTICE {$replyNick} :{$line}\r\n");
+        }
+    }
+
+    fputs($socket, "NOTICE {$replyNick} :=== end ===\r\n");
+    logEntry("channelModeration: {$replyNick} ran !actions dump", 'DEBUG');
 }
 
 // ---- Expiry timer -------------------------------------------------------

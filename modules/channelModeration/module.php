@@ -147,14 +147,26 @@ function channelModeration_applyQuiet($by, $target, $duration_str, $reason) {
     $secs     = channelModeration_parseDuration($duration_str);
     $dur_text = $secs !== null ? channelModeration_formatDuration($secs) : 'permanent';
 
+    $existing = channelModeration_getActiveAction($target, 'quiet');
+    if ($existing) {
+        if ($existing['target_mask'] !== $mask) {
+            // Mask changed (e.g. user identified since last quiet) — remove old mask from IRC
+            fputs($socket, "MODE {$config['channel']} -q {$existing['target_mask']}\r\n");
+        }
+        // Lift old DB record without a redundant MODE change, then fall through to re-apply
+        channelModeration_liftAction($existing['id'], $by);
+        fputs($socket, "NOTICE {$by} :Updated existing quiet for {$target} — now {$dur_text}.\r\n");
+        logEntry("channelModeration: {$by} updated quiet for {$target} ({$mask}) to {$dur_text}" . ($reason !== '' ? ": {$reason}" : ''), 'INFO');
+    } else {
+        logEntry("channelModeration: {$by} quieted {$target} ({$mask}) for {$dur_text}" . ($reason !== '' ? ": {$reason}" : ''), 'INFO');
+    }
+
     fputs($socket, "MODE {$config['channel']} +q {$mask}\r\n");
     channelModeration_recordAction('quiet', $target, $mask, $secs, $reason, $by);
 
     $notice = "You have been muted in {$config['channel']} for {$dur_text}.";
     if ($reason !== '') $notice .= " Reason: {$reason}";
     fputs($socket, "NOTICE {$target} :{$notice}\r\n");
-
-    logEntry("channelModeration: {$by} quieted {$target} ({$mask}) for {$dur_text}" . ($reason !== '' ? ": {$reason}" : ''), 'INFO');
 }
 
 function channelModeration_removeQuiet($by, $target) {
@@ -189,6 +201,20 @@ function channelModeration_applyBan($by, $target, $duration_str, $reason, $kick_
     $dur_text = $secs !== null ? channelModeration_formatDuration($secs) : 'permanent';
     $type     = $redirect ? 'redirect' : 'ban';
 
+    $existing = channelModeration_getActiveAction($target, 'ban') ??
+                channelModeration_getActiveAction($target, 'redirect');
+    if ($existing) {
+        if ($existing['target_mask'] !== $mask) {
+            // Mask changed — remove old mask from IRC
+            fputs($socket, "MODE {$config['channel']} -b {$existing['target_mask']}\r\n");
+        }
+        channelModeration_liftAction($existing['id'], $by);
+        fputs($socket, "NOTICE {$by} :Updated existing ban for {$target} — now {$dur_text}.\r\n");
+        logEntry("channelModeration: {$by} updated ban for {$target} ({$mask}) to {$dur_text}" . ($reason !== '' ? ": {$reason}" : ''), 'INFO');
+    } else {
+        logEntry("channelModeration: {$by} banned {$target} ({$mask}) for {$dur_text}" . ($kick_first ? ' (kickban)' : '') . ($redirect ? ' (redirect)' : '') . ($reason !== '' ? ": {$reason}" : ''), 'INFO');
+    }
+
     if ($kick_first) {
         $kick_reason = $reason !== '' ? $reason : "Banned at the request of {$by}";
         fputs($socket, "KICK {$config['channel']} {$target} :{$kick_reason}\r\n");
@@ -196,10 +222,6 @@ function channelModeration_applyBan($by, $target, $duration_str, $reason, $kick_
 
     fputs($socket, "MODE {$config['channel']} +b {$mask}\r\n");
     channelModeration_recordAction($type, $target, $mask, $secs, $reason, $by);
-
-    $tag = $kick_first ? ' (kickban)' : '';
-    $tag .= $redirect ? ' (redirect)' : '';
-    logEntry("channelModeration: {$by} banned {$target} ({$mask}) for {$dur_text}{$tag}" . ($reason !== '' ? ": {$reason}" : ''), 'INFO');
 }
 
 function channelModeration_removeBan($by, $target) {

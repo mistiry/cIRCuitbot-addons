@@ -80,7 +80,6 @@ function channelMod($data) {
             }
             $kick_reason = $reason !== '' ? $reason : "Kicked at the request of {$data['usernickname']}";
             fputs($socket, "KICK {$config['channel']} {$target} :{$kick_reason}\r\n");
-            channelModeration_recordAction('kick', $target, null, null, $kick_reason, $data['usernickname']);
             logEntry("channelModeration: {$data['usernickname']} kicked {$target}: {$kick_reason}", 'INFO');
             break;
 

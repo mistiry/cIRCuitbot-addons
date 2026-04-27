@@ -29,13 +29,13 @@ function getSeenInfo($ircdata) {
 
                 switch($lastdatatype) {
                     case "PRIVMSG":
-                        $message = "User '".$whoDisplay."' was last seen on ".$timelastseen." using hostname '".$hostname."' saying \"".$lastmessage."\"";
+                        $message = "A user matching '".$whoDisplay."' was last seen on ".$timelastseen." using hostname '".$hostname."' saying \"".$lastmessage."\"";
                         break;
                     case "QUIT":
-                        $message = "User '".$whoDisplay."' was last seen on ".$timelastseen." using hostname '".$hostname."' quitting the channel.";
+                        $message = "A user matching '".$whoDisplay."' was last seen on ".$timelastseen." using hostname '".$hostname."' quitting the channel.";
                         break;
                     case "JOIN":
-                        $message = "User '".$whoDisplay."' was last seen on ".$timelastseen." using hostname '".$hostname."' joining the channel.";
+                        $message = "A user matching '".$whoDisplay."' was last seen on ".$timelastseen." using hostname '".$hostname."' joining the channel.";
                         break;
                 }
             }

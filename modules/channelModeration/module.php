@@ -242,13 +242,21 @@ function channelModeration_checkExpired($ircdata = null) {
         }
     }
 
-    $timerArray['channelModeration_checkExpired'] = time() + 60;
+    // Schedule next check: fire at the soonest upcoming expiry, capped at 60s
+    $next = mysqli_query($dbconnection,
+        "SELECT MIN(UNIX_TIMESTAMP(expires_at)) AS next_expiry
+         FROM moderation_actions
+         WHERE lifted_at IS NULL AND expires_at IS NOT NULL AND expires_at > NOW()"
+    );
+    $next_row    = $next ? mysqli_fetch_assoc($next) : null;
+    $next_expiry = ($next_row && $next_row['next_expiry']) ? (int)$next_row['next_expiry'] : time() + 60;
+    $timerArray['channelModeration_checkExpired'] = min($next_expiry, time() + 60);
 }
 
 // ---- Database helpers ---------------------------------------------------
 
 function channelModeration_recordAction($type, $nick, $mask, $duration_secs, $reason, $by_nick) {
-    global $dbconnection;
+    global $dbconnection, $timerArray;
 
     $type_esc   = mysqli_real_escape_string($dbconnection, $type);
     $nick_esc   = mysqli_real_escape_string($dbconnection, $nick);
@@ -264,6 +272,15 @@ function channelModeration_recordAction($type, $nick, $mask, $duration_secs, $re
          VALUES
              ('{$type_esc}', '{$nick_esc}', {$mask_sql}, '{$by_esc}', '{$reason_esc}', {$dur_sql}, NOW(), {$exp_sql})"
     );
+
+    // If this action expires sooner than the next scheduled check, reschedule now
+    if ($duration_secs !== null) {
+        $expiry_time    = time() + $duration_secs;
+        $current_timer  = $timerArray['channelModeration_checkExpired'] ?? time() + 60;
+        if ($expiry_time < $current_timer) {
+            $timerArray['channelModeration_checkExpired'] = $expiry_time;
+        }
+    }
 
     return mysqli_insert_id($dbconnection);
 }

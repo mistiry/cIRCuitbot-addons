@@ -205,7 +205,7 @@ function triviaSystem_getMyScores($ircdata) {
             logEntry("Found row for hostname '".$hostname."'");
             $userhostname = $row['userhostname'];
             $lastusednickname = $row['lastusednickname'];
-            $scores = unserialize($row['scores']);
+            $scores = json_decode($row['scores'], true);
             $lastwintime = $row['lastwintime'];
         }
         arsort($scores);
@@ -236,7 +236,7 @@ function triviaSystem_getHiScores($ircdata) {
         while($row = mysqli_fetch_assoc($result)) {
             $lastusednickname = $row['lastusednickname'];
             $scores = $row['scores'];
-            $scoresArray = unserialize($scores);
+            $scoresArray = json_decode($scores, true);
             if(empty($scoresArray)) {
                 $scoresArray = array();
             }
@@ -301,7 +301,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
         while($row = mysqli_fetch_assoc($result)) {
             $userhostname = $row['userhostname'];
             $lastusednickname = $row['lastusednickname'];
-            $scoresArray = unserialize($row['scores']);
+            $scoresArray = json_decode($row['scores'], true);
             $lastwintime = $row['lastwintime'];
 
             //confirm hostname match
@@ -312,7 +312,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $newScore = ($oldScore + 1);
                 unset($scoresArray[$topic]);
                 $scoresArray[$topic] = $newScore;
-                $newScoresArray = serialize($scoresArray);
+                $newScoresArray = json_encode($scoresArray);
                 $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = '".$hostname."'";
             }
             $userhostname = "";
@@ -324,7 +324,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
         }
     } else {
         $newScoresArray[$topic] = 1;
-        $newScoresArray = serialize($newScoresArray);
+        $newScoresArray = json_encode($newScoresArray);
         $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".time()."')";
     } 
 

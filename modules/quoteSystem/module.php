@@ -162,7 +162,7 @@ function upvoteQuote($data) {
             $id = $row['id'];
             $upvotes = $row['upvotes'];
             $voted_hostnames = $row['voted_hostnames'];
-            $votedhostnamesArray = unserialize($voted_hostnames);
+            $votedhostnamesArray = json_decode($voted_hostnames, true);
             if(empty($votedhostnamesArray)) {
                 $votedhostnamesArray = array();
             }
@@ -174,7 +174,7 @@ function upvoteQuote($data) {
                 } else {
                     array_push($votedhostnamesArray,$data['userhostname']);
                     $newupvotes = $upvotes + 1;
-                    $votedhostnames = serialize($votedhostnamesArray);
+                    $votedhostnames = json_encode($votedhostnamesArray);
                     $query = "UPDATE quotes SET upvotes = $newupvotes, voted_hostnames = '".$votedhostnames."' WHERE id = $id LIMIT 1";
                 }
             }
@@ -212,7 +212,7 @@ function downvoteQuote($data) {
             $id = $row['id'];
             $downvotes = $row['downvotes'];
             $voted_hostnames = $row['voted_hostnames'];
-            $votedhostnamesArray = unserialize($voted_hostnames);
+            $votedhostnamesArray = json_decode($voted_hostnames, true);
             if(empty($votedhostnamesArray)) {
                 $votedhostnamesArray = array();
             }
@@ -224,7 +224,7 @@ function downvoteQuote($data) {
                 } else {
                     array_push($votedhostnamesArray,$data['userhostname']);
                     $newdownvotes = $downvotes + 1;
-                    $votedhostnames = serialize($votedhostnamesArray);
+                    $votedhostnames = json_encode($votedhostnamesArray);
                     $query = "UPDATE quotes SET downvotes = $newdownvotes, voted_hostnames = '".$votedhostnames."' WHERE id = $id LIMIT 1";
                 }
             }

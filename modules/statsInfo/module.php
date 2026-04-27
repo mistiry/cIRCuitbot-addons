@@ -16,7 +16,7 @@ function getStatsInfo($ircdata) {
         if(mysqli_num_rows($result) == 1) {
             while($row = mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
-                $nickaliases = unserialize($row['nick_aliases']);
+                $nickaliases = json_decode($row['nick_aliases'], true);
                 $totalwords = $row['total_words'];
                 $totallines = $row['total_lines'];
                 $nickcount = count($nickaliases);
@@ -41,7 +41,7 @@ function getStatsInfoTop($ircdata) {
     if(mysqli_num_rows($result) > 0) {
         $count = 1;
         while($row = mysqli_fetch_assoc($result)) {
-            $nickaliases = unserialize($row['nick_aliases']);
+            $nickaliases = json_decode($row['nick_aliases'], true);
             $UserAlias = $nickaliases[0];
             $totalwords = number_format($row['total_words']);
             $totallines = number_format($row['total_lines']);

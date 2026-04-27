@@ -31,6 +31,12 @@ function parseURLfromMessage($ircdata) {
     $parsetiktok = $configfile['parsetiktok'];
     $tiktokDomains = $configfile['tiktokDomains'];
 
+    $parsesteam = $configfile['parsesteam'];
+    $steamDomains = $configfile['steamDomains'];
+
+    $parsewikipedia = $configfile['parsewikipedia'];
+    $wikipediaDomains = $configfile['wikipediaDomains'];
+
     //First, detect if a URL was seen, then figure out if we need to send to custom parser or not
     if(stristr($ircdata['fullmessage'], "https://") || stristr($ircdata['fullmessage'], "http://")) {
         $messagePieces = explode(" ", $ircdata['fullmessage']);
@@ -133,6 +139,35 @@ function parseURLfromMessage($ircdata) {
             }
             return true;
         } elseif($parsetiktok == "false" && in_array($domain, $tiktokDomains)) {
+            return true;
+        }
+
+        //Steam
+        if($parsesteam == "true" && in_array($domain, $steamDomains)) {
+            $title = getSteamInfo($url);
+            if($title !== null) {
+                $urlBanner = stylizeText("-- Steam --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_teal");
+                sendPRIVMSG($config['channel'], $urlBanner . " " . $title);
+                return true;
+            }
+            // null means non-app URL (homepage, tags, etc.) — fall through to default parser
+        } elseif($parsesteam == "false" && in_array($domain, $steamDomains)) {
+            return true;
+        }
+
+        //Wikipedia
+        $isWikipedia = in_array($domain, $wikipediaDomains) || stristr($domain, 'wikipedia.org');
+        if($parsewikipedia == "true" && $isWikipedia) {
+            $title = getWikipediaInfo($url);
+            if($title !== null) {
+                $urlBanner = stylizeText("-- Wikipedia --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_light_grey");
+                sendPRIVMSG($config['channel'], $urlBanner . " " . $title);
+                return true;
+            }
+            // null means Special/Talk/User page — fall through to default parser
+        } elseif($parsewikipedia == "false" && $isWikipedia) {
             return true;
         }
 
@@ -240,6 +275,81 @@ function getTwitterInfo($url) {
     }
 
     return stylizeText("@{$author}", "bold") . ": {$tweetText}";
+}
+
+function getSteamInfo($url) {
+    preg_match('~/app/(\d+)~', $url, $m);
+    $appId = $m[1] ?? null;
+    if (!$appId) { return null; }
+
+    $ch = curl_init("https://store.steampowered.com/api/appdetails?appids={$appId}&cc=us&l=en");
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0",
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_ENCODING => '',
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    if (!$response) { return null; }
+    $outer = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE || empty($outer[$appId]['data'])) { return null; }
+
+    $data  = $outer[$appId]['data'];
+    $name  = $data['name'] ?? null;
+    if (!$name) { return null; }
+
+    if (!empty($data['price_overview']['final_formatted'])) {
+        $price = $data['price_overview']['final_formatted'];
+    } elseif (!empty($data['is_free'])) {
+        $price = "Free to Play";
+    } else {
+        $price = null;
+    }
+
+    $meta   = $data['metacritic']['score'] ?? null;
+    $genres = !empty($data['genres']) ? implode(', ', array_slice(array_column($data['genres'], 'description'), 0, 3)) : null;
+
+    $parts = [stylizeText($name, "bold")];
+    if ($price)  { $parts[] = $price; }
+    if ($meta)   { $parts[] = "Metacritic: {$meta}"; }
+    if ($genres) { $parts[] = $genres; }
+    return implode(' | ', $parts);
+}
+
+function getWikipediaInfo($url) {
+    preg_match('~https?://([a-z]+)\.wikipedia\.org/wiki/(.+)~i', $url, $m);
+    if (empty($m[2])) { return null; }
+    $lang  = $m[1];
+    $title = $m[2];
+
+    // Strip fragment, query string from title
+    $title = preg_replace('/[?#].*$/', '', $title);
+    if (empty($title)) { return null; }
+
+    $ch = curl_init("https://{$lang}.wikipedia.org/api/rest_v1/page/summary/" . $title);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0 (https://github.com/mistiry/cIRCuitbot)",
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_ENCODING => '',
+    ]);
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    if (!$response || $httpCode !== 200) { return null; }
+    $data = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE) { return null; }
+
+    $pageTitle   = $data['title'] ?? null;
+    $description = $data['description'] ?? null;
+    if (!$pageTitle) { return null; }
+
+    $out = stylizeText($pageTitle, "bold");
+    if (!empty($description)) { $out .= ": {$description}"; }
+    return $out;
 }
 
 function getStackExchangeInfo($url) {

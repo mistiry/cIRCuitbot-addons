@@ -20,7 +20,7 @@ function doBraveSearch($data) {
             "X-Subscription-Token: " . $apiKey,
         ],
         CURLOPT_TIMEOUT => 10,
-        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYPEER => true,
     ]);
     $response = curl_exec($ch);
     curl_close($ch);

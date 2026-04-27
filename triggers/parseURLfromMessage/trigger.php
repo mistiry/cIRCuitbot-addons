@@ -168,6 +168,11 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
         $videoId = $m[1];
     }
 
+    // youtu.be short URLs: the path itself is the video ID (e.g. youtu.be/sCzdecygpmg)
+    if (!$videoId && preg_match('/^\/([a-zA-Z0-9_-]+)$/', $path, $m)) {
+        $videoId = $m[1];
+    }
+
     if (!$videoId) {
         return null;
     }

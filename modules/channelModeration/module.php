@@ -20,7 +20,7 @@ function channelMod($data) {
     $target       = (isset($argparts[0]) && $argparts[0] !== '') ? $argparts[0] : '';
     $duration_str = null;
     $reason_start = 1;
-    if (isset($argparts[1]) && preg_match('/^\d+[mhdwMHDW]$/', $argparts[1])) {
+    if (isset($argparts[1]) && preg_match('/^(\d+[mhdwMHDW]|0|perm(anent)?)$/i', $argparts[1])) {
         $duration_str = $argparts[1];
         $reason_start = 2;
     }
@@ -146,7 +146,11 @@ function channelModeration_applyQuiet($by, $target, $duration_str, $reason) {
         return;
     }
 
-    $secs     = channelModeration_parseDuration($duration_str);
+    $secs = channelModeration_parseDuration($duration_str);
+    if ($secs === false) {
+        fputs($socket, "NOTICE {$by} :Duration too large — use 'perm' or '0' for a permanent action.\r\n");
+        return;
+    }
     $dur_text = $secs !== null ? channelModeration_formatDuration($secs) : 'permanent';
 
     $existing = channelModeration_getActiveAction($target, 'quiet');
@@ -201,7 +205,15 @@ function channelModeration_applyBan($by, $target, $duration_str, $reason, $kick_
     }
 
     // Redirect bans are always permanent
-    $secs     = $redirect ? null : channelModeration_parseDuration($duration_str);
+    if (!$redirect) {
+        $secs = channelModeration_parseDuration($duration_str);
+        if ($secs === false) {
+            fputs($socket, "NOTICE {$by} :Duration too large — use 'perm' or '0' for a permanent action.\r\n");
+            return;
+        }
+    } else {
+        $secs = null;
+    }
     $dur_text = $secs !== null ? channelModeration_formatDuration($secs) : 'permanent';
     $type     = $redirect ? 'redirect' : 'ban';
 
@@ -404,17 +416,16 @@ function channelModeration_getMask($target_nick, $redirect = false, $requestedBy
 }
 
 function channelModeration_parseDuration($str) {
-    if (empty($str) || $str === '0') return null;
+    if (empty($str)) return null;
     $str = strtolower(trim($str));
+    if ($str === '0' || $str === 'perm' || $str === 'permanent') return null;
     if (!preg_match('/^(\d+)([mhdw])$/', $str, $m)) return null;
-    $n = (int)$m[1];
-    switch ($m[2]) {
-        case 'm': return $n * 60;
-        case 'h': return $n * 3600;
-        case 'd': return $n * 86400;
-        case 'w': return $n * 604800;
-    }
-    return null;
+    $n    = (int)$m[1];
+    $mult = ['m' => 60, 'h' => 3600, 'd' => 86400, 'w' => 604800];
+    $secs = $n * $mult[$m[2]];
+    $max  = mktime(0, 0, 0, 12, 31, 9999) - time();
+    if ($secs > $max) return false;
+    return $secs;
 }
 
 function channelModeration_formatDuration($secs) {

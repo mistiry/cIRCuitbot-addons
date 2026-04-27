@@ -193,7 +193,7 @@ function triviaSystem_timeExpired($ircdata) {
 function triviaSystem_getMyScores($ircdata) {
     global $dbconnection;
 
-    $hostname = $ircdata['userhostname'];
+    $hostname = mysqli_real_escape_string($dbconnection, $ircdata['userhostname']);
     logEntry("Getting scores for hostname '".$hostname."'");
 
     $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."'";
@@ -205,7 +205,7 @@ function triviaSystem_getMyScores($ircdata) {
             logEntry("Found row for hostname '".$hostname."'");
             $userhostname = $row['userhostname'];
             $lastusednickname = $row['lastusednickname'];
-            $scores = unserialize($row['scores']);
+            $scores = json_decode($row['scores'], true);
             $lastwintime = $row['lastwintime'];
         }
         arsort($scores);
@@ -236,7 +236,7 @@ function triviaSystem_getHiScores($ircdata) {
         while($row = mysqli_fetch_assoc($result)) {
             $lastusednickname = $row['lastusednickname'];
             $scores = $row['scores'];
-            $scoresArray = unserialize($scores);
+            $scoresArray = json_decode($scores, true);
             if(empty($scoresArray)) {
                 $scoresArray = array();
             }
@@ -291,6 +291,8 @@ function triviaSystem_getHiScores($ircdata) {
 function triviaSystem_updateScores($hostname,$nickname,$topic) {
     global $dbconnection;
 
+    $hostname  = mysqli_real_escape_string($dbconnection, $hostname);
+    $nickname  = mysqli_real_escape_string($dbconnection, $nickname);
     $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."' LIMIT 1";
     $result = mysqli_query($dbconnection,$query);
 
@@ -299,7 +301,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
         while($row = mysqli_fetch_assoc($result)) {
             $userhostname = $row['userhostname'];
             $lastusednickname = $row['lastusednickname'];
-            $scoresArray = unserialize($row['scores']);
+            $scoresArray = json_decode($row['scores'], true);
             $lastwintime = $row['lastwintime'];
 
             //confirm hostname match
@@ -310,7 +312,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
                 $newScore = ($oldScore + 1);
                 unset($scoresArray[$topic]);
                 $scoresArray[$topic] = $newScore;
-                $newScoresArray = serialize($scoresArray);
+                $newScoresArray = json_encode($scoresArray);
                 $query = "UPDATE trivia SET lastusednickname='".$newLastUsedNickname."', lastwintime='".$newLastWinTime."', scores='".$newScoresArray."' WHERE userhostname = '".$hostname."'";
             }
             $userhostname = "";
@@ -322,7 +324,7 @@ function triviaSystem_updateScores($hostname,$nickname,$topic) {
         }
     } else {
         $newScoresArray[$topic] = 1;
-        $newScoresArray = serialize($newScoresArray);
+        $newScoresArray = json_encode($newScoresArray);
         $query = "INSERT INTO trivia(userhostname,lastusednickname,scores,lastwintime) VALUES('".$hostname."','".$nickname."','".$newScoresArray."','".time()."')";
     } 
 

@@ -91,7 +91,7 @@ function getTitle($url) {
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         $html = curl_exec($ch);
         curl_close($ch);
         if (!$html) { return false; }
@@ -117,7 +117,7 @@ function getRedditTitle($url) {
         CURLOPT_USERAGENT => "cIRCuitbot/1.0 by /u/mistiry",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT => 10,
-        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYPEER => true,
     ]);
     $tokenResult = curl_exec($ch);
     curl_close($ch);
@@ -134,7 +134,7 @@ function getRedditTitle($url) {
         CURLOPT_HTTPHEADER => ["Authorization: Bearer " . $token],
         CURLOPT_USERAGENT => "cIRCuitbot/1.0 by /u/mistiry",
         CURLOPT_TIMEOUT => 10,
-        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYPEER => true,
     ]);
     $response = curl_exec($ch);
     curl_close($ch);

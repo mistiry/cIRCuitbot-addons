@@ -11,7 +11,8 @@ function doActionFromCommand($ircdata) {
     switch($options['action']) {
         case "%COMMANDARGS%":
             if($ircdata['commandargs'] != "") {
-                fputs($socket, "PRIVMSG ".$ircdata['location']." :\001ACTION ".$ircdata['commandargs']."\001\n");
+                $action = str_replace(["\r", "\n", "\0"], '', $ircdata['commandargs']);
+                fputs($socket, "PRIVMSG ".$ircdata['location']." :\001ACTION ".$action."\001\n");
             }
             break;
         case "%USERNICKNAME%":

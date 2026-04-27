@@ -4,6 +4,7 @@ function gitGud($data) {
 
     $usertogitgud = trim($data['commandargs']);
     $usertogitgud = mysqli_real_escape_string($dbconnection,$usertogitgud);
+    $usertogitgud = str_replace(['%', '_'], ['\\%', '\\_'], $usertogitgud);
     $query = "SELECT id FROM known_users WHERE nick_aliases LIKE '%$usertogitgud%'";
     $result = mysqli_query($dbconnection,$query);
     if(mysqli_num_rows($result) > 0) {

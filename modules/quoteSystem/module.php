@@ -4,18 +4,20 @@ function getQuote($data) {
 
     $search = $data['commandargs'];
     $search = mysqli_real_escape_string($dbconnection, $search);
-    
+
     //they are probably searching a specific id if search term is numeric
     if(is_numeric($search)) {
         $query = "SELECT * FROM quotes WHERE id = $search LIMIT 1";
     } elseif(strlen($search)>1) {
-        $query = "SELECT * FROM quotes WHERE quote LIKE '%$search%' ORDER BY rand() LIMIT 1";
+        $searchLike = str_replace(['%', '_'], ['\\%', '\\_'], $search);
+        $query = "SELECT * FROM quotes WHERE quote LIKE '%$searchLike%' ORDER BY rand() LIMIT 1";
     } else {
         $query = "SELECT * FROM quotes ORDER BY rand() LIMIT 1";
     }
 
     if(strlen($search) == 0) {
-        $notnick = $data['usernickname'];
+        $notnick = mysqli_real_escape_string($dbconnection, $data['usernickname']);
+        $notnick = str_replace(['%', '_'], ['\\%', '\\_'], $notnick);
         $query = "SELECT * FROM quotes WHERE submittedby NOT LIKE '%".$notnick."%' AND downvotes < 3 ORDER BY rand() LIMIT 1";
     }
 
@@ -160,7 +162,7 @@ function upvoteQuote($data) {
             $id = $row['id'];
             $upvotes = $row['upvotes'];
             $voted_hostnames = $row['voted_hostnames'];
-            $votedhostnamesArray = unserialize($voted_hostnames);
+            $votedhostnamesArray = json_decode($voted_hostnames, true);
             if(empty($votedhostnamesArray)) {
                 $votedhostnamesArray = array();
             }
@@ -172,7 +174,7 @@ function upvoteQuote($data) {
                 } else {
                     array_push($votedhostnamesArray,$data['userhostname']);
                     $newupvotes = $upvotes + 1;
-                    $votedhostnames = serialize($votedhostnamesArray);
+                    $votedhostnames = json_encode($votedhostnamesArray);
                     $query = "UPDATE quotes SET upvotes = $newupvotes, voted_hostnames = '".$votedhostnames."' WHERE id = $id LIMIT 1";
                 }
             }
@@ -210,7 +212,7 @@ function downvoteQuote($data) {
             $id = $row['id'];
             $downvotes = $row['downvotes'];
             $voted_hostnames = $row['voted_hostnames'];
-            $votedhostnamesArray = unserialize($voted_hostnames);
+            $votedhostnamesArray = json_decode($voted_hostnames, true);
             if(empty($votedhostnamesArray)) {
                 $votedhostnamesArray = array();
             }
@@ -222,7 +224,7 @@ function downvoteQuote($data) {
                 } else {
                     array_push($votedhostnamesArray,$data['userhostname']);
                     $newdownvotes = $downvotes + 1;
-                    $votedhostnames = serialize($votedhostnamesArray);
+                    $votedhostnames = json_encode($votedhostnamesArray);
                     $query = "UPDATE quotes SET downvotes = $newdownvotes, voted_hostnames = '".$votedhostnames."' WHERE id = $id LIMIT 1";
                 }
             }

@@ -136,11 +136,13 @@ function channelMod($data) {
 // ---- Quiet --------------------------------------------------------------
 
 function channelModeration_applyQuiet($by, $target, $duration_str, $reason) {
-    global $socket, $config;
+    global $socket, $config, $channelMembers;
 
-    $mask = channelModeration_getMask($target);
+    $mask = channelModeration_getMask($target, false, $by);
     if ($mask === null) {
-        fputs($socket, "NOTICE {$by} :{$target} not found in channel members or hostname unknown.\r\n");
+        if (!isset($channelMembers[$target])) {
+            fputs($socket, "NOTICE {$by} :{$target} not found in channel members.\r\n");
+        }
         return;
     }
 
@@ -188,11 +190,13 @@ function channelModeration_removeQuiet($by, $target) {
 // ---- Ban / Redirect -----------------------------------------------------
 
 function channelModeration_applyBan($by, $target, $duration_str, $reason, $kick_first, $redirect) {
-    global $socket, $config;
+    global $socket, $config, $channelMembers;
 
-    $mask = channelModeration_getMask($target, $redirect);
+    $mask = channelModeration_getMask($target, $redirect, $by);
     if ($mask === null) {
-        fputs($socket, "NOTICE {$by} :{$target} not found in channel members or hostname unknown.\r\n");
+        if (!isset($channelMembers[$target])) {
+            fputs($socket, "NOTICE {$by} :{$target} not found in channel members.\r\n");
+        }
         return;
     }
 
@@ -265,6 +269,7 @@ function channelModeration_dumpActiveActions($replyNick) {
             $reason  = !empty($row['reason'])     ? $row['reason']              : '(no reason)';
             $line    = "[{$row['action_type']}] target={$row['target_nick']} mask={$row['target_mask']} by={$row['applied_by']} at={$row['applied_at']} UTC expires={$expires} reason={$reason}";
             fputs($socket, "NOTICE {$replyNick} :{$line}\r\n");
+            usleep(200000);
         }
     }
 
@@ -370,15 +375,22 @@ function channelModeration_getActiveAction($nick, $type) {
 
 // ---- Mask / duration helpers --------------------------------------------
 
-function channelModeration_getMask($target_nick, $redirect = false) {
-    global $channelMembers, $config;
+function channelModeration_getMask($target_nick, $redirect = false, $requestedBy = null) {
+    global $channelMembers, $config, $socket;
 
     if (!isset($channelMembers[$target_nick])) return null;
 
     $hostname = $channelMembers[$target_nick]['hostname'] ?? '';
     $account  = $channelMembers[$target_nick]['account']  ?? '';
 
-    if (empty($hostname)) return null;
+    if (empty($hostname)) {
+        // Nick is tracked but hostname not yet populated — request it via WHO
+        fputs($socket, "WHO {$target_nick}\r\n");
+        if ($requestedBy !== null) {
+            fputs($socket, "NOTICE {$requestedBy} :Hostname for {$target_nick} not yet known — WHO request sent. Please retry in a moment.\r\n");
+        }
+        return null;
+    }
 
     if ($redirect && !empty($config['moderation_redirect_channel'])) {
         return "*!*@{$hostname}\${$config['moderation_redirect_channel']}";

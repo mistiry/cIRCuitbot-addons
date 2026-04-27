@@ -57,10 +57,11 @@ function parseURLfromMessage($ircdata) {
 
         //Default Parser
         $title = getTitle($url);
-        $urlBanner = stylizeText("-- URL --", "bold");
-        $urlBanner = stylizeText($urlBanner, "color_purple");
-        $message = "".$urlBanner." ".$title."";
-        sendPRIVMSG($config['channel'], "".$message.""); 
+        if (!empty($title)) {
+            $urlBanner = stylizeText("-- URL --", "bold");
+            $urlBanner = stylizeText($urlBanner, "color_purple");
+            sendPRIVMSG($config['channel'], $urlBanner . " " . $title);
+        }
     }
     return true;
 }
@@ -97,7 +98,8 @@ function getTitle($url) {
         if (!$html) { return false; }
         // Extract the title from the HTML
         $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
-        $title = trim($title);
+        $title = html_entity_decode(trim((string)$title), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        if (empty($title)) { return false; }
         return $title;
     }
 }

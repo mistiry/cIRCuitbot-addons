@@ -147,6 +147,8 @@ function getTitle($url) {
 }
 
 function getTwitterInfo($url) {
+    // Normalize to bare status URL — strip /photo/1, /mediaviewer, etc. after the status ID
+    $url = preg_replace('~(https?://(?:x|twitter)\.com/[^/?#]+/status/\d+).*$~i', '$1', $url);
     $apiUrl = "https://publish.twitter.com/oembed?url=" . urlencode($url) . "&omit_script=true";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);

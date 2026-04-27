@@ -96,9 +96,27 @@ function getTitle($url) {
         $html = curl_exec($ch);
         curl_close($ch);
         if (!$html) { return false; }
-        // Extract the title from the HTML
+
+        // 1. Try <title> tag
         $title = preg_match('/<title[^>]*>(.*?)<\/title>/ims', $html, $match) ? $match[1] : null;
         $title = html_entity_decode(trim((string)$title), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        // 2. Fall back to og:title (handles JS-rendered sites that set OG tags server-side)
+        if (empty($title)) {
+            if (preg_match('/<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\'][^>]*>/i', $html, $match) ||
+                preg_match('/<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:title["\'][^>]*>/i', $html, $match)) {
+                $title = html_entity_decode(trim($match[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            }
+        }
+
+        // 3. Fall back to twitter:title
+        if (empty($title)) {
+            if (preg_match('/<meta[^>]+name=["\']twitter:title["\'][^>]+content=["\']([^"\']+)["\'][^>]*>/i', $html, $match) ||
+                preg_match('/<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']twitter:title["\'][^>]*>/i', $html, $match)) {
+                $title = html_entity_decode(trim($match[1]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            }
+        }
+
         if (empty($title)) { return false; }
         return $title;
     }

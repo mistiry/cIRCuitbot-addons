@@ -16,6 +16,9 @@ function parseURLfromMessage($ircdata) {
     $redditclientsecret = $configfile['redditclientsecret'];
     $redditDomains = $configfile['redditDomains'];
 
+    $parsetwitter = $configfile['parsetwitter'];
+    $twitterDomains = $configfile['twitterDomains'];
+
     //First, detect if a URL was seen, then figure out if we need to send to custom parser or not
     if(stristr($ircdata['fullmessage'], "https://") || stristr($ircdata['fullmessage'], "http://")) {
         $messagePieces = explode(" ", $ircdata['fullmessage']);
@@ -55,6 +58,19 @@ function parseURLfromMessage($ircdata) {
             return true;
         }
 
+        //X / Twitter
+        if($parsetwitter == "true" && in_array($domain, $twitterDomains)) {
+            $title = getTwitterInfo($url);
+            if(!empty($title)) {
+                $urlBanner = stylizeText("-- X/Twitter --", "bold");
+                $urlBanner = stylizeText($urlBanner, "color_blue");
+                sendPRIVMSG($config['channel'], $urlBanner . " " . $title);
+            }
+            return true;
+        } elseif($parsetwitter == "false" && in_array($domain, $twitterDomains)) {
+            return true;
+        }
+
         //Default Parser
         $title = getTitle($url);
         if (!empty($title)) {
@@ -73,10 +89,10 @@ function getTitle($url) {
         $parsedUrl = parse_url($url);
         $extension = pathinfo($parsedUrl['path'], PATHINFO_EXTENSION);
         // List of disallowed file extensions
-        $disallowedExtensions = ['pdf', 'exe', 'sh', 'cmd', 'js', 'py', 'bat', 'pl', 'rb', 'ps1', 'vbs', 'msi', 'tcl'];
+        $disallowedExtensions = ['pdf', 'exe', 'sh', 'cmd', 'js', 'py', 'bat', 'pl', 'rb', 'ps1', 'vbs', 'msi', 'tcl',
+                                  'jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg', 'mp4', 'mp3', 'mov', 'avi', 'mkv', 'webm'];
         if (in_array(strtolower($extension), $disallowedExtensions)) {
-            $message = "Unable to parse URL that points to ".$extension." file.";
-            return $message;
+            return false;
         }
         // List of disallowed domains, useful if using something like the parseYoutubeURL trigger
         $disallowedDomains = ['xyoutube.com'];
@@ -93,6 +109,14 @@ function getTitle($url) {
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language: en-US,en;q=0.5',
+            'Connection: keep-alive',
+            'Upgrade-Insecure-Requests: 1',
+            'Cache-Control: max-age=0',
+        ]);
         $html = curl_exec($ch);
         curl_close($ch);
         if (!$html) { return false; }
@@ -120,6 +144,35 @@ function getTitle($url) {
         if (empty($title)) { return false; }
         return $title;
     }
+}
+
+function getTwitterInfo($url) {
+    $apiUrl = "https://publish.twitter.com/oembed?url=" . urlencode($url) . "&omit_script=true";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    if (!$response) { return null; }
+    $data = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE || empty($data['html'])) { return null; }
+
+    // Extract tweet text from the <p> inside the blockquote
+    preg_match('/<p[^>]*>(.*?)<\/p>/is', $data['html'], $m);
+    $tweetText = html_entity_decode(trim(strip_tags($m[1] ?? '')), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    $author = $data['author_name'] ?? '';
+    if (empty($tweetText)) { return null; }
+
+    // Truncate long tweets
+    if (strlen($tweetText) > 200) {
+        $tweetText = substr($tweetText, 0, 197) . '...';
+    }
+
+    return stylizeText("@{$author}", "bold") . ": {$tweetText}";
 }
 
 function getRedditTitle($url) {

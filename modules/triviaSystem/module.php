@@ -193,7 +193,7 @@ function triviaSystem_timeExpired($ircdata) {
 function triviaSystem_getMyScores($ircdata) {
     global $dbconnection;
 
-    $hostname = $ircdata['userhostname'];
+    $hostname = mysqli_real_escape_string($dbconnection, $ircdata['userhostname']);
     logEntry("Getting scores for hostname '".$hostname."'");
 
     $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."'";
@@ -291,6 +291,8 @@ function triviaSystem_getHiScores($ircdata) {
 function triviaSystem_updateScores($hostname,$nickname,$topic) {
     global $dbconnection;
 
+    $hostname  = mysqli_real_escape_string($dbconnection, $hostname);
+    $nickname  = mysqli_real_escape_string($dbconnection, $nickname);
     $query = "SELECT userhostname,lastusednickname,scores,lastwintime FROM trivia WHERE userhostname = '".$hostname."' LIMIT 1";
     $result = mysqli_query($dbconnection,$query);
 

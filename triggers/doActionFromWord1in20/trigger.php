@@ -11,7 +11,7 @@ function doActionFromWord1in20($ircdata) {
     $rand = rand(0,19);
     if($rand == "4") {
         if($options['action'] != "") {
-            fputs($socket, "PRIVMSG ".$ircdata['location']." :\001ACTION ".$options['action']."\001\n");
+            fputs($socket, "PRIVMSG ".$ircdata['location']." :\001ACTION ".$options['action']."\001\r\n");
         }
     }
     return true;

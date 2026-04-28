@@ -238,12 +238,19 @@ function triviaSystem_processWin($ircdata, $isFuzzy) {
     // Check starter badges for the asker too (they may have hit a milestone this game)
     $askerBadges = triviaSystem_getNewStarterBadges($game['asker_host']);
 
+    // If asker and winner are the same person, fold starter badges into the winner's list
+    // rather than suppressing them silently
+    if($game['asker_host'] === $ircdata['userhostname']) {
+        $newBadges   = array_merge($newBadges, $askerBadges);
+        $askerBadges = array();
+    }
+
     // Build and send badge announcement if anything was earned
     $badgeParts = array();
     if(!empty($newBadges)) {
         $badgeParts[] = stylizeText($ircdata['usernickname'], "color_light_green") . ": " . triviaSystem_formatBadgeList($newBadges, $config);
     }
-    if(!empty($askerBadges) && $game['asker_host'] !== $ircdata['userhostname']) {
+    if(!empty($askerBadges)) {
         $badgeParts[] = stylizeText($game['asker'], "color_light_green") . ": " . triviaSystem_formatBadgeList($askerBadges, $config);
     }
     if(!empty($badgeParts)) {

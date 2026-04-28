@@ -26,5 +26,8 @@
     "comeback":             { "name": "Comeback Kid",         "emoji": "🔄", "description": "Win after a 14-day or longer gap from your last win" },
     "starter_10":           { "name": "Game Starter",         "emoji": "🎮", "description": "Start 10 trivia games" },
     "starter_50":           { "name": "Crowd Pleaser",        "emoji": "🎮", "description": "Start 50 trivia games" },
-    "fuzzy_win":            { "name": "Close Enough",         "emoji": "🔍", "description": "Win using an alternate or fuzzy-matched answer" }
+    "fuzzy_win":            { "name": "Close Enough",         "emoji": "🔍", "description": "Win using an alternate or fuzzy-matched answer" },
+    "topic_5_[topic]":      { "name": "Specialist",           "emoji": "📚", "description": "Win 5 times in a single topic" },
+    "topic_15_[topic]":     { "name": "Expert",               "emoji": "🎯", "description": "Win 15 times in a single topic" },
+    "topic_25_[topic]":     { "name": "Master",               "emoji": "🏆", "description": "Win 25 times in a single topic" }
 }

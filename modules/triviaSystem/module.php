@@ -755,8 +755,7 @@ function triviaSystem_getHiScores($ircdata) {
         }
         $scoresMessage = implode("   ", $parts);
 
-        $triviaPrefix = stylizeText("-- TRIVIA --", "color_green");
-        $message      = stylizeText("{$triviaPrefix} Here are the top scores per topic!", "bold");
+        $message = stylizeText(triviaSystem_prefix() . " Here are the top scores per topic!", "bold");
         sendPRIVMSG($ircdata['location'], $message);
         sendPRIVMSG($ircdata['location'], $scoresMessage);
     }

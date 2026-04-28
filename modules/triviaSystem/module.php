@@ -156,7 +156,7 @@ function triviaSystem_checkAnswer($ircdata) {
             if($ans !== $game['answer']) {
                 $isFuzzy = true;
             }
-            triviaSystem_processWin($ircdata, $isFuzzy);
+            triviaSystem_processWin($ircdata, $isFuzzy, $ans);
             return true;
         }
     }
@@ -169,7 +169,7 @@ function triviaSystem_checkAnswer($ircdata) {
         $tolerance = (int)floor($ansLen / 6);
         if($tolerance < 1) continue;
         if(levenshtein($normalInput, $normalAns) <= $tolerance) {
-            triviaSystem_processWin($ircdata, true);
+            triviaSystem_processWin($ircdata, true, $game['answer']);
             return true;
         }
     }
@@ -185,7 +185,7 @@ function triviaSystem_normalizeAnswer($str) {
     return trim($str);
 }
 
-function triviaSystem_processWin($ircdata, $isFuzzy) {
+function triviaSystem_processWin($ircdata, $isFuzzy, $matchedAnswer = null) {
     global $activeActivityArray;
     global $timerArray;
     global $triggers;
@@ -217,7 +217,7 @@ function triviaSystem_processWin($ircdata, $isFuzzy) {
     $congratsText  = stylizeText($congratsArray[array_rand($congratsArray)], "bold");
     $usernameText  = stylizeText(stylizeText($ircdata['usernickname'], "color_light_green"), "bold");
     $topicText     = stylizeText(stylizeText($game['topic'], "color_pink"), "bold");
-    $answerText    = stylizeText(stylizeText($game['answer'], "color_cyan"), "bold");
+    $answerText    = stylizeText(stylizeText($matchedAnswer ?? $game['answer'], "color_cyan"), "bold");
     $pointsText    = stylizeText("{$pointsAwarded}pt" . ($pointsAwarded !== 1 ? "s" : ""), "bold");
 
     $prefix = triviaSystem_prefix();

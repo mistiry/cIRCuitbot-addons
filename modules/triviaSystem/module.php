@@ -728,42 +728,64 @@ function triviaSystem_getStats($ircdata) {
     return true;
 }
 
+function triviaSystem_visibleLength($str) {
+    $stripped = preg_replace('/\x03(?:\d{1,2}(?:,\d{1,2})?)?|\x02|\x0f|\x16|\x1d|\x1f/', '', $str);
+    return strlen($stripped);
+}
+
 function triviaSystem_getHiScores($ircdata) {
     global $dbconnection;
 
     $query  = "SELECT lastusednickname, scores FROM trivia";
     $result = mysqli_query($dbconnection, $query);
 
-    if(mysqli_num_rows($result) > 0) {
-        $topicArray = array();
-        while($row = mysqli_fetch_assoc($result)) {
-            $lastusednickname = $row['lastusednickname'];
-            $scoresArray      = json_decode($row['scores'], true);
-            if(empty($scoresArray) || !is_array($scoresArray)) continue;
-            arsort($scoresArray);
-            foreach($scoresArray as $topic => $score) {
-                if(!array_key_exists($topic, $topicArray)) {
+    if(!$result || mysqli_num_rows($result) === 0) return;
+
+    $topicArray = array();
+    while($row = mysqli_fetch_assoc($result)) {
+        $lastusednickname = $row['lastusednickname'];
+        $scoresArray      = json_decode($row['scores'], true);
+        if(empty($scoresArray) || !is_array($scoresArray)) continue;
+        arsort($scoresArray);
+        foreach($scoresArray as $topic => $score) {
+            if(!array_key_exists($topic, $topicArray)) {
+                $topicArray[$topic] = array('nickname' => $lastusednickname, 'score' => $score);
+            } else {
+                $current = $topicArray[$topic];
+                if($score > $current['score']) {
                     $topicArray[$topic] = array('nickname' => $lastusednickname, 'score' => $score);
-                } else {
-                    $current = $topicArray[$topic];
-                    if($score > $current['score']) {
-                        $topicArray[$topic] = array('nickname' => $lastusednickname, 'score' => $score);
-                    } elseif($score == $current['score'] && !stristr($current['nickname'], $lastusednickname)) {
-                        $topicArray[$topic]['nickname'] .= ", {$lastusednickname}";
-                    }
+                } elseif($score == $current['score'] && !stristr($current['nickname'], $lastusednickname)) {
+                    $topicArray[$topic]['nickname'] .= ", {$lastusednickname}";
                 }
             }
         }
+    }
 
-        $parts = array();
-        foreach($topicArray as $topic => $details) {
-            $parts[] = stylizeText(stylizeText($topic, "color_cyan"), "bold") .
-                       " ({$details['score']}pts: {$details['nickname']})";
+    if(empty($topicArray)) return;
+
+    $entries = array();
+    foreach($topicArray as $topic => $details) {
+        $entries[] = stylizeText(stylizeText($topic, "color_cyan"), "bold") .
+                     " ({$details['score']}pts: {$details['nickname']})";
+    }
+
+    // Column width = longest visible entry + 3 spaces buffer
+    $maxVisible = 0;
+    foreach($entries as $e) {
+        $maxVisible = max($maxVisible, triviaSystem_visibleLength($e));
+    }
+    $colWidth = $maxVisible + 3;
+
+    $message = stylizeText(triviaSystem_prefix() . " Here are the top scores per topic!", "bold");
+    sendPRIVMSG($ircdata['location'], $message);
+
+    foreach(array_chunk($entries, 4) as $chunk) {
+        usleep(400000);
+        $cells = array();
+        foreach($chunk as $entry) {
+            $padding = str_repeat(' ', max(0, $colWidth - triviaSystem_visibleLength($entry)));
+            $cells[] = $entry . $padding;
         }
-        $scoresMessage = implode("   ", $parts);
-
-        $message = stylizeText(triviaSystem_prefix() . " Here are the top scores per topic!", "bold");
-        sendPRIVMSG($ircdata['location'], $message);
-        sendPRIVMSG($ircdata['location'], $scoresMessage);
+        sendPRIVMSG($ircdata['location'], implode('', $cells));
     }
 }

@@ -748,14 +748,15 @@ function triviaSystem_getHiScores($ircdata) {
             }
         }
 
-        $scoresMessage = "";
+        $parts = array();
         foreach($topicArray as $topic => $details) {
-            $scoresMessage .= "  " . stylizeText(stylizeText($topic, "color_cyan"), "bold") .
-                              " ({$details['score']}pts: {$details['nickname']})  ";
+            $parts[] = stylizeText(stylizeText($topic, "color_cyan"), "bold") .
+                       " ({$details['score']}pts: {$details['nickname']})";
         }
+        $scoresMessage = implode("   ", $parts);
 
-        $prefix  = triviaSystem_prefix();
-        $message = stylizeText("{$prefix} Here are the top scores per topic!", "bold");
+        $triviaPrefix = stylizeText("-- TRIVIA --", "color_green");
+        $message      = stylizeText("{$triviaPrefix} Here are the top scores per topic!", "bold");
         sendPRIVMSG($ircdata['location'], $message);
         sendPRIVMSG($ircdata['location'], $scoresMessage);
     }

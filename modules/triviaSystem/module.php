@@ -1,15 +1,13 @@
 <?php
 
-// In-memory deduplication: tracks recently asked questions within the configured window
-$triviaRecentlyAsked = array();
-
 function triviaSystem_startGame($ircdata) {
+    static $recentlyAsked = array();
+
     global $activeActivityArray;
     global $timerArray;
     global $triggers;
     global $config;
     global $dbconnection;
-    global $triviaRecentlyAsked;
 
     $configfile   = parse_ini_file("{$config['addons_dir']}/modules/triviaSystem/module.conf");
     $activityName = $configfile['activityName'];
@@ -41,9 +39,9 @@ function triviaSystem_startGame($ircdata) {
     }
 
     // Load a question, skipping recently asked ones
-    $windowSeconds  = (int)($configfile['noRepeatWindow'] ?? 60) * 60;
-    $cutoff         = time() - $windowSeconds;
-    $triviaRecentlyAsked = array_values(array_filter($triviaRecentlyAsked, function($e) use ($cutoff) {
+    $windowSeconds = (int)($configfile['noRepeatWindow'] ?? 60) * 60;
+    $cutoff        = time() - $windowSeconds;
+    $recentlyAsked = array_values(array_filter($recentlyAsked, function($e) use ($cutoff) {
         return $e['asked_at'] > $cutoff;
     }));
 
@@ -68,7 +66,7 @@ function triviaSystem_startGame($ircdata) {
         }
 
         $alreadySeen = false;
-        foreach($triviaRecentlyAsked as $entry) {
+        foreach($recentlyAsked as $entry) {
             if($entry['hash'] === $candidateHash) {
                 $alreadySeen = true;
                 break;
@@ -91,7 +89,7 @@ function triviaSystem_startGame($ircdata) {
         return true;
     }
 
-    $triviaRecentlyAsked[] = array('hash' => sha1($triviaQuestion), 'asked_at' => time());
+    $recentlyAsked[] = array('hash' => sha1($triviaQuestion), 'asked_at' => time());
 
     // Record game start time and register wildcard answer checker
     $currentEpoch = time();
@@ -131,11 +129,15 @@ function triviaSystem_startGame($ircdata) {
 }
 
 function triviaSystem_checkAnswer($ircdata) {
+    static $activityName = null;
+
     global $activeActivityArray;
     global $config;
 
-    $configfile   = parse_ini_file("{$config['addons_dir']}/modules/triviaSystem/module.conf");
-    $activityName = $configfile['activityName'];
+    if($activityName === null) {
+        $configfile   = parse_ini_file("{$config['addons_dir']}/modules/triviaSystem/module.conf");
+        $activityName = $configfile['activityName'];
+    }
 
     if(!array_key_exists($activityName, $activeActivityArray)) {
         return false;

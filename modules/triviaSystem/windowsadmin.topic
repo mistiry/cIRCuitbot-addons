@@ -1,168 +1,54 @@
 {
   "questions": [
-    {
-      "question": "What is the command-line tool used to manage disk partitions in Windows?",
-      "answer": "diskpart"
-    },
-    {
-      "question": "What is the process of setting up and managing user accounts and permissions in Windows?",
-      "answer": "user management"
-    },
-    {
-      "question": "What is the utility used to schedule tasks to run automatically in Windows?",
-      "answer": "task scheduler"
-    },
-    {
-      "question": "What is the tool used to view and manage running processes in Windows?",
-      "answer": "task manager"
-    },
-    {
-      "question": "What is the process of installing, configuring, and updating software in Windows?",
-      "answer": "software management"
-    },
-    {
-      "question": "What is the command-line tool used to manage services in Windows?",
-      "answer": "services.msc"
-    },
-    {
-      "question": "What is the utility used to view and configure system hardware in Windows?",
-      "answer": "device manager"
-    },
-    {
-      "question": "What is the process of monitoring and managing system resources in Windows?",
-      "answer": "resource monitoring"
-    },
-    {
-      "question": "What is the tool used to remotely manage Windows servers and workstations?",
-      "answer": "remote desktop"
-    },
-    {
-      "question": "What is the process of ensuring that Windows systems are up-to-date with the latest patches and security updates?",
-      "answer": "patch management"
-    },
-    {
-      "question": "What is the utility used to view and manage installed drivers in Windows?",
-      "answer": "device manager"
-    },
-    {
-      "question": "What is the process of monitoring and analyzing system logs in Windows?",
-      "answer": "log analysis"
-    },
-    {
-      "question": "What is the tool used to diagnose and troubleshoot network connectivity issues in Windows?",
-      "answer": "network troubleshooter"
-    },
-    {
-      "question": "What is the command-line tool used to manage Active Directory in Windows?",
-      "answer": "dsa.msc"
-    },
-    {
-      "question": "What is the process of configuring and managing system backups in Windows?",
-      "answer": "backup management"
-    },
-    {
-      "question": "What is the utility used to view and manage installed software and updates in Windows?",
-      "answer": "control panel"
-    },
-    {
-      "question": "What is the process of ensuring that Windows systems are protected against malware and viruses?",
-      "answer": "antivirus management"
-    },
-    {
-      "question": "What is the tool used to manage disk volumes and file systems in Windows?",
-      "answer": "disk management"
-    },
-    {
-      "question": "What is the command-line tool used to manage network shares in Windows?",
-      "answer": "net share"
-    },
-    {
-      "question": "What is the process of configuring and managing system-wide policies in Windows?",
-      "answer": "group policy management"
-    },
-    {
-      "question": "What is the utility used to view and manage system performance in Windows?",
-      "answer": "performance monitor"
-    },
-    {
-      "question": "What is the tool used to manage and troubleshoot domain controllers in Windows?",
-      "answer": "active directory users and computers"
-    },
-    {
-      "question": "What is the command-line tool used to manage print queues and printer settings in Windows?",
-      "answer": "print management"
-    },
-    {
-      "question": "What is the process of configuring and managing network connections in Windows?",
-      "answer": "network management"
-    },
-    {
-      "question": "What is the utility used to view and manage installed updates and patches in Windows?",
-      "answer": "windows update"
-    },
-    {
-      "question": "What is the tool used to monitor and manage system services in Windows?",
-      "answer": "services.msc"
-    },
-    {
-      "question": "What is the command-line tool used to manage disk volumes in Windows?",
-      "answer": "diskpart"
-    },
-    {
-      "question": "What is the process of setting up and managing file and folder permissions in Windows?",
-      "answer": "file permissions"
-    },
-    {
-      "question": "What is the utility used to view and manage system information in Windows?",
-      "answer": "system information"
-    },
-    {
-      "question": "What is the tool used to manage and troubleshoot domain trusts in Windows?",
-      "answer": "active directory domains and trusts"
-    },
-    {
-      "question": "What is the command-line tool used to manage network adapters and settings in Windows?",
-      "answer": "netsh"
-    },
-    {
-      "question": "What is the process of configuring and managing user profiles in Windows?",
-      "answer": "user profile management"
-    },
-    {
-      "question": "What is the utility used to view and manage system event logs in Windows?",
-      "answer": "event viewer"
-    },
-    {
-      "question": "What is the tool used to manage and troubleshoot group policies in Windows?",
-      "answer": "group policy management console"
-    },
-    {
-      "question": "What is the process of configuring and managing system security settings in Windows?",
-      "answer": "security configuration"
-    },
-    {
-      "question": "What is the utility used to view and manage system updates and patches in Windows?",
-      "answer": "windows update"
-    },
-    {
-      "question": "What is the tool used to manage and troubleshoot domain sites and services in Windows?",
-      "answer": "active directory sites and services"
-    },
-    {
-      "question": "What is the command-line tool used to manage printers and printer settings in Windows?",
-      "answer": "printui"
-    },
-    {
-      "question": "What is the process of configuring and managing system power settings in Windows?",
-      "answer": "power management"
-    },
-    {
-      "question": "What is the utility used to view and manage system services in Windows?",
-      "answer": "services.msc"
-    },
-    {
-      "question": "What is the command line tool to add, delete, and manage network drives?",
-      "answer": "net use"
-    }
+    { "question": "What command-line tool is used to manage disk partitions in Windows?", "answer": "diskpart" },
+    { "question": "What Windows utility schedules tasks to run automatically at defined times or events?", "answer": "task scheduler" },
+    { "question": "What Windows utility shows running processes, CPU, memory, and network usage in real time?", "answer": "task manager" },
+    { "question": "What MMC snap-in is used to start, stop, and configure Windows services?", "answer": "services.msc", "alt_answers": ["services"] },
+    { "question": "What Windows utility manages hardware devices and their drivers?", "answer": "device manager" },
+    { "question": "What Windows protocol and tool is used to access a graphical desktop on a remote system?", "answer": "remote desktop", "alt_answers": ["rdp", "mstsc"] },
+    { "question": "What MMC snap-in is the primary tool for managing Active Directory users, groups, and computers?", "answer": "active directory users and computers", "alt_answers": ["dsa.msc"] },
+    { "question": "What Windows utility displays disk volumes and allows you to create, format, and resize partitions graphically?", "answer": "disk management", "alt_answers": ["diskmgmt.msc"] },
+    { "question": "What Windows command-line tool manages network shares?", "answer": "net share" },
+    { "question": "What Windows utility monitors system performance counters like CPU, memory, disk, and network?", "answer": "performance monitor", "alt_answers": ["perfmon"] },
+    { "question": "What tool manages Active Directory domain controllers' sites, subnets, and replication links?", "answer": "active directory sites and services", "alt_answers": ["dssite.msc"] },
+    { "question": "What is the primary GUI tool for managing Group Policy Objects in a Windows domain?", "answer": "group policy management console", "alt_answers": ["gpmc", "group policy management"] },
+    { "question": "What Windows command-line tool configures and manages network interfaces, routing, and firewall rules?", "answer": "netsh" },
+    { "question": "What Windows command maps a local drive letter to a network share?", "answer": "net use" },
+    { "question": "What Windows utility shows detailed logs from Windows components, applications, and services?", "answer": "event viewer", "alt_answers": ["eventvwr"] },
+    { "question": "What Windows tool manages domain trust relationships between Active Directory forests and domains?", "answer": "active directory domains and trusts", "alt_answers": ["domain trusts"] },
+    { "question": "What command shows installed printers and their settings in Windows?", "answer": "printui", "alt_answers": ["print management"] },
+    { "question": "What service keeps Windows systems current with security patches and feature updates?", "answer": "windows update", "alt_answers": ["wsus"] },
+    { "question": "What Windows tool displays detailed hardware and software system information?", "answer": "system information", "alt_answers": ["msinfo32"] },
+    { "question": "What PowerShell cmdlet retrieves system event log entries?", "answer": "get-eventlog", "alt_answers": ["get-winevent"] },
+    { "question": "What command-line tool in Windows displays and flushes DNS resolver cache?", "answer": "ipconfig", "alt_answers": ["ipconfig /flushdns"] },
+    { "question": "What Windows command queries DNS records from a DNS server?", "answer": "nslookup" },
+    { "question": "What Windows command tests network connectivity by sending ICMP echo requests?", "answer": "ping" },
+    { "question": "What Windows command traces the route packets take to a network destination?", "answer": "tracert", "alt_answers": ["traceroute"] },
+    { "question": "What Windows tool scans and repairs corrupted system files?", "answer": "sfc", "alt_answers": ["sfc /scannow", "system file checker"] },
+    { "question": "What Windows command checks and repairs file system errors on a disk volume?", "answer": "chkdsk" },
+    { "question": "What Windows tool directly edits the registry database?", "answer": "regedit", "alt_answers": ["registry editor"] },
+    { "question": "What Windows configuration tool manages startup programs and boot options?", "answer": "msconfig", "alt_answers": ["system configuration"] },
+    { "question": "What Windows command displays the current version of Windows?", "answer": "winver" },
+    { "question": "What Windows command-line tool lists all running processes?", "answer": "tasklist" },
+    { "question": "What Windows command terminates a running process by name or PID?", "answer": "taskkill" },
+    { "question": "What Windows tool configures the Boot Configuration Database?", "answer": "bcdedit" },
+    { "question": "What Windows command-line tool copies files with advanced resume and mirror capabilities?", "answer": "robocopy" },
+    { "question": "What Windows command sets, views, or modifies file and folder permissions from the command line?", "answer": "icacls", "alt_answers": ["cacls"] },
+    { "question": "What command displays the current logged-in user and their domain in Windows?", "answer": "whoami" },
+    { "question": "What Windows command displays the resultant set of Group Policies applied to a user or computer?", "answer": "gpresult" },
+    { "question": "What command forces an immediate refresh of Group Policy on a Windows system?", "answer": "gpupdate", "alt_answers": ["gpupdate /force"] },
+    { "question": "What Windows encryption feature protects entire drives by encrypting their contents?", "answer": "bitlocker" },
+    { "question": "What tool is used to service and repair Windows images offline, often used in deployment?", "answer": "dism", "alt_answers": ["deployment image servicing"] },
+    { "question": "What Windows scripting environment replaced cmd.exe as the modern command-line shell?", "answer": "powershell" },
+    { "question": "What Windows feature allows remote execution of commands on another system using WMI or WinRM?", "answer": "winrm", "alt_answers": ["windows remote management", "invoke-command"] },
+    { "question": "What Windows Server role provides automatic IP address assignment to network clients?", "answer": "dhcp", "alt_answers": ["dhcp server"] },
+    { "question": "What Windows Server role translates domain names into IP addresses?", "answer": "dns", "alt_answers": ["dns server"] },
+    { "question": "What Windows Server role is the foundation of domain login and centralized authentication?", "answer": "active directory", "alt_answers": ["adds", "active directory domain services"] },
+    { "question": "What Windows tool prepares a system installation for cloning or imaging?", "answer": "sysprep" },
+    { "question": "What Windows registry hive stores settings for the current logged-in user?", "answer": "hkcu", "alt_answers": ["hkey_current_user"] },
+    { "question": "What Windows registry hive stores machine-wide settings and configuration?", "answer": "hklm", "alt_answers": ["hkey_local_machine"] },
+    { "question": "What network protocol does Windows use to authenticate users in an Active Directory domain?", "answer": "kerberos" },
+    { "question": "What Windows command maps network drives and displays current drive mappings?", "answer": "net use" },
+    { "question": "What Windows Defender feature monitors and blocks malicious programs in real time?", "answer": "windows defender", "alt_answers": ["microsoft defender", "real-time protection"] }
   ]
 }

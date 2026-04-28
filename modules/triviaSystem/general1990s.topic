@@ -1,124 +1,54 @@
 {
   "questions": [
-    {
-      "question": "What was the name of the first web browser?",
-      "answer": "mosaic"
-    },
-    {
-      "question": "What was the name of the popular virtual pet that debuted in the 1990s?",
-      "answer": "tamagotchi"
-    },
-    {
-      "question": "Which toy craze swept the world in the 1990s, consisting of collectible characters stored inside plastic eggs?",
-      "answer": "pokemon"
-    },
-    {
-      "question": "What was the name of the famous sitcom featuring six friends living in New York City during the 1990s?",
-      "answer": "friends"
-    },
-    {
-      "question": "Which Swedish pop group rose to fame in the 1990s with hits like 'Mamma Mia' and 'Dancing Queen'?",
-      "answer": "abba"
-    },
-    {
-      "question": "What was the name of the handheld electronic organizer that gained popularity in the 1990s?",
-      "answer": "palm pilot"
-    },
-    {
-      "question": "Which video game console, released in the mid-1990s, introduced iconic characters like Crash Bandicoot and Spyro the Dragon?",
-      "answer": "playstation"
-    },
-    {
-      "question": "What was the name of the popular dance craze that originated in the 1990s with a song by Los del Río?",
-      "answer": "macarena"
-    },
-    {
-      "question": "What was the name of the popular TV show about a group of high school students that aired in the 1990s?",
-      "answer": "saved by the bell"
-    },
-    {
-      "question": "What was the name of the popular handheld gaming device released by Nintendo in the 1990s?",
-      "answer": "game boy"
-    },
-    {
-      "question": "What was the name of the first commercially successful consumer digital camera released in the 1990s?",
-      "answer": "apple quicktake"
-    },
-    {
-      "question": "What was the name of the iconic sitcom featuring a group of four single friends living in New York City during the 1990s?",
-      "answer": "seinfeld"
-    },
-    {
-      "question": "What was the name of the revolutionary online bookseller founded in the 1990s by Jeff Bezos?",
-      "answer": "amazon"
-    },
-    {
-      "question": "Which animated Disney film, released in 1994, became one of the highest-grossing films of the decade?",
-      "answer": "the lion king"
-    },
-    {
-      "question": "What was the name of the popular trading card game launched in the 1990s featuring creatures called Pokémon?",
-      "answer": "pokemon"
-    },
-    {
-      "question": "What was the name of the dance-pop group formed by Spice Girls creator Simon Fuller in the late 1990s?",
-      "answer": "s club 7"
-    },
-    {
-      "question": "What was the name of the popular fashion doll line introduced by Mattel in the 1990s?",
-      "answer": "barbie"
-    },
-    {
-      "question": "What was the name of the popular children's TV show featuring a group of colorful talking dinosaurs that aired in the 1990s?",
-      "answer": "barney and friends"
-    },
-    {
-      "question": "What was the name of the famous sitcom set in a Boston bar that aired throughout the 1980s and 1990s?",
-      "answer": "cheers"
-    },
-    {
-      "question": "What was the name of the popular Disney movie released in 1991, featuring a young princess named Belle?",
-      "answer": "beauty and the beast"
-    },
-    {
-      "question": "What was the name of the popular family sitcom set in the 1970s that aired throughout the 1990s?",
-      "answer": "the brady bunch"
-    },
-    {
-      "question": "What was the name of the iconic children's TV show featuring colorful characters like Elmo and Big Bird that aired in the 1990s?",
-      "answer": "sesame street"
-    },
-    {
-      "question": "What was the name of the iconic children's TV show featuring a group of anthropomorphic animals that aired in the 1990s?",
-      "answer": "animaniacs"
-    },
-    {
-      "question": "What was the name of the popular toy line featuring small collectible characters that debuted in the 1990s?",
-      "answer": "beanie babies"
-    },
-    {
-      "question": "What was the name of the popular educational computer game series created by The Learning Company in the 1990s?",
-      "answer": "reader rabbit"
-    },
-    {
-      "question": "What was the name of the popular children's TV show featuring a group of colorful characters who lived in a big house?",
-      "answer": "teletubbies"
-    },
-    {
-      "question": "What was the name of the popular video game console released by Nintendo in the mid-1990s?",
-      "answer": "nintendo 64"
-    },
-    {
-      "question": "What was the name of the popular Disney animated film released in 1992, featuring a genie voiced by Robin Williams?",
-      "answer": "aladdin"
-    },
-    {
-      "question": "What was the name of the popular Disney movie released in 1994, featuring a young lion named Simba?",
-      "answer": "the lion king"
-    },
-    {
-      "question": "What was the name of the popular children's TV show featuring a group of crime-fighting turtles?",
-      "answer": "teenage mutant ninja turtles"
-    }
+    { "question": "What was the name of the first popular graphical web browser, released in 1993?", "answer": "mosaic" },
+    { "question": "What was the name of the popular virtual pet toy that debuted in 1996?", "answer": "tamagotchi" },
+    { "question": "What was the name of the famous sitcom featuring six friends living in New York City?", "answer": "friends" },
+    { "question": "What was the name of the popular handheld personal digital assistant that gained popularity in the 1990s?", "answer": "palm pilot" },
+    { "question": "Which video game console, released in 1994 in North America, introduced iconic characters like Crash Bandicoot?", "answer": "playstation" },
+    { "question": "What was the name of the popular dance craze that originated with a 1995 song by Los del Rio?", "answer": "macarena" },
+    { "question": "What was the name of the popular TV show about a group of California high school students airing from 1989-1993?", "answer": "saved by the bell" },
+    { "question": "What was the name of the popular handheld gaming device released by Nintendo in 1989 that dominated the 1990s?", "answer": "game boy" },
+    { "question": "What was the name of the iconic sitcom featuring four single friends in New York City created by Larry David?", "answer": "seinfeld" },
+    { "question": "What was the name of the revolutionary online bookseller founded in 1994 by Jeff Bezos?", "answer": "amazon" },
+    { "question": "Which animated Disney film, released in 1994, became one of the highest-grossing films of the decade?", "answer": "the lion king" },
+    { "question": "What was the name of the British pop group that released Say You'll Be There and 2 Become 1 in 1996?", "answer": "spice girls" },
+    { "question": "What was the name of the popular children's TV show featuring Barney the purple dinosaur?", "answer": "barney and friends", "alt_answers": ["barney"] },
+    { "question": "What was the name of the popular Disney movie released in 1991 featuring a young princess named Belle?", "answer": "beauty and the beast" },
+    { "question": "What was the name of the popular toy line featuring small bean-filled stuffed animals that became a craze?", "answer": "beanie babies" },
+    { "question": "What was the name of the popular children's TV show featuring wobbling characters in a colorful dome?", "answer": "teletubbies" },
+    { "question": "What was the name of the popular video game console released by Nintendo in 1996?", "answer": "nintendo 64", "alt_answers": ["n64"] },
+    { "question": "What was the name of the popular Disney animated film released in 1992 featuring a genie voiced by Robin Williams?", "answer": "aladdin" },
+    { "question": "Which 1991 thriller film earned Anthony Hopkins an Oscar for playing cannibalistic psychiatrist Hannibal Lecter?", "answer": "the silence of the lambs" },
+    { "question": "What Nirvana song, released in 1991, became the anthem of the grunge movement?", "answer": "smells like teen spirit" },
+    { "question": "What 1993 Steven Spielberg blockbuster brought dinosaurs back to life using theme park technology?", "answer": "jurassic park" },
+    { "question": "What 1994 Quentin Tarantino film featured John Travolta and Samuel L. Jackson as hit men?", "answer": "pulp fiction" },
+    { "question": "What 1997 James Cameron film became the highest-grossing movie of all time upon release?", "answer": "titanic" },
+    { "question": "Which 1994 Tom Hanks film follows a man with a low IQ who witnesses and influences decades of American history?", "answer": "forrest gump" },
+    { "question": "What 1993 Spielberg film set during World War II starred Liam Neeson saving Jews from the Holocaust?", "answer": "schindlers list", "alt_answers": ["schindler's list"] },
+    { "question": "What 1999 sci-fi film starring Keanu Reeves revealed that reality was a computer simulation?", "answer": "the matrix" },
+    { "question": "What Microsoft operating system, released in 1995, had a massive launch featuring the Rolling Stones?", "answer": "windows 95" },
+    { "question": "What peer-to-peer music file sharing service launched in 1999 by Shawn Fanning disrupted the music industry?", "answer": "napster" },
+    { "question": "What Internet service provider sent millions of free trial CDs in the mail throughout the 1990s?", "answer": "aol", "alt_answers": ["america online"] },
+    { "question": "What 1990 film starring Macaulay Culkin featured an 8-year-old defending his home against burglars?", "answer": "home alone" },
+    { "question": "What video game debuted on the N64 in 1996 and became the first 3D platformer featuring Mario?", "answer": "super mario 64" },
+    { "question": "What 1998 Nintendo 64 adventure game set in the land of Hyrule is widely considered one of the greatest games ever made?", "answer": "the legend of zelda ocarina of time", "alt_answers": ["ocarina of time", "zelda ocarina of time"] },
+    { "question": "What animated TV series about a dysfunctional Springfield family launched in 1989 and dominated the 1990s?", "answer": "the simpsons" },
+    { "question": "Who became famous playing the Fresh Prince in the 1990-1996 TV sitcom?", "answer": "will smith" },
+    { "question": "What monster-collecting video game launched by Nintendo in 1996 spawned a global trading card and TV show craze?", "answer": "pokemon" },
+    { "question": "What music genre originating in Seattle in the early 1990s was characterized by distorted guitars and flannel shirts?", "answer": "grunge" },
+    { "question": "What 1995 Pixar film was the studio's first feature-length computer-animated movie?", "answer": "toy story" },
+    { "question": "What 1999 M. Night Shyamalan film starred Bruce Willis and featured the famous twist ending?", "answer": "the sixth sense" },
+    { "question": "What 1996 action thriller film starred Will Smith and Jeff Goldblum defending Earth against aliens?", "answer": "independence day" },
+    { "question": "What instant messaging service launched in 1996 featured distinctive sound effects and became hugely popular?", "answer": "icq", "alt_answers": ["i seek you"] },
+    { "question": "What British boy band, including a young Robbie Williams, had massive hits in the early 1990s?", "answer": "take that" },
+    { "question": "What 1999 Star Wars prequel introduced the young Anakin Skywalker and the character Jar Jar Binks?", "answer": "the phantom menace", "alt_answers": ["star wars episode i", "episode 1", "star wars episode 1"] },
+    { "question": "What US president was impeached by the House of Representatives in 1998?", "answer": "bill clinton", "alt_answers": ["clinton"] },
+    { "question": "In what year did Nelson Mandela become the first democratically elected president of South Africa?", "answer": "1994" },
+    { "question": "What futuristic anxiety about computers crashing at midnight affected the world at the end of 1999?", "answer": "y2k", "alt_answers": ["year 2000 problem", "millennium bug"] },
+    { "question": "What 1993 Disney animated film featured a young Native American woman and a talking raccoon?", "answer": "pocahontas", "alt_answers": ["pocahontas"] },
+    { "question": "What programming language released in 1995 became essential for web browser functionality?", "answer": "javascript", "alt_answers": ["java"] },
+    { "question": "What clone of a Finn Dorset sheep, created in 1996, became the first mammal cloned from an adult somatic cell?", "answer": "dolly", "alt_answers": ["dolly the sheep"] },
+    { "question": "What Sega console launched in 1998 was the company's last ever home gaming system?", "answer": "dreamcast", "alt_answers": ["sega dreamcast"] },
+    { "question": "What 1992 reality TV show on MTV placed strangers in a house together and filmed their daily lives?", "answer": "the real world" }
   ]
 }

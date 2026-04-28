@@ -5,8 +5,8 @@
       "answer": "sun"
     },
     {
-      "question": "What is the name of the galaxy containing the Milky Way?",
-      "answer": "andromeda"
+      "question": "What is the name of the force that keeps planets in orbit around the Sun?",
+      "answer": "gravity"
     },
     {
       "question": "What is the name of the largest planet in our solar system?",
@@ -105,7 +105,7 @@
       "answer": "dispersion"
     },
     {
-      "question": "What is the name of the small, rocky planet second from the Sun?",
+      "question": "What is the name of the planet second from the Sun?",
       "answer": "venus"
     },
     {
@@ -115,6 +115,27 @@
     {
       "question": "What is the name of the large-scale structure in the universe that contains many galaxy superclusters?",
       "answer": "supercluster"
-    }
+    },
+    { "question": "What was the name of the first human to walk on the Moon in 1969?", "answer": "neil armstrong" },
+    { "question": "What NASA program landed humans on the Moon?", "answer": "apollo", "alt_answers": ["apollo program"] },
+    { "question": "What is the name of the boundary around a black hole beyond which nothing can escape?", "answer": "event horizon" },
+    { "question": "What is the name of the dwarf planet discovered in 2005 that was once considered a tenth planet?", "answer": "eris", "alt_answers": ["pluto"] },
+    { "question": "In what year was Pluto reclassified as a dwarf planet?", "answer": "2006" },
+    { "question": "What is the name of the space telescope launched in 1990 that has provided deep-field images of the universe?", "answer": "hubble", "alt_answers": ["hubble space telescope"] },
+    { "question": "What is the name of the NASA rover that landed on Mars in February 2021?", "answer": "perseverance", "alt_answers": ["perseverance rover"] },
+    { "question": "What is the minimum speed an object must reach to escape a planet's gravity?", "answer": "escape velocity" },
+    { "question": "What planet in our solar system rotates on its side with an axial tilt of 98 degrees?", "answer": "uranus" },
+    { "question": "What is the name of the faint glow of ancient light left over from the Big Bang?", "answer": "cosmic microwave background", "alt_answers": ["cmb"] },
+    { "question": "How many moons does Mars have?", "answer": "two", "alt_answers": ["2"] },
+    { "question": "What is the name of the largest volcano in the solar system, located on Mars?", "answer": "olympus mons" },
+    { "question": "What is the name of the dense, rapidly rotating neutron star that emits beams of electromagnetic radiation?", "answer": "pulsar" },
+    { "question": "What is the name of the region beyond Neptune containing small icy bodies including Pluto?", "answer": "kuiper belt" },
+    { "question": "What is the name of the theoretical spherical cloud of icy objects surrounding the solar system at its outermost edge?", "answer": "oort cloud" },
+    { "question": "What planet in our solar system has the most moons, with over 90 confirmed?", "answer": "saturn", "alt_answers": ["jupiter"] },
+    { "question": "What is the term for a small rocky body that orbits the Sun, mostly found between Mars and Jupiter?", "answer": "asteroid" },
+    { "question": "What is the name of the process by which two atomic nuclei combine to release energy, powering stars?", "answer": "nuclear fusion", "alt_answers": ["fusion"] },
+    { "question": "What telescope launched in December 2021 succeeded the Hubble as NASA's flagship space observatory?", "answer": "james webb", "alt_answers": ["james webb space telescope", "jwst"] },
+    { "question": "What is the name of the point in space where gravitational forces balance, allowing objects to remain stationary relative to two larger bodies?", "answer": "lagrange point", "alt_answers": ["lagrangian point"] },
+    { "question": "What is the scientific term for the study of the origin, evolution, and eventual fate of the universe?", "answer": "cosmology" }
   ]
 }

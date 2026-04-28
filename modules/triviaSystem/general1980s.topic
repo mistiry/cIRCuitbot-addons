@@ -1,84 +1,54 @@
 {
   "questions": [
-    {
-      "question": "What was the name of the British prime minister who served throughout much of the 1980s?",
-      "answer": "margaret thatcher"
-    },
-    {
-      "question": "What was the name of the popular arcade game released in 1980 by Namco?",
-      "answer": "pacman"
-    },
-    {
-      "question": "Which American actor starred as Indiana Jones in the 1981 film 'Raiders of the Lost Ark'?",
-      "answer": "harrison ford"
-    },
-    {
-      "question": "What was the name of the space shuttle that completed the first successful orbital flight in 1981?",
-      "answer": "columbia"
-    },
-    {
-      "question": "Who was the first woman to be appointed to the United States Supreme Court in 1981?",
-      "answer": "sandra day o'connor"
-    },
-    {
-      "question": "What was the name of the first commercially successful personal computer, released by IBM in 1981?",
-      "answer": "ibm pc"
-    },
-    {
-      "question": "Which American musician released the album 'Thriller' in 1982?",
-      "answer": "michael jackson"
-    },
-    {
-      "question": "What was the name of the first compact disc player released in 1982 by Sony?",
-      "answer": "sony cdp 101"
-    },
-    {
-      "question": "Which American president survived an assassination attempt in 1981?",
-      "answer": "ronald reagan"
-    },
-    {
-      "question": "What was the name of the popular American TV series that aired from 1982 to 1993, following the lives of a group of friends in a Boston bar?",
-      "answer": "cheers"
-    },
-    {
-      "question": "Which British musician famously performed at Live Aid in 1985?",
-      "answer": "queen"
-    },
-    {
-      "question": "What was the name of the Soviet leader who initiated policies of economic and political restructuring in the USSR during the 1980s?",
-      "answer": "mikhail gorbachev"
-    },
-    {
-      "question": "Which American computer company introduced the Macintosh personal computer in 1984?",
-      "answer": "apple"
-    },
-    {
-      "question": "Which American musician released the album 'Born in the U.S.A.' in 1984?",
-      "answer": "bruce springsteen"
-    },
-    {
-      "question": "What was the name of the American space probe that encountered Halley's Comet in 1986?",
-      "answer": "giotto"
-    },
-    {
-      "question": "Which American actor starred as Marty McFly in the 1985 film 'Back to the Future'?",
-      "answer": "michael j fox"
-    },
-    {
-      "question": "What was the name of the disaster at the Ukrainian nuclear power plant that occurred in 1986?",
-      "answer": "chernobyl"
-    },
-    {
-      "question": "Which American singer released the album 'Like a Virgin' in 1984?",
-      "answer": "madonna"
-    },
-    {
-      "question": "What was the name of the American TV series that aired from 1983 to 1987, following the lives of a group of high school students?",
-      "answer": "fame"
-    },
-    {
-      "question": "Which American actor played the lead role in the film 'E.T. the Extra-Terrestrial', released in 1982?",
-      "answer": "henry thomas"
-    }
+    { "question": "What was the name of the British prime minister who served throughout much of the 1980s?", "answer": "margaret thatcher" },
+    { "question": "What was the name of the popular arcade game released in 1980 by Namco?", "answer": "pacman", "alt_answers": ["pac-man", "pac man"] },
+    { "question": "Which American actor starred as Indiana Jones in the 1981 film Raiders of the Lost Ark?", "answer": "harrison ford" },
+    { "question": "What was the name of the space shuttle that completed the first successful orbital flight in 1981?", "answer": "columbia" },
+    { "question": "Who was the first woman to be appointed to the United States Supreme Court in 1981?", "answer": "sandra day oconnor", "alt_answers": ["sandra day o'connor"] },
+    { "question": "What was the name of the first commercially successful personal computer released by IBM in 1981?", "answer": "ibm pc", "alt_answers": ["ibm personal computer"] },
+    { "question": "Which American musician released the album Thriller in 1982?", "answer": "michael jackson" },
+    { "question": "Which American president survived an assassination attempt in 1981?", "answer": "ronald reagan" },
+    { "question": "What was the name of the popular American TV series that aired from 1982 to 1993 about a Boston bar?", "answer": "cheers" },
+    { "question": "Which British band famously performed at Live Aid in 1985?", "answer": "queen" },
+    { "question": "What was the name of the Soviet leader who initiated policies of economic and political restructuring in the 1980s?", "answer": "mikhail gorbachev" },
+    { "question": "Which American computer company introduced the Macintosh personal computer in 1984?", "answer": "apple" },
+    { "question": "Which American musician released the album Born in the U.S.A. in 1984?", "answer": "bruce springsteen" },
+    { "question": "What was the name of the European Space Agency probe that encountered Halley's Comet in 1986?", "answer": "giotto" },
+    { "question": "Which American actor starred as Marty McFly in the 1985 film Back to the Future?", "answer": "michael j fox" },
+    { "question": "What was the name of the disaster at the Ukrainian nuclear power plant that occurred in 1986?", "answer": "chernobyl" },
+    { "question": "Which American singer released the album Like a Virgin in 1984?", "answer": "madonna" },
+    { "question": "Which American actor played Elliott in the 1982 Spielberg film E.T. the Extra-Terrestrial?", "answer": "henry thomas" },
+    { "question": "In what year did the Berlin Wall fall?", "answer": "1989" },
+    { "question": "What Nintendo home game console launched in North America in 1985?", "answer": "nes", "alt_answers": ["nintendo entertainment system"] },
+    { "question": "What block-stacking puzzle video game created by Alexey Pajitnov became a worldwide sensation in the 1980s?", "answer": "tetris" },
+    { "question": "What was the name of the colorful cube puzzle toy that became a global craze in the early 1980s?", "answer": "rubiks cube", "alt_answers": ["rubik's cube", "rubik cube"] },
+    { "question": "Which artist released the album Purple Rain in 1984?", "answer": "prince" },
+    { "question": "Which pop duo, consisting of George Michael and Andrew Ridgeley, had hits like Wake Me Up Before You Go-Go?", "answer": "wham", "alt_answers": ["wham!"] },
+    { "question": "What 1985 John Hughes film set in a high school detention room became a defining 1980s classic?", "answer": "the breakfast club" },
+    { "question": "Which 1986 Tom Cruise film featured fighter jets and a famous volleyball scene?", "answer": "top gun" },
+    { "question": "What animated TV show, debuting in 1984, featured vehicles that could transform into robots?", "answer": "transformers" },
+    { "question": "In what year did MTV launch?", "answer": "1981" },
+    { "question": "Which 1984 comedy film starred Bill Murray and Dan Aykroyd as paranormal investigators in New York City?", "answer": "ghostbusters" },
+    { "question": "What 1982 Disney film set inside a computer world featured digital warriors called programs?", "answer": "tron" },
+    { "question": "What long-running 1980s TV drama featured the wealthy Ewing family and the oil industry in Texas?", "answer": "dallas" },
+    { "question": "Which Nintendo arcade game, released in 1981, first introduced the character Mario?", "answer": "donkey kong" },
+    { "question": "Which 1986 Oliver Stone Vietnam War film won the Academy Award for Best Picture?", "answer": "platoon" },
+    { "question": "What 1984 science fiction film starred Arnold Schwarzenegger as a killer robot sent from the future?", "answer": "the terminator" },
+    { "question": "Which pop singer known for quirky fashion released Girls Just Want to Have Fun in 1983?", "answer": "cyndi lauper" },
+    { "question": "Which 1982 Ridley Scott film starred Harrison Ford as a detective hunting bioengineered humans?", "answer": "blade runner" },
+    { "question": "What 1980 Stanley Kubrick horror film based on a Stephen King novel starred Jack Nicholson?", "answer": "the shining" },
+    { "question": "Which rock band released the 1986 album Slippery When Wet featuring Livin on a Prayer?", "answer": "bon jovi" },
+    { "question": "What 1983 children's doll line featured pudgy fabric-face dolls with unique adoption certificates?", "answer": "cabbage patch kids", "alt_answers": ["cabbage patch dolls"] },
+    { "question": "What 1986 John Hughes film featured a teenager named Ferris taking a day off from a Chicago high school?", "answer": "ferris buellers day off", "alt_answers": ["ferris bueller's day off", "ferris bueller"] },
+    { "question": "Which 1985 charity supergroup recorded Do They Know Its Christmas for African famine relief?", "answer": "band aid" },
+    { "question": "What massive dual-venue charity concert was held on July 13, 1985, in London and Philadelphia?", "answer": "live aid" },
+    { "question": "What hairstyle featuring short sides and a long back became an iconic symbol of 1980s fashion?", "answer": "mullet" },
+    { "question": "Which British pop star known as the Thin White Duke had a major hit with Lets Dance in 1983?", "answer": "david bowie" },
+    { "question": "Which rock band released the 1987 album Appetite for Destruction featuring Sweet Child O Mine?", "answer": "guns n roses" },
+    { "question": "What 1987 John Hughes comedy featured a man who missed his flight home before Christmas?", "answer": "planes trains and automobiles", "alt_answers": ["planes trains & automobiles"] },
+    { "question": "Which 1988 film starred Dustin Hoffman as an autistic savant and Tom Cruise as his brother?", "answer": "rain man" },
+    { "question": "What was the name of the popular American primetime soap opera set in Denver that ran from 1981 to 1989?", "answer": "dynasty" },
+    { "question": "What year did Space Invaders first arrive in American arcades?", "answer": "1978", "alt_answers": ["1979"] },
+    { "question": "Which 1980s TV series followed the adventures of a talking car called KITT?", "answer": "knight rider" }
   ]
 }

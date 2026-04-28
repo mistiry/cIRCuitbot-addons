@@ -50,7 +50,7 @@
         {"question": "Which singersongwriter is known for hits like Piano Man and Uptown Girl?", "answer": "billy joel"},
         {"question": "What string instrument is the largest in the violin family?", "answer": "double bass"},
         {"question": "What city is considered the birthplace of country music?", "answer": "nashville tennessee"},
-        {"question":  "Which artist has won the most Grammy awards of all time?", "answer": "georg solti"},
+        {"question": "Which artist became the first to win 4 Grammy Awards for Album of the Year?", "answer": "taylor swift"},
         {"question": "Who wrote the famous ballet Swan Lake?", "answer": "pyotr ilyich tchaikovsky"},
         {"question": "What musical genre is characterized by a strong emphasis on rhythm and spoken lyrics?", "answer": "rap"}, 
         {"question": "What are the four main sections of an orchestra?", "answer": "strings woodwinds brass percussion"},

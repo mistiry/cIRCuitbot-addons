@@ -1,120 +1,54 @@
 {
   "questions": [
-    {
-      "question": "What is the command-line tool used to manage disk partitions in Linux?",
-      "answer": "fdisk"
-    },
-    {
-      "question": "What is the process of setting up and managing user accounts and permissions in Linux?",
-      "answer": "user management"
-    },
-    {
-      "question": "What is the utility used to schedule tasks to run automatically in Linux?",
-      "answer": "cron"
-    },
-    {
-      "question": "What is the process of installing, configuring, and updating software in Linux?",
-      "answer": "package management"
-    },
-    {
-      "question": "What is the utility used to view and configure system hardware in Linux?",
-      "answer": "lshw"
-    },
-    {
-      "question": "What is the process of monitoring and managing system resources in Linux?",
-      "answer": "resource monitoring"
-    },
-    {
-      "question": "What is the tool used to remotely manage Linux servers and workstations?",
-      "answer": "ssh"
-    },
-    {
-      "question": "What is the process of ensuring that Linux systems are up-to-date with the latest patches and security updates?",
-      "answer": "patch management"
-    },
-    {
-      "question": "What is the utility used to view and manage installed drivers in Linux?",
-      "answer": "lsmod"
-    },
-    {
-      "question": "What is the process of monitoring and analyzing system logs in Linux?",
-      "answer": "log analysis"
-    },
-    {
-      "question": "What is the tool used to diagnose and troubleshoot network connectivity issues in Linux?",
-      "answer": "ping"
-    },
-    {
-      "question": "What is the command-line tool used to manage user accounts and groups in Linux?",
-      "answer": "useradd"
-    },
-    {
-      "question": "What is the process of configuring and managing system backups in Linux?",
-      "answer": "backup management"
-    },
-    {
-      "question": "What is the debian-based utility used to view and manage installed software and updates in Linux?",
-      "answer": "apt"
-    },
-    {
-      "question": "What is the command-line tool used to manage network shares in Linux?",
-      "answer": "samba"
-    },
-    {
-      "question": "What is the utility used to view and manage system performance in Linux?",
-      "answer": "top"
-    },
-    {
-      "question": "What is the process of configuring and managing network connections in Linux?",
-      "answer": "network management"
-    },
-    {
-      "question": "What is the command-line tool used to manage disk volumes in Linux?",
-      "answer": "mkfs"
-    },
-    {
-      "question": "What is the process of setting up and managing file and folder permissions in Linux?",
-      "answer": "file permissions"
-    },
-    {
-      "question": "What is the tool used to manage and troubleshoot domain trusts in Linux?",
-      "answer": "ldap"
-    },
-    {
-      "question": "What is the command-line tool used to manage network adapters and settings in Linux?",
-      "answer": "ifconfig"
-    },
-    {
-      "question": "What is the process of configuring and managing user profiles in Linux?",
-      "answer": "user profile management"
-    },
-    {
-      "question": "What is the utility used to view and manage system event logs in Linux?",
-      "answer": "journalctl"
-    },
-    {
-      "question": "What is the tool used to manage and troubleshoot group policies in Linux?",
-      "answer": "policy management"
-    },
-    {
-      "question": "What is the command-line tool used to manage network connections in Linux?",
-      "answer": "nmcli"
-    },
-    {
-      "question": "What is the process of configuring and managing system security settings in Linux?",
-      "answer": "security configuration"
-    },
-    {
-      "question": "What is the command-line tool used to manage printers and printer settings in Linux?",
-      "answer": "lpadmin"
-    },
-    {
-      "question": "What is the process of configuring and managing system power settings in Linux?",
-      "answer": "power management"
-    },
-    {
-      "question": "What is the utility used to view and manage system services in Linux?",
-      "answer": "systemctl"
-    }
+    { "question": "What command-line tool is used to manage disk partitions in Linux?", "answer": "fdisk", "alt_answers": ["parted"] },
+    { "question": "What command in Linux is used to schedule recurring tasks to run automatically?", "answer": "cron", "alt_answers": ["crontab"] },
+    { "question": "What command lists all hardware in a Linux system with detailed information?", "answer": "lshw" },
+    { "question": "What tool is used to remotely access and manage Linux servers over a secure encrypted connection?", "answer": "ssh" },
+    { "question": "What command lists currently loaded kernel modules in Linux?", "answer": "lsmod" },
+    { "question": "What simple command-line tool is used to test network connectivity by sending ICMP packets?", "answer": "ping" },
+    { "question": "What command is used to create a new user account in Linux?", "answer": "useradd", "alt_answers": ["adduser"] },
+    { "question": "What Debian-based command-line tool is used to install and manage software packages?", "answer": "apt", "alt_answers": ["apt-get"] },
+    { "question": "What Linux service allows a Linux server to share files and printers with Windows systems?", "answer": "samba" },
+    { "question": "What interactive command displays real-time CPU, memory, and process usage in a terminal?", "answer": "top", "alt_answers": ["htop"] },
+    { "question": "What command creates a new filesystem on a Linux disk partition?", "answer": "mkfs" },
+    { "question": "What LDAP-based service provides centralized authentication and directory services in Linux?", "answer": "ldap", "alt_answers": ["openldap"] },
+    { "question": "What command configures a network interface's IP address in older Linux systems?", "answer": "ifconfig", "alt_answers": ["ip addr"] },
+    { "question": "What command in systemd-based Linux systems is used to view the system log journal?", "answer": "journalctl" },
+    { "question": "What NetworkManager command-line tool manages network connections in Linux?", "answer": "nmcli" },
+    { "question": "What command manages printers and printer queues on Linux systems?", "answer": "lpadmin", "alt_answers": ["lp", "cupsd"] },
+    { "question": "What command manages and controls systemd services, enabling, disabling, starting, and stopping them?", "answer": "systemctl" },
+    { "question": "What command displays disk space usage for all mounted filesystems in Linux?", "answer": "df", "alt_answers": ["df -h"] },
+    { "question": "What command shows how much disk space a directory or file is using in Linux?", "answer": "du", "alt_answers": ["du -sh"] },
+    { "question": "What command changes file permissions in Linux using numeric or symbolic notation?", "answer": "chmod" },
+    { "question": "What command changes the owner of a file or directory in Linux?", "answer": "chown" },
+    { "question": "What command searches for files in a directory hierarchy based on various criteria?", "answer": "find" },
+    { "question": "What command searches for patterns within files using regular expressions?", "answer": "grep" },
+    { "question": "What powerful text processing utility in Linux is used for pattern scanning and processing?", "answer": "awk" },
+    { "question": "What command creates a compressed archive of files in Linux?", "answer": "tar" },
+    { "question": "What command displays the last N lines of a file, often used to monitor log files?", "answer": "tail" },
+    { "question": "What command displays a list of currently running processes in Linux?", "answer": "ps", "alt_answers": ["ps aux"] },
+    { "question": "What command terminates a process by its process ID in Linux?", "answer": "kill", "alt_answers": ["killall", "pkill"] },
+    { "question": "What command securely transfers files between systems using SSH encryption?", "answer": "scp", "alt_answers": ["rsync", "sftp"] },
+    { "question": "What file contains the list of all user accounts on a Linux system?", "answer": "/etc/passwd" },
+    { "question": "What directory in Linux contains most system-wide configuration files?", "answer": "/etc" },
+    { "question": "What command prints the current working directory in Linux?", "answer": "pwd" },
+    { "question": "What file in Linux defines which users can run commands as root using sudo?", "answer": "/etc/sudoers", "alt_answers": ["sudoers"] },
+    { "question": "What Red Hat-based package manager replaced yum as the default in newer RHEL and Fedora versions?", "answer": "dnf" },
+    { "question": "What command shows active network connections and listening ports on a Linux system?", "answer": "ss", "alt_answers": ["netstat"] },
+    { "question": "What Linux firewall management tool provides a simplified interface to iptables?", "answer": "ufw", "alt_answers": ["firewalld", "iptables"] },
+    { "question": "What command allows a user to run commands as another user, typically root?", "answer": "sudo", "alt_answers": ["su"] },
+    { "question": "What character represents the root directory in Linux file paths?", "answer": "/" },
+    { "question": "What command displays the kernel version and other system information in Linux?", "answer": "uname", "alt_answers": ["uname -a"] },
+    { "question": "What Linux command shows the route that network packets take to a remote host?", "answer": "traceroute", "alt_answers": ["tracepath"] },
+    { "question": "What text editor is commonly found on nearly all Unix-like systems and famous for its modal editing?", "answer": "vi", "alt_answers": ["vim"] },
+    { "question": "What directory stores log files in most Linux distributions?", "answer": "/var/log" },
+    { "question": "What tool is used to synchronize files and directories between two locations, locally or over a network?", "answer": "rsync" },
+    { "question": "What command allows you to run a process that survives after you log out of a shell session?", "answer": "nohup", "alt_answers": ["screen", "tmux"] },
+    { "question": "What special permission bit on an executable allows it to run as the file's owner regardless of who executes it?", "answer": "setuid", "alt_answers": ["suid"] },
+    { "question": "What file stores hashed user passwords in modern Linux systems?", "answer": "/etc/shadow" },
+    { "question": "What package format is used by Debian and Ubuntu Linux systems?", "answer": "deb", "alt_answers": [".deb"] },
+    { "question": "What tool creates and manages Logical Volumes in Linux for flexible disk management?", "answer": "lvm", "alt_answers": ["logical volume manager"] },
+    { "question": "What command repairs and checks a Linux filesystem for errors?", "answer": "fsck" },
+    { "question": "What standard defines how Linux filesystem directories are organized and named?", "answer": "fhs", "alt_answers": ["filesystem hierarchy standard"] }
   ]
 }

@@ -2,9 +2,8 @@
 function getStatsInfo($ircdata) {
     global $dbconnection;
 
-    $who = trim($ircdata['usernickname']);
-    $who = mysqli_real_escape_string($dbconnection, $who);
-    $query = "SELECT id,nick_aliases,total_words,total_lines FROM known_users WHERE hostname = '".$ircdata['userhostname']."' LIMIT 1";
+    $hostname = mysqli_real_escape_string($dbconnection, $ircdata['userhostname']);
+    $query = "SELECT id,nick_aliases,total_words,total_lines FROM known_users WHERE hostname = '".$hostname."' LIMIT 1";
 
     $result = mysqli_query($dbconnection,$query);
     $nickaliases = array();

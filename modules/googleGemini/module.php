@@ -47,26 +47,27 @@ function googleGemini_generateTextByTextPrompt($ircdata) {
         $geminiResultJson = curl_exec($curl);
         $geminiResult = json_decode($geminiResultJson, true);
 
-        $geminiResponse = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
-        //$geminiResponse = str_replace("\n","  ",$geminiResponse);
+        $geminiResponse = $geminiResult["candidates"][0]["content"]["parts"][0]["text"] ?? null;
 
-        //Create random hash to save the generated results to custom HTML output
-        $outputToSave = trim($geminiResult["candidates"][0]["content"]["parts"][0]["text"]);
-
-        $savedOutput = googleGemini_saveGeneratedOutput($geminiPrompt,$outputToSave);
-
-        if(strlen($geminiResponse) > 5) {
-            $currentEpoch = time();
-            $expiryTime = $timerArray['googleGemini_timeoutExpired'];
-            $timeRemaining = $expiryTime - $currentEpoch;
-            $successText1 = stylizeText(stylizeText("Success!","color_light_green"), "bold");
-            $successText2 = stylizeText("(next run available in ".$timeRemaining."s) - check out my response at", "bold");
-            $successText3 = stylizeText(stylizeText("".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."", "color_blue"), "bold");
-            sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$successText1." ".$successText2." ".$successText3."");
-        } else {
+        if(empty($geminiResponse) || strlen(trim($geminiResponse)) <= 5) {
+            curl_close($curl);
             $failText = stylizeText(stylizeText("Something Happened!","color_red"), "bold");
             sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$failText."");
+            return true;
         }
+
+        $geminiResponse = trim($geminiResponse);
+
+        //Create random hash to save the generated results to custom HTML output
+        $savedOutput = googleGemini_saveGeneratedOutput($geminiPrompt, $geminiResponse);
+
+        $currentEpoch = time();
+        $expiryTime = $timerArray['googleGemini_timeoutExpired'];
+        $timeRemaining = $expiryTime - $currentEpoch;
+        $successText1 = stylizeText(stylizeText("Success!","color_light_green"), "bold");
+        $successText2 = stylizeText("(next run available in ".$timeRemaining."s) - check out my response at", "bold");
+        $successText3 = stylizeText(stylizeText("".$configfile['baseOutputUrl']."/view.php?gen=".$savedOutput."", "color_blue"), "bold");
+        sendPRIVMSG($ircdata['location'], "".$geminiBanner." ".$successText1." ".$successText2." ".$successText3."");
         curl_close($curl);
         return true;
     }

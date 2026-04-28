@@ -539,7 +539,16 @@ function getYouTubeInfo($youtubeAPIKey, $url) {
     logEntry("YouTube Video ID from URL: ".$videoId."");
 
     $apiUrl = "https://www.googleapis.com/youtube/v3/videos?id={$videoId}&part=snippet,contentDetails&key={$youtubeAPIKey}";
-    $response = file_get_contents($apiUrl);
+    $ch = curl_init($apiUrl);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERAGENT => "cIRCuitbot/1.0",
+        CURLOPT_TIMEOUT => 10,
+        CURLOPT_SSL_VERIFYPEER => true,
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    if (!$response) { return null; }
     $videoData = json_decode($response, true);
 
     if (isset($videoData['items']) && count($videoData['items']) > 0) {

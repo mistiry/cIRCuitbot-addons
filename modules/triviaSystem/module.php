@@ -178,6 +178,9 @@ function triviaSystem_checkAnswer($ircdata) {
 }
 
 function triviaSystem_normalizeAnswer($str) {
+    // Strip IRC formatting codes first — bridged Discord messages arrive with
+    // leading \x0F (reset) and may include \x03 color, \x02 bold, etc.
+    $str = preg_replace('/\x03(?:\d{1,2}(?:,\d{1,2})?)?|\x02|\x0f|\x16|\x1d|\x1f/', '', $str);
     $str = strtolower(trim($str));
     $str = preg_replace("/^(the|a|an)\s+/", "", $str);
     $str = preg_replace("/['\"\-\.,!?]/", "", $str);

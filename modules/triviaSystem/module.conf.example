@@ -1,20 +1,45 @@
 module[] = "trivia||triviaSystem_startGame"
 module[] = "scores||triviaSystem_getHiScores"
-module[] = "myscores||triviaSystem_getMyScores"
+module[] = "triviastats||triviaSystem_getStats"
 
-; These are used for configuring the trivia game. 
-; questionTime is how long a question is answerable before the time is up.
-; activityName is used internally for the bot to identify what activities are active at any given time. Just a friendly name that is unique to this module.
+; questionTime: how long (in seconds) a question stays open before time expires
 questionTime = "30"
+
+; activityName: internal identifier for this module's active-activity slot; must be unique across modules
 activityName = "triviaSystem"
 
-; List of topics you want available for the bot to choose from
-; These need to be JSON formatted files with a '.topic' extension for the bot to recognize
-; the file. 
+; maxPoints: maximum points awarded for the fastest correct answer
+; Time is divided into equal tiers — one tier per point value (e.g. maxPoints=3 gives 3pts/2pts/1pt)
+; Note: if questionTime does not divide evenly by maxPoints, earlier tiers round up by one second
+maxPoints = "3"
+
+; hintsEnabled: set to "true" to automatically reveal a partial hint at the halfway point of the timer
+hintsEnabled = "true"
+
+; hintStrength: controls how much of the answer is revealed in the hint
+; light  = first letter of each word only
+; medium = first and last letter of each word
+; heavy  = first two and last two letters of each word
+; Short words are protected: 1-char words are never revealed; 2-char words are capped at light behavior
+hintStrength = "medium"
+
+; noRepeatWindow: how long (in minutes) before a question can be asked again
+; Uses an in-memory window — resets if the bot restarts, which is acceptable for short windows
+noRepeatWindow = "60"
+
+; statsURL: if set, this URL is appended to the win message and shown in !triviastats output
+; Leave empty to disable
+statsURL = ""
+
+; List of topics available for the bot to choose from
+; Each entry must have a corresponding .topic JSON file in this directory
 topics[] = "windowsadmin"
 topics[] = "linuxadmin"
 topics[] = "cybersec"
 topics[] = "generalcomputer"
+topics[] = "networking"
+topics[] = "programming"
+topics[] = "docker"
 topics[] = "space"
 topics[] = "worldhistory"
 topics[] = "general1980s"

@@ -86,7 +86,8 @@
     },
     {
       "question": "What was the name of the famous naval battle in 1588 in which the English defeated the Spanish Armada?",
-      "answer": "battle of graveney"
+      "answer": "battle of gravelines",
+      "alt_answers": ["gravelines"]
     },
     {
       "question": "Who was the last emperor of Russia, whose reign ended with the Russian Revolution?",

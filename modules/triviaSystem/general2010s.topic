@@ -121,8 +121,8 @@
       "answer": "leonardo dicaprio"
     },
     {
-      "question": "What was the name of the social media platform launched in 2010 that allowed users to share short messages?",
-      "answer": "twitter"
+      "question": "What short-video social media app launched by ByteDance in 2016 became the fastest-growing platform in history?",
+      "answer": "tiktok"
     },
     {
       "question": "Which American singer released the album 'Born This Way' in 2011?",
@@ -159,6 +159,48 @@
     {
       "question": "Which American filmmaker released the movie 'Moonlight' in 2016?",
       "answer": "barry jenkins"
+    },
+    {
+      "question": "What 2019 Marvel film became the highest-grossing movie of all time, concluding the Infinity Saga?",
+      "answer": "avengers endgame",
+      "alt_answers": ["endgame"]
+    },
+    {
+      "question": "What 2018 Marvel film about a fictional African nation broke box office records and cultural barriers?",
+      "answer": "black panther"
+    },
+    {
+      "question": "What 2013 Disney animated film featuring sisters Elsa and Anna became a massive global phenomenon?",
+      "answer": "frozen"
+    },
+    {
+      "question": "What sandbox building video game created by Mojang in 2011 became the best-selling video game of all time?",
+      "answer": "minecraft"
+    },
+    {
+      "question": "What 2016 UK referendum resulted in the country voting to leave the European Union?",
+      "answer": "brexit"
+    },
+    {
+      "question": "What Netflix horror series set in a small Indiana town in the 1980s premiered in 2016?",
+      "answer": "stranger things"
+    },
+    {
+      "question": "What Lin-Manuel Miranda Broadway musical blending hip hop and history opened in 2015?",
+      "answer": "hamilton"
+    },
+    {
+      "question": "What viral social media charity challenge in 2014 involved dumping a bucket of ice water over your head?",
+      "answer": "ice bucket challenge",
+      "alt_answers": ["als ice bucket challenge"]
+    },
+    {
+      "question": "What ride-sharing app, founded in 2009, disrupted the taxi industry globally throughout the 2010s?",
+      "answer": "uber"
+    },
+    {
+      "question": "What cryptocurrency, created in 2009 by the pseudonymous Satoshi Nakamoto, surged to prominence in the 2010s?",
+      "answer": "bitcoin"
     }
   ]
 }

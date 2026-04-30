@@ -41,7 +41,7 @@
       "answer": "lord of the rings"
     },
     {
-      "question": "Which popular TV show, a spin-off of 'Buffy the Vampire Slayer', aired from 2003 to 2007?",
+      "question": "Which popular TV drama, a spin-off of Buffy the Vampire Slayer, aired from 1999 to 2004?",
       "answer": "angel"
     },
     {
@@ -77,7 +77,7 @@
       "answer": "twilight"
     },
     {
-      "question": "Which popular Disney movie, released in 2006, featured a young girl and her alien friend?",
+      "question": "Which 2002 Disney animated film featured a young Hawaiian girl who befriends a peculiar alien?",
       "answer": "lilo and stitch"
     },
     {
@@ -89,8 +89,8 @@
       "answer": "wall-e"
     },
     {
-      "question": "What was the name of the popular TV show that followed a group of high school students in a fictional California town, airing from 1990 to 2000?",
-      "answer": "beverly hills 90210"
+      "question": "What iPhone model, released in 2007, was the first smartphone to combine a phone, iPod, and Internet device?",
+      "answer": "iphone", "alt_answers": ["iphone 2g", "first iphone"]
     },
     {
       "question": "Which film, released in 2000, starred Tom Hanks as a FedEx employee stranded on a deserted island?",
@@ -109,7 +109,7 @@
       "answer": "grand theft auto"
     },
     {
-      "question": "Which animated movie, released in 2005, featured a young robot who dreams of becoming a real boy?",
+      "question": "Which 2005 animated film featured a young robot inventor named Rodney Copperbottom who travels to Robot City?",
       "answer": "robots"
     },
     {
@@ -125,8 +125,87 @@
       "answer": "ratatouille"
     },
     {
-      "question": "What was the name of the popular TV show that followed the lives of a group of high school students in a California beach town, airing from 1992 to 2000?",
-      "answer": "saved by the bell"
+      "question": "What was the name of the popular HBO crime drama set in Baltimore that aired from 2002 to 2008?",
+      "answer": "the wire"
+    },
+    {
+      "question": "What coordinated terrorist attacks on September 11, 2001 killed nearly 3,000 people in the United States?",
+      "answer": "september 11 attacks",
+      "alt_answers": ["9/11", "nine eleven", "september 11"]
+    },
+    {
+      "question": "What Xbox launch title in 2001 became Microsoft's flagship first-person shooter franchise?",
+      "answer": "halo",
+      "alt_answers": ["halo combat evolved"]
+    },
+    {
+      "question": "What massively multiplayer online game launched by Blizzard in 2004 became the most popular MMO of all time?",
+      "answer": "world of warcraft",
+      "alt_answers": ["wow"]
+    },
+    {
+      "question": "What social networking site, launched in 2003, briefly dominated before being overtaken by Facebook?",
+      "answer": "myspace"
+    },
+    {
+      "question": "What microblogging service launched in 2006 by Jack Dorsey limited posts to 140 characters?",
+      "answer": "twitter"
+    },
+    {
+      "question": "What 2005 hurricane devastated New Orleans and parts of the Gulf Coast?",
+      "answer": "hurricane katrina",
+      "alt_answers": ["katrina"]
+    },
+    {
+      "question": "What 2008 Christopher Nolan film starring Heath Ledger as the Joker became one of the highest-rated films ever?",
+      "answer": "the dark knight"
+    },
+    {
+      "question": "What 2003 Disney and Jerry Bruckheimer swashbuckling film starred Johnny Depp as Captain Jack Sparrow?",
+      "answer": "pirates of the caribbean",
+      "alt_answers": ["curse of the black pearl"]
+    },
+    {
+      "question": "What HBO drama about a New Jersey mob boss and his therapy sessions ran from 1999 to 2007?",
+      "answer": "the sopranos"
+    },
+    {
+      "question": "What US adaptation of a British workplace mockumentary set in Scranton Pennsylvania debuted in 2005?",
+      "answer": "the office"
+    },
+    {
+      "question": "What Fox thriller series starring Kiefer Sutherland as a counter-terrorism agent told each season in real time?",
+      "answer": "24"
+    },
+    {
+      "question": "What AMC crime drama that premiered in 2008 followed a chemistry teacher turned methamphetamine manufacturer?",
+      "answer": "breaking bad"
+    },
+    {
+      "question": "What animated Nickelodeon series that premiered in 1999 featured a yellow sponge living under the sea?",
+      "answer": "spongebob squarepants",
+      "alt_answers": ["spongebob"]
+    },
+    {
+      "question": "What 2005 Microsoft gaming console, known for its online Xbox Live service, succeeded the original Xbox?",
+      "answer": "xbox 360"
+    },
+    {
+      "question": "What 2004 teen comedy starring Lindsay Lohan and Rachel McAdams about high school cliques became a cult classic?",
+      "answer": "mean girls"
+    },
+    {
+      "question": "What 2002 action film starring Matt Damon as an amnesiac CIA operative kicked off a major spy franchise?",
+      "answer": "the bourne identity",
+      "alt_answers": ["bourne identity"]
+    },
+    {
+      "question": "What online video-calling service, founded in 2003, allowed users to make free video and voice calls over the Internet?",
+      "answer": "skype"
+    },
+    {
+      "question": "What mapping service launched by Google in 2005 revolutionized online navigation?",
+      "answer": "google maps"
     }
   ]
 }

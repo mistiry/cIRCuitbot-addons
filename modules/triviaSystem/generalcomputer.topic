@@ -77,8 +77,9 @@
       "answer": "compiler"
     },
     {
-      "question": "What is the protocol used for securely transferring files over a network?",
-      "answer": "ftp"
+      "question": "What is the protocol used for transferring files between a client and server over a network?",
+      "answer": "ftp",
+      "alt_answers": ["file transfer protocol"]
     },
     {
       "question": "What is the term for a program designed to prevent unauthorized access to or from a private network?",
@@ -177,8 +178,13 @@
       "answer": "bus"
     },
     {
-      "question": "What is the programming language often used for creating interactive web pages?",
-      "answer": "javascript"
+      "question": "What does RAM stand for in computing?",
+      "answer": "random access memory"
+    },
+    {
+      "question": "What lightweight data-interchange format, human-readable and based on JavaScript object syntax, is widely used in web APIs?",
+      "answer": "json",
+      "alt_answers": ["javascript object notation"]
     },
     {
       "question": "What is the name for a software program that scans for and removes unwanted files from a computer?",

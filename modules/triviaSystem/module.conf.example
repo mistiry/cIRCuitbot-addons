@@ -32,7 +32,7 @@ noRepeatWindow = "60"
 ; and to !triviastats output (the looked-up user's profile). The bot appends
 ; "player.php?id=<known_user_id>" automatically, falling back to
 ; "player.php?h=<hostname>" when there's no known_user record.
-; Example: statsURL = "https://dotheneedful.online/trivia/"
+; Example: statsURL = "https://your-website.example/trivia/"
 ; Leave empty to disable.
 statsURL = ""
 

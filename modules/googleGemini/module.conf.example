@@ -1,5 +1,5 @@
 activityName = "googleGemini"
 geminiAPIkey = "APIKEYHERE"
-baseOutputUrl = "https://dotheneedful.online/gemini"
+baseOutputUrl = "https://your-website.example/gemini"
 timeBetweenRequests = "300" ;number of seconds between allowing new requests to the Gemini API
 module[] = "gemini||googleGemini_generateTextByTextPrompt"

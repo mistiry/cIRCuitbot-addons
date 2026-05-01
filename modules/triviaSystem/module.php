@@ -262,7 +262,10 @@ function triviaSystem_processWin($ircdata, $isFuzzy, $matchedAnswer = null) {
     }
 
     if(!empty($configfile['statsURL'])) {
-        sendPRIVMSG($ircdata['location'], "{$prefix} " . stylizeText("Full leaderboard: " . $configfile['statsURL'], "bold"));
+        $profileURL = triviaSystem_buildProfileURL($configfile['statsURL'], $ircdata['userhostname']);
+        if(!empty($profileURL)) {
+            sendPRIVMSG($ircdata['location'], "{$prefix} " . stylizeText("Trivia profile: " . $profileURL, "bold"));
+        }
     }
 
     triviaSystem_cleanup($activityName);
@@ -721,14 +724,25 @@ function triviaSystem_getStats($ircdata) {
 
     sendPRIVMSG($ircdata['location'], $statsLine);
 
-    if(!empty($config['statsURL'] ?? '') || !empty(parse_ini_file("{$config['addons_dir']}/modules/triviaSystem/module.conf")['statsURL'])) {
-        $confFile = parse_ini_file("{$config['addons_dir']}/modules/triviaSystem/module.conf");
-        if(!empty($confFile['statsURL'])) {
-            sendPRIVMSG($ircdata['location'], "{$prefix} Full stats: " . $confFile['statsURL']);
+    $confFile = parse_ini_file("{$config['addons_dir']}/modules/triviaSystem/module.conf");
+    if(!empty($confFile['statsURL'])) {
+        $profileURL = triviaSystem_buildProfileURL($confFile['statsURL'], $hostname);
+        if(!empty($profileURL)) {
+            sendPRIVMSG($ircdata['location'], "{$prefix} Profile: " . $profileURL);
         }
     }
 
     return true;
+}
+
+function triviaSystem_buildProfileURL($baseURL, $hostname) {
+    if(empty($baseURL)) return '';
+    $base = rtrim($baseURL, '/') . '/';
+    $userRecord = function_exists('getUserRecord') ? getUserRecord($hostname) : null;
+    if($userRecord && !empty($userRecord['id'])) {
+        return $base . 'player.php?id=' . (int)$userRecord['id'];
+    }
+    return $base . 'player.php?h=' . urlencode($hostname);
 }
 
 function triviaSystem_visibleLength($str) {

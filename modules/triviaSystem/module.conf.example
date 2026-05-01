@@ -27,8 +27,13 @@ hintStrength = "medium"
 ; Uses an in-memory window — resets if the bot restarts, which is acceptable for short windows
 noRepeatWindow = "60"
 
-; statsURL: if set, this URL is appended to the win message and shown in !triviastats output
-; Leave empty to disable
+; statsURL: base URL of the trivia website section (where player.php lives).
+; If set, the bot appends a player profile link to win announcements (winner's profile)
+; and to !triviastats output (the looked-up user's profile). The bot appends
+; "player.php?id=<known_user_id>" automatically, falling back to
+; "player.php?h=<hostname>" when there's no known_user record.
+; Example: statsURL = "https://dotheneedful.online/trivia/"
+; Leave empty to disable.
 statsURL = ""
 
 ; List of topics available for the bot to choose from
